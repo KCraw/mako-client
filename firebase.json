@@ -1,0 +1,9 @@
+{
+  "firebase": "mako",
+  "public": "./public",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
