@@ -1,6 +1,6 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('mlb-team', 'Unit | Model | mlb team', {
+moduleForModel('mlb-player', 'Unit | Model | mlb player', {
   // Specify the other units that are required for this test.
   needs: []
 });

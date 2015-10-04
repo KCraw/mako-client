@@ -2,10 +2,8 @@ import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  team: DS.belongsTo('mlb-team'),
   firstName: DS.attr('string'),
   lastName: DS.attr('string'),
-  battingOrder: DS.attr('number'),
 
   fullName: Ember.computed('firstName', 'lastName', function() {
     return `${this.get('firstName')} ${this.get('lastName')}`;
@@ -13,14 +11,9 @@ export default DS.Model.extend({
 
   fdRating: DS.attr('number'),
   fdRatingPlus: DS.attr('number'),
-  fdPosition: DS.attr('string'),
-  fdSalary: DS.attr('number'),
-  fdActual: DS.attr('number'),
-  dkRating: DS.attr('number'),  // How to handle different for FD vs. DK?
+  dkRating: DS.attr('number'),
   dkRatingPlus: DS.attr('number'),
-  dkPosition: DS.attr('string'),
-  dkSalary: DS.attr('number'),
-  dkActual: DS.attr('number'),
-  stats: DS.belongsTo('mlb-pitcher-stats'),
-  gamelogs: DS.hasMany('mlb-pitcher-gamelog')
+  stats: DS.belongsTo('mlb-pitcher-stats', { async: true }),
+  gamelogs: DS.hasMany('mlb-pitcher-gamelog', { async: true }),
+  actual: DS.belongsTo('mlb-pitcher-gamelog', { async: true })
 });

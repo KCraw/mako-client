@@ -1,6 +1,7 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
+  handed: DS.attr('string'),
   pa: DS.attr('number'),
   ab: DS.attr('number'),
   k: DS.attr('number'),

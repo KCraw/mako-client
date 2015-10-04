@@ -2,7 +2,6 @@ import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  pitcher: DS.belongsTo('mlb-pitcher'),
   date: DS.attr('date'),
   ip: DS.attr('number'),
   win: DS.attr('boolean'),
@@ -20,7 +19,7 @@ export default DS.Model.extend({
   fdPoints: Ember.computed('ip', 'win', 'k', 'er', function() {
     return Math.floor(this.get('ip')) + Math.floor(this.get('ip') % 1 * 333)/100 + this.get('win') * 4 + this.get('k') + this.get('er') * -1; // This maps to FD rules
   }),
-  
+
   dkPoints: Ember.computed('', function() {
     return 0; // This should actually compute ponts based on DK rules
   })

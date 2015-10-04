@@ -1,2 +1,55 @@
-<h1>Welcome to Mako</h1>
-{{outlet}}
+
+
+{{#if session.isAuthenticated}}
+<!-- This section (including the applicatino outlet) is only visible if a user is logged in -->
+
+  <!-- Nav bar at the top -->
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        {{link-to "Mako" "index" class="navbar-brand"}}
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li>{{link-to "Upcoming" "contests"}}</li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-header">Signed in as <br><small>{{session.currentUser.email}}</small></li>
+              <li><a href="#">Edit Profile</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#" {{action "signOut"}}>Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <!-- Container and the main application outlet -->
+  <div class="container">
+    {{outlet}}
+  </div>
+
+{{else}}
+<!-- This section is only displayed if a user has not logged in -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-2" style="margin-top: 20%">
+        {{#simple-login action="signIn"}}
+          <h2>Mako | <small>Advanced DFS Analytics Toolset</small></h2>
+          <p>To get started, login with your email and password:</p>
+        {{/simple-login}}
+      </div>
+    </div>
+  </div>
+{{/if}}

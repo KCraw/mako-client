@@ -2,7 +2,6 @@ import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  hitter: DS.belongsTo('mlb-hitter'),
   date: DS.attr('date'),
   ab: DS.attr('number'),
   k: DS.attr('number'),
@@ -29,7 +28,7 @@ export default DS.Model.extend({
               + this.get('r') + this.get('rbi')
               + this.get('sb');
   }),
-  
+
   dkPoints: Ember.computed('', function() {
     return 0;
   })
