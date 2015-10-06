@@ -7,7 +7,7 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('contests');
-  this.route('date', { path: '/contests/:date' });
+  this.route('date', { path: '/contests/past/:date' });
   this.route('mlb', { path: '/contests/mlb/:contest_id' });
   this.route('nfl', { path: '/contests/nfl/:contest_id' });
   this.route('nba', { path: '/contests/nba/:contest_id' });

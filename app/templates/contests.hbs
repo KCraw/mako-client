@@ -1,2 +1,11 @@
 <h4>Upcoming Contests</h4>
+{{#each model.nflContests as |contest|}}
+  {{#link-to contest.sport contest}}
+    {{contest.site}} {{contest.sport}} {{contest.slotName}} {{contest.startTime}}
+  {{/link-to}}
+  <p>{{contest.meta.games}}</p>
+  {{#each-in contest.meta.players as |key player|}}
+    <p>{{player.firstName}} {{player.lastName}} {{player.team}} {{player.position}} {{player.salary}}</p>
+  {{/each-in}}
+{{/each}}
 {{outlet}}

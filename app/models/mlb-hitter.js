@@ -4,6 +4,7 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   firstName: DS.attr('string'),
   lastName: DS.attr('string'),
+  team: DS.attr('string'),
 
   fullName: Ember.computed('firstName', 'lastName', function() {
     return `${this.get('firstName')} ${this.get('lastName')}`;
@@ -15,5 +16,5 @@ export default DS.Model.extend({
   dkRatingPlus: DS.attr('number'),
   stats: DS.belongsTo('mlb-hitter-stats', { async: true }),
   gamelogs: DS.hasMany('mlb-hitter-gamelog', { async: true }),
-  actual: DS.belongsto('mlb-hitter-gamelog', { async: true })
+  actual: DS.belongsTo('mlb-hitter-gamelog', { async: true })
 });
