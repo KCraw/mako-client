@@ -1,1 +1,17 @@
-{{outlet}}
+<div class="container">
+  <div class="row">
+    {{#each model.meta.matchups as |matchup index|}}
+      <div class='col-lg-6'>
+        {{nfl-matchup matchup=matchup site=model.site playerslist=model.meta.players}}
+      </div>
+    {{else}}
+      <p>No matchups yet for {{model.name}}.</p>
+    {{/each}}
+  </div>
+  <div class="row">
+    Component for players by position goes here
+  </div>
+  <div class="row">
+    Component for lineup generator goes here
+  </div>
+</div>

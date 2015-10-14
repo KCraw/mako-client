@@ -1,28 +1,56 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  // This should build a DS.RSVP object with contests categorized by site and then sport
-  // This should return all contests that start(ed) on the date provided
-  model({date}) {
-    let start = new Date(date + "T00:00:00").getTime();
-    let end = new Date(date + "T23:59:59").getTime();
+  model({ date }) {
+    let start = moment.tz(date + "T00:00:00", 'America/New_York').format();
+    let end = moment.tz(date + "T23:59:59", 'America/New_York').format();
+    let today = moment.tz(date + "T00:00:00", 'America/New_York');
 
     return Ember.RSVP.hash({
-      mlbContests: this.store.findAll('mlb-contest', {
+      fanduelMlbContests: this.store.query('mlb/contest', {
         orderBy: 'startTime',
         startAt: start,
         endAt: end
+      }).then((contests) => {
+        return contests.filterBy('isFanDuel');
       }),
-      nflContests: this.store.findAll('nfl-contest', {
+      fanduelNflContests: this.store.query('nfl/contest', {
         orderBy: 'startTime',
         startAt: start,
         endAt: end
+      }).then((contests) => {
+        return contests.filterBy('isFanDuel');
       }),
-      nbaContests: this.store.findAll('nba-contest', {
+      fanduelNbaContests: this.store.query('nba/contest', {
         orderBy: 'startTime',
         startAt: start,
         endAt: end
-      })
+      }).then((contests) => {
+        return contests.filterBy('isFanDuel');
+      }),
+      draftkingsMlbContests: this.store.query('mlb/contest', {
+        orderBy: 'startTime',
+        startAt: start,
+        endAt: end
+      }).then((contests) => {
+        return contests.filterBy('isDraftKings');
+      }),
+      draftkingsNflContests: this.store.query('nfl/contest', {
+        orderBy: 'startTime',
+        startAt: start,
+        endAt: end
+      }).then((contests) => {
+        return contests.filterBy('isDraftKings');
+      }),
+      draftkingsNbaContests: this.store.query('nba/contest', {
+        orderBy: 'startTime',
+        startAt: start,
+        endAt: end
+      }).then((contests) => {
+        return contests.filterBy('isDraftKings');
+      }),
+      date: today.format('dddd, MMMM Do, YYYY'),
+      shortDate: today.format('MM/DD/YYYY')
     });
   }
 });

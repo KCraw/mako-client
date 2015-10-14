@@ -1,11 +1,75 @@
-<h4>Upcoming Contests</h4>
-{{#each model.nflContests as |contest|}}
-  {{#link-to contest.sport contest}}
-    {{contest.site}} {{contest.sport}} {{contest.slotName}} {{contest.startTime}}
-  {{/link-to}}
-  <p>{{contest.meta.games}}</p>
-  {{#each-in contest.meta.players as |key player|}}
-    <p>{{player.firstName}} {{player.lastName}} {{player.team}} {{player.position}} {{player.salary}}</p>
-  {{/each-in}}
-{{/each}}
-{{outlet}}
+<div class="container">
+  <div class="row page-header">
+    <div class="col-md-12">
+      <h1>Contests <small>Upcoming</small></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>FanDuel</h2>
+      <h3>MLB</h3>
+      <ul>
+        {{#each model.fanduelMlbContests as |contest|}}
+          {{#link-to contest.sport contest}}
+            {{contest.name}}
+          {{/link-to}}
+        {{else}}
+          No upcoming contests
+        {{/each}}
+      </ul>
+      <h3>NFL</h3>
+      <ul>
+        {{#each model.fanduelNflContests as |contest|}}
+          {{#link-to contest.sport contest}}
+            {{contest.name}}
+          {{/link-to}}
+        {{else}}
+          No upcoming contests
+        {{/each}}
+      </ul>
+      <h3>NBA</h3>
+      <ul>
+        {{#each model.fanduelNbaContests as |contest|}}
+          {{#link-to contest.sport contest}}
+            {{contest.name}}
+          {{/link-to}}
+        {{else}}
+          No upcoming contests
+        {{/each}}
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h2>DraftKings</h2>
+      <h3>MLB</h3>
+      <ul>
+        {{#each model.draftkingsMlbContests as |contest|}}
+          {{#link-to contest.sport contest}}
+            {{contest.name}}
+          {{/link-to}}
+        {{else}}
+          No upcoming contests
+        {{/each}}
+      </ul>
+      <h3>NFL</h3>
+      <ul>
+        {{#each model.draftkingsNflContests as |contest|}}
+          {{#link-to contest.sport contest}}
+            {{contest.name}}
+          {{/link-to}}
+        {{else}}
+          No upcoming contests
+        {{/each}}
+      </ul>
+      <h3>NBA</h3>
+      <ul>
+        {{#each model.draftkingsNbaContests as |contest|}}
+          {{#link-to contest.sport contest}}
+            {{contest.name}}
+          {{/link-to}}
+        {{else}}
+          No upcoming contests
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,208 @@
+
+<div class="panel-heading">
+  <div class="row">
+    <div class="col-md-4">
+      <h3 class="panel-title">{{matchup.homeTeam}}@{{matchup.awayTeam}}</h3>
+      <p>{{matchup.startTime}}</p>
+    </div>
+    <div class="col-md-8">
+      <p><small>Weather: <small>{{matchup.weather}}</small></small></p>
+      <p><small>Line: <small>{{matchup.line}}</small> O/U: <small>{{matchup.ou}}</small></small></p>
+    </div>
+  </div>
+</div>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-6 table-responsive">
+      <table class="table table-condensed">
+        <caption>{{matchup.awayTeam}}</caption>
+        <thead>
+          <tr>
+            <td>Rq</td>
+            <td>Ex</td>
+            <td>Po</td>
+            <td>Na</td>
+            <td>R</td>
+            <td>R+</td>
+            <td>$</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>QB</td>
+            <td>{{matchup.aQB.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>RB</td>
+            <td>{{matchup.aRB.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>WR1</td>
+            <td>{{matchup.aWR1.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>WR2</td>
+            <td>{{matchup.aWR2.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>WR3</td>
+            <td>{{matchup.aWR3.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>TE</td>
+            <td>{{matchup.aTE.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>K</td>
+            <td>{{matchup.aK.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>D</td>
+            <td>{{matchup.aD.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6 table-responsive">
+      <table class="table table-condensed">
+        <caption>@ {{matchup.homeTeam}}</caption>
+        <thead>
+          <tr>
+            <td>Rq</td>
+            <td>Ex</td>
+            <td>Po</td>
+            <td>Na</td>
+            <td>R</td>
+            <td>R+</td>
+            <td>$</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>QB</td>
+            <td>{{matchup.hQB.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>RB</td>
+            <td>{{matchup.hRB.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>WR1</td>
+            <td>{{matchup.hWR1.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>WR2</td>
+            <td>{{matchup.hWR2.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>WR3</td>
+            <td>{{matchup.hWR3.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>TE</td>
+            <td>{{matchup.hTE.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>K</td>
+            <td>{{matchup.hK.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>D</td>
+            <td>{{matchup.hD.fullName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="panel-footer">
+  <div class="row">
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-6">
+    </div>
+  </div>
+</div>
+
+
+{{yield}}

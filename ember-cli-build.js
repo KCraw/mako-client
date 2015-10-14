@@ -36,7 +36,8 @@ module.exports = function(defaults) {
   app.import(app.bowerDirectory + '/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2', {
     destDir: 'fonts'
   });
-
+  app.import(app.bowerDirectory + '/moment/moment.js');
+  app.import(app.bowerDirectory + '/moment-timezone/builds/moment-timezone-with-data.js');
 
   return app.toTree();
 };
