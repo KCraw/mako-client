@@ -24,6 +24,12 @@ export default DS.Model.extend({
       return 0;
     }
   }),
+  value: Ember.computed('rating', 'salary', function() {
+    return this.get('rating') / this.get('salary') * 1000;
+  }),
+  valuePlus: Ember.computed('ratingPlus', 'salary', function() {
+    return this.get('ratingPlus') / this.get('salary') * 1000;
+  }),
   position: DS.attr('string'),
   salary: DS.attr('number'),
   stats: Ember.computed.alias('proto.stats'),
