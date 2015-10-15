@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  matchups: DS.attr(),
+  players: DS.attr(),
   games: DS.attr(),
-  players: DS.attr()
+  matchups: DS.hasMany('nfl/contest-matchup'),
 });

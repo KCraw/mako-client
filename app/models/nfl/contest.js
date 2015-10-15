@@ -2,21 +2,22 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   site: DS.attr('string'),
+  slot: DS.attr('string'),
   startTime: DS.attr('date'),
   endTime: DS.attr('date'),
-  slotName: DS.attr('string'),
   meta: DS.belongsTo('nfl/contest-meta'),
 
-  name: Ember.computed('startTime', 'slotName', function () {
-    return `${moment(this.get('startTime')).tz('America/New_York').format('ddd MM/DD @ h:mmA z')} (${this.get('slotName')})`;
+  displayName: Ember.computed('site', 'slot', 'startTime', function() {
+    let name = '';
+    if (this.get('site') === 'fanduel') {
+      name += "FanDuel ";
+    } else if (this.get('site') === 'draftkings') {
+      name += "DraftKings ";
+    }
+    name += moment(this.get('startTime')).tz('America/New_York').format('ddd MM/DD/YY h:mmA') + ' ET ';
+    name += '(' + this.get('slot').toUpperCase() + ')';
+    return name;
   }),
-  sport: Ember.computed(function() {
-    return 'nfl';
-  }),
-  isFanDuel: Ember.computed('site', function() {
-    return this.get('site') === 'fanduel';
-  }),
-  isDraftKings: Ember.computed('site', function() {
-    return this.get('site') === 'draftkings';
-  })
+
+  sport: 'nfl'
 });

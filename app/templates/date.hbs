@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row page-header">
     <div class="col-md-12">
-      <h1>Contests <small>{{model.date}}</small></h1>
+      <h1>Contests <small>{{et-date model.date format="dddd MMMM Do, YYYY"}}</small></h1>
     </div>
   </div>
   <div class="row">
@@ -12,7 +12,7 @@
       <ul>
         {{#each model.fanduelMlbContests as |contest|}}
           {{#link-to contest.sport contest}}
-            {{contest.name}}
+            {{contest.displayName}}
           {{/link-to}}
         {{else}}
           No contests on {{model.shortDate}}
@@ -22,7 +22,7 @@
       <ul>
         {{#each model.fanduelNflContests as |contest|}}
           {{#link-to contest.sport contest}}
-            {{contest.name}}
+            {{contest.displayName}}
           {{/link-to}}
         {{else}}
           No contests on {{model.shortDate}}
@@ -32,7 +32,7 @@
       <ul>
         {{#each model.fanduelNbaContests as |contest|}}
           {{#link-to contest.sport contest}}
-            {{contest.name}}
+            {{contest.displayName}}
           {{/link-to}}
         {{else}}
           No contests on {{model.shortDate}}
@@ -45,7 +45,7 @@
       <ul>
         {{#each model.draftkingsMlbContests as |contest|}}
           {{#link-to contest.sport contest}}
-            {{contest.name}}
+            {{contest.displayName}}
           {{/link-to}}
         {{else}}
           No contests on {{model.shortDate}}
@@ -55,7 +55,7 @@
       <ul>
         {{#each model.draftkingsNflContests as |contest|}}
           {{#link-to contest.sport contest}}
-            {{contest.name}}
+            {{contest.displayName}}
           {{/link-to}}
         {{else}}
           No contests on {{model.shortDate}}
@@ -65,7 +65,7 @@
       <ul>
         {{#each model.draftkingsNbaContests as |contest|}}
           {{#link-to contest.sport contest}}
-            {{contest.name}}
+            {{contest.displayName}}
           {{/link-to}}
         {{else}}
           No contests on {{model.shortDate}}

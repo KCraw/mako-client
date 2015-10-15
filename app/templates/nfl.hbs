@@ -1,11 +1,9 @@
 <div class="container">
   <div class="row">
     {{#each model.meta.matchups as |matchup index|}}
-      <div class='col-lg-6'>
         {{nfl-matchup matchup=matchup site=model.site playerslist=model.meta.players}}
-      </div>
     {{else}}
-      <p>No matchups yet for {{model.name}}.</p>
+      <p>No matchups yet for {{model.displayName}}.</p>
     {{/each}}
   </div>
   <div class="row">

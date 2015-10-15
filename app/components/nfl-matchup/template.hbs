@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-4">
       <h3 class="panel-title">{{matchup.homeTeam}}@{{matchup.awayTeam}}</h3>
-      <p>{{matchup.startTime}}</p>
+      <p>{{et-date matchup.startTime format="ddd MM/DD/YY h:mmA"}} ET</p>
     </div>
     <div class="col-md-8">
       <p><small>Weather: <small>{{matchup.weather}}</small></small></p>
@@ -32,73 +32,73 @@
             <td></td>
             <td></td>
             <td>QB</td>
-            <td>{{matchup.aQB.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{matchup.aQB.lastName}}</td>
+            <td>{{matchup.aQB.rating}}</td>
+            <td>{{matchup.aQB.ratingPlus}}</td>
+            <td>{{matchup.aQB.salary}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td>RB</td>
-            <td>{{matchup.aRB.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{matchup.aRB.lastName}}</td>
+            <td>{{matchup.aRB.rating}}</td>
+            <td>{{matchup.aRB.ratingPlus}}</td>
+            <td>{{matchup.aRB.salary}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
-            <td>WR1</td>
-            <td>{{matchup.aWR1.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>WR</td>
+            <td>{{matchup.aWR1.lastName}}</td>
+            <td>{{matchup.aWR1.rating}}</td>
+            <td>{{matchup.aWR1.ratingPlus}}</td>
+            <td>{{matchup.aWR1.salary}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
-            <td>WR2</td>
-            <td>{{matchup.aWR2.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>WR</td>
+            <td>{{matchup.aWR2.lastName}}</td>
+            <td>{{matchup.aWR2.rating}}</td>
+            <td>{{matchup.aWR2.ratingPlus}}</td>
+            <td>{{matchup.aWR2.salary}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
-            <td>WR3</td>
-            <td>{{matchup.aWR3.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>WR</td>
+            <td>{{matchup.aWR3.lastName}}</td>
+            <td>{{matchup.aWR3.rating}}</td>
+            <td>{{matchup.aWR3.ratingPlus}}</td>
+            <td>{{matchup.aWR3.salary}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td>TE</td>
-            <td>{{matchup.aTE.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{matchup.aTE.lastName}}</td>
+            <td>{{matchup.aTE.rating}}</td>
+            <td>{{matchup.aTE.ratingPlus}}</td>
+            <td>{{matchup.aTE.salary}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td>K</td>
-            <td>{{matchup.aK.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{matchup.aK.lastName}}</td>
+            <td>{{matchup.aK.rating}}</td>
+            <td>{{matchup.aK.ratingPlus}}</td>
+            <td>{{matchup.aK.salary}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td>D</td>
-            <td>{{matchup.aD.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{matchup.aD.lastName}}</td>
+            <td>{{matchup.aD.rating}}</td>
+            <td>{{matchup.aD.ratingPlus}}</td>
+            <td>{{matchup.aD.salary}}</td>
           </tr>
         </tbody>
       </table>
@@ -122,73 +122,73 @@
             <td></td>
             <td></td>
             <td>QB</td>
-            <td>{{matchup.hQB.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{matchup.hQB.lastName}}</td>
+            <td>{{matchup.hQB.rating}}</td>
+            <td>{{matchup.hQB.ratingPlus}}</td>
+            <td>{{matchup.hQB.salary}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td>RB</td>
-            <td>{{matchup.hRB.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{matchup.hRB.lastName}}</td>
+            <td>{{matchup.hRB.rating}}</td>
+            <td>{{matchup.hRB.ratingPlus}}</td>
+            <td>{{matchup.hRB.salary}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
-            <td>WR1</td>
-            <td>{{matchup.hWR1.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>WR</td>
+            <td>{{matchup.hWR1.lastName}}</td>
+            <td>{{matchup.hWR1.rating}}</td>
+            <td>{{matchup.hWR1.ratingPlus}}</td>
+            <td>{{matchup.hWR1.salary}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
-            <td>WR2</td>
-            <td>{{matchup.hWR2.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>WR</td>
+            <td>{{matchup.hWR2.lastName}}</td>
+            <td>{{matchup.hWR2.rating}}</td>
+            <td>{{matchup.hWR2.ratingPlus}}</td>
+            <td>{{matchup.hWR2.salary}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
-            <td>WR3</td>
-            <td>{{matchup.hWR3.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>WR</td>
+            <td>{{matchup.hWR3.lastName}}</td>
+            <td>{{matchup.hWR3.rating}}</td>
+            <td>{{matchup.hWR3.ratingPlus}}</td>
+            <td>{{matchup.hWR3.salary}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td>TE</td>
-            <td>{{matchup.hTE.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{matchup.hTE.lastName}}</td>
+            <td>{{matchup.hTE.rating}}</td>
+            <td>{{matchup.hTE.ratingPlus}}</td>
+            <td>{{matchup.hTE.salary}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td>K</td>
-            <td>{{matchup.hK.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{matchup.hK.lastName}}</td>
+            <td>{{matchup.hK.rating}}</td>
+            <td>{{matchup.hK.ratingPlus}}</td>
+            <td>{{matchup.hK.salary}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td>D</td>
-            <td>{{matchup.hD.fullName}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{matchup.hD.lastName}}</td>
+            <td>{{matchup.hD.rating}}</td>
+            <td>{{matchup.hD.ratingPlus}}</td>
+            <td>{{matchup.hD.salary}}</td>
           </tr>
         </tbody>
       </table>

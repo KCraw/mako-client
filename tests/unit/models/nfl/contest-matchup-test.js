@@ -1,6 +1,6 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('nfl/quarterback-stats', 'Unit | Model | nfl/quarterback stats', {
+moduleForModel('nfl/contest-matchup', 'Unit | Model | nfl/contest matchup', {
   // Specify the other units that are required for this test.
   needs: []
 });

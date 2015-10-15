@@ -11,37 +11,49 @@ export default Ember.Route.extend({
         orderBy: 'startTime',
         startAt: start
       }).then((contests) => {
-        return contests.filterBy('isFanDuel');
+        return contests.filter(function(item) {
+          return item.get('site') === 'fanduel';
+        });
       }),
       fanduelNflContests: this.store.query('nfl/contest', {
         orderBy: 'startTime',
         startAt: start
       }).then((contests) => {
-        return contests.filterBy('isFanDuel');
+        return contests.filter(function(item) {
+          return item.get('site') === 'fanduel';
+        });
       }),
       fanduelNbaContests: this.store.query('nba/contest', {
         orderBy: 'startTime',
         startAt: start
       }).then((contests) => {
-        return contests.filterBy('isFanDuel');
+        return contests.filter(function(item) {
+          return item.get('site') === 'fanduel';
+        });
       }),
       draftkingsMlbContests: this.store.query('mlb/contest', {
         orderBy: 'startTime',
         startAt: start
       }).then((contests) => {
-        return contests.filterBy('isDraftKings');
+        return contests.filter(function(item) {
+          return item.get('site') === 'draftkings';
+        });
       }),
       draftkingsNflContests: this.store.query('nfl/contest', {
         orderBy: 'startTime',
         startAt: start
       }).then((contests) => {
-        return contests.filterBy('isDraftKings');
+        return contests.filter(function(item) {
+          return item.get('site') === 'draftkings';
+        });
       }),
       draftkingsNbaContests: this.store.query('nba/contest', {
         orderBy: 'startTime',
         startAt: start
       }).then((contests) => {
-        return contests.filterBy('isDraftKings');
+        return contests.filter(function(item) {
+          return item.get('site') === 'draftkings';
+        });
       })
     });
   }

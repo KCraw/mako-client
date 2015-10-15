@@ -2,7 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   beforeModel: function() {
-    return this.get('session').fetch().catch(function() {});
+    var self = this;
+    return this.get('session').fetch().catch(function(error) {
+      self.transitionTo('/');
+    });
   },
   actions: {
     signIn: function(email, password, ref) {
@@ -13,11 +16,9 @@ export default Ember.Route.extend({
         email: email,
         password: password
       }).then(function(data) {
-        console.log(data.currentUser);
         ref.set('hasError', false);
         self.transitionTo('contests');
       }).catch(function(error) {
-        console.log(error);
         ref.set('hasError', true);
       });
     },
