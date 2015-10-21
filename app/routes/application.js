@@ -2,23 +2,20 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   beforeModel: function() {
-    var self = this;
-    return this.get('session').fetch().catch(function(error) {
-      self.transitionTo('/');
+    return this.get('session').fetch().catch((error) => {
+      this.transitionTo('/');
     });
   },
   actions: {
     signIn: function(email, password, ref) {
-      var self = this;
-
       this.get('session').open('firebase', {
         provider: 'password',
         email: email,
         password: password
-      }).then(function(data) {
+      }).then((data) => {
         ref.set('hasError', false);
-        self.transitionTo('contests');
-      }).catch(function(error) {
+        this.transitionTo('contests');
+      }).catch((error) => {
         ref.set('hasError', true);
       });
     },

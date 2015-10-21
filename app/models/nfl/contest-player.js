@@ -6,30 +6,10 @@ export default DS.Model.extend({
   lastName: DS.attr('string'),
   team: DS.attr('string'),
   game: DS.attr('string'),
-  rating: Ember.computed('proto.fdRating', 'proto.dkRating', 'site', function() {
-    if (this.get('site') === 'fanduel') {
-      return this.get('proto.fdRating') || 0;
-    } else if (this.get('site') === 'draftkings') {
-      return this.get('proto.dkRating') || 0;
-    } else {
-      return 0;
-    }
-  }),
-  ratingPlus: Ember.computed('proto.fdRatingPlus', 'proto.dkRatingPlus', 'site', function() {
-    if (this.get('site') === 'fanduel') {
-      return this.get('proto.fdRatingPlus') || 0;
-    } else if (this.get('site') === 'draftkings') {
-      return this.get('proto.dkRatingPlus') || 0;
-    } else {
-      return 0;
-    }
-  }),
-  value: Ember.computed('rating', 'salary', function() {
-    return this.get('rating') / this.get('salary') * 1000;
-  }),
-  valuePlus: Ember.computed('ratingPlus', 'salary', function() {
-    return this.get('ratingPlus') / this.get('salary') * 1000;
-  }),
+  rating: DS.attr('number', { defaultValue: 0 }),
+  ratingPlus: DS.attr('number', { defaultValue: 0 }),
+  value: DS.attr('number', { defaultValue: 0 }),
+  valuePlus: DS.attr('number', { defaultValue: 0 }),
   position: DS.attr('string'),
   salary: DS.attr('number'),
   stats: Ember.computed.alias('proto.stats'),
