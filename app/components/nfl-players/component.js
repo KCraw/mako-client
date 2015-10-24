@@ -11,12 +11,12 @@ const NflPlayersComponent = Ember.Component.extend({
 		let r = [];
 		r.pushObject({ category: "QB", list: this.get('playersQB') });
 		r.pushObject({ category: "RB", list: this.get('playersRB') });
-		r.pushObject({ category: "WR", list: this.get('playersWR') });
+		r.pushObject({ category: "WR", list: this.get('playersTE') });
 		return r;
 	}),
 	playersGroup2: Ember.computed('playersTE', 'playersK', 'playersD', function() {
 		let r = [];
-		r.pushObject({ category: "TE", list: this.get('playersTE') });
+		r.pushObject({ category: "TE", list: this.get('playersWR') });
 		r.pushObject({ category: "K", list: this.get('playersK') });
 		r.pushObject({ category: "D", list: this.get('playersD') });
 		return r;
