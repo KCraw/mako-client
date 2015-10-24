@@ -1,1 +1,10 @@
-{{yield}}
+
+{{#each rows as |row|}}
+	<div class="row">
+	{{#each row as |matchup|}}
+		<div class="col-md-6">
+		{{nfl-matchup matchup}}
+		</div>
+	{{/each}}
+	</div>
+{{/each}}

@@ -8,31 +8,37 @@
     <div class="col-md-6">
       <h2>FanDuel</h2>
       <h3>MLB</h3>
-      <ul>
+      <ul class="list-unstyled">
         {{#each model.fanduelMlbContests as |contest|}}
+          <li>
           {{#link-to contest.sport contest}}
             {{contest.displayName}}
           {{/link-to}}
+          </li>
         {{else}}
           No upcoming contests
         {{/each}}
       </ul>
       <h3>NFL</h3>
-      <ul>
+      <ul class="list-unstyled">
         {{#each model.fanduelNflContests as |contest|}}
+          <li>
           {{#link-to contest.sport contest}}
             {{contest.displayName}}
           {{/link-to}}
+          </li>
         {{else}}
           No upcoming contests
         {{/each}}
       </ul>
       <h3>NBA</h3>
-      <ul>
+      <ul class="list-unstyled">
         {{#each model.fanduelNbaContests as |contest|}}
+          <li>
           {{#link-to contest.sport contest}}
             {{contest.displayName}}
           {{/link-to}}
+          </li>
         {{else}}
           No upcoming contests
         {{/each}}
@@ -41,31 +47,37 @@
     <div class="col-md-6">
       <h2>DraftKings</h2>
       <h3>MLB</h3>
-      <ul>
+      <ul class="list-unstyled">
         {{#each model.draftkingsMlbContests as |contest|}}
+          <li>
           {{#link-to contest.sport contest}}
             {{contest.displayName}}
           {{/link-to}}
+          </li>
         {{else}}
           No upcoming contests
         {{/each}}
       </ul>
       <h3>NFL</h3>
-      <ul>
+      <ul class="list-unstyled">
         {{#each model.draftkingsNflContests as |contest|}}
+          <li>
           {{#link-to contest.sport contest}}
             {{contest.displayName}}
           {{/link-to}}
+          </li>
         {{else}}
           No upcoming contests
         {{/each}}
       </ul>
       <h3>NBA</h3>
-      <ul>
+      <ul class="list-unstyled">
         {{#each model.draftkingsNbaContests as |contest|}}
+          <li>
           {{#link-to contest.sport contest}}
             {{contest.displayName}}
           {{/link-to}}
+          </li>
         {{else}}
           No upcoming contests
         {{/each}}

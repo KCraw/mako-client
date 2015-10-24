@@ -1,4 +1,22 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const NflMatchupsComponent =  Ember.Component.extend({
+	classNames: ['row'],
+	matchupsSorting: ['startTime'],
+	sortedMatchups: Ember.computed.sort('matchups', 'matchupsSorting'),
+	rows: Ember.computed('sortedMatchups', function() {
+		let matchups = this.get('sortedMatchups');
+		let size = 2;
+		let r = [];
+		for (let i = 0, len = matchups.length; i < len; i += size) {
+			r.push(matchups.slice(i, i + size));
+		}
+		return r;
+	})
 });
+
+NflMatchupsComponent.reopenClass({
+	positionalParams: ['matchups']
+});
+
+export default NflMatchupsComponent;

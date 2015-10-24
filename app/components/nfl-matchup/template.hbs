@@ -1,11 +1,11 @@
 
 <div class="panel-heading">
   <div class="row">
-    <div class="col-md-4">
-      <h3 class="panel-title">{{matchup.homeTeam}}@{{matchup.awayTeam}}</h3>
+    <div class="col-md-6">
+      <h3 class="panel-title">{{matchup.awayTeam}}@{{matchup.homeTeam}}</h3>
       <p>{{et-date matchup.startTime format="ddd MM/DD/YY h:mmA"}} ET</p>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6">
       <p><small>Weather: <small>{{matchup.weather}}</small></small></p>
       <p><small>Line: <small>{{matchup.line}}</small> O/U: <small>{{matchup.ou}}</small></small></p>
     </div>
@@ -13,219 +13,77 @@
 </div>
 <div class="panel-body">
   <div class="row">
-    <div class="col-md-6 table-responsive">
-      <table class="table table-condensed">
+    <div class="col-lg-6 table-responsive">
+      <table class="table table-condensed small">
         <caption>{{matchup.awayTeam}}</caption>
         <thead>
-          <tr>
-            <td>Rq</td>
-            <td>Ex</td>
-            <td>Po</td>
-            <td>Na</td>
-            <td>R</td>
-            <td>R+</td>
-            <td>$</td>
-            <td>V</td>
-            <td>V+</td>
+          <tr class="small">
+            <td class="small">Rq/Ex</td>
+            <td class="small">P</td>
+            <td class="small">Name</td>
+            <td class="small">R</td>
+            <td class="small">R+</td>
+            <td class="small">$</td>
+            <td class="small">V</td>
+            <td class="small">V+</td>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>QB</td>
-            <td>{{matchup.aQB.lastName}}</td>
-            <td>{{matchup.aQB.rating}}</td>
-            <td>{{matchup.aQB.ratingPlus}}</td>
-            <td>{{matchup.aQB.salary}}</td>
-            <td>{{matchup.aQB.value}}</td>
-            <td>{{matchup.aQB.valuePlus}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>RB</td>
-            <td>{{matchup.aRB.lastName}}</td>
-            <td>{{matchup.aRB.rating}}</td>
-            <td>{{matchup.aRB.ratingPlus}}</td>
-            <td>{{matchup.aRB.salary}}</td>
-            <td>{{matchup.aRB.value}}</td>
-            <td>{{matchup.aRB.valuePlus}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>WR</td>
-            <td>{{matchup.aWR1.lastName}}</td>
-            <td>{{matchup.aWR1.rating}}</td>
-            <td>{{matchup.aWR1.ratingPlus}}</td>
-            <td>{{matchup.aWR1.salary}}</td>
-            <td>{{matchup.aWR1.value}}</td>
-            <td>{{matchup.aWR1.valuePlus}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>WR</td>
-            <td>{{matchup.aWR2.lastName}}</td>
-            <td>{{matchup.aWR2.rating}}</td>
-            <td>{{matchup.aWR2.ratingPlus}}</td>
-            <td>{{matchup.aWR2.salary}}</td>
-            <td>{{matchup.aWR2.value}}</td>
-            <td>{{matchup.aWR2.valuePlus}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>WR</td>
-            <td>{{matchup.aWR3.lastName}}</td>
-            <td>{{matchup.aWR3.rating}}</td>
-            <td>{{matchup.aWR3.ratingPlus}}</td>
-            <td>{{matchup.aWR3.salary}}</td>
-            <td>{{matchup.aWR3.value}}</td>
-            <td>{{matchup.aWR3.valuePlus}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>TE</td>
-            <td>{{matchup.aTE.lastName}}</td>
-            <td>{{matchup.aTE.rating}}</td>
-            <td>{{matchup.aTE.ratingPlus}}</td>
-            <td>{{matchup.aTE.salary}}</td>
-            <td>{{matchup.aTE.value}}</td>
-            <td>{{matchup.aTE.valuePlus}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>K</td>
-            <td>{{matchup.aK.lastName}}</td>
-            <td>{{matchup.aK.rating}}</td>
-            <td>{{matchup.aK.ratingPlus}}</td>
-            <td>{{matchup.aK.salary}}</td>
-            <td>{{matchup.aK.value}}</td>
-            <td>{{matchup.aK.valuePlus}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>D</td>
-            <td>{{matchup.aD.lastName}}</td>
-            <td>{{matchup.aD.rating}}</td>
-            <td>{{matchup.aD.ratingPlus}}</td>
-            <td>{{matchup.aD.salary}}</td>
-            <td>{{matchup.aD.value}}</td>
-            <td>{{matchup.aD.valuePlus}}</td>
-          </tr>
+          {{#each awayPlayers as |player|}}
+            <tr>
+              {{#if player.lastName}}
+                <td class="small"></td>
+                <td class="small"><small>{{player.position}}</small></td>
+                <td class="small"><small>{{player.lastName}}</small></td>
+                <td class="small">{{player.rating}}</td>
+                <td class="small">{{player.ratingPlus}}</td>
+                <td class="small">{{player.salary}}</td>
+                <td class="small">{{player.value}}</td>
+                <td class="small">{{player.valuePlus}}</td>
+              {{else}}
+                <td class="small"></td>
+                <td class="small"><small>{{player.proto.type}}</small></td>
+                <td class="small" colspan="6"><small>{{player.proto.fullName}} not in contest.</small></td>
+              {{/if}}
+            </tr>
+          {{/each}}
         </tbody>
       </table>
     </div>
-    <div class="col-md-6 table-responsive">
-      <table class="table table-condensed">
+    <div class="col-lg-6 table-responsive">
+      <table class="table table-condensed small">
         <caption>@ {{matchup.homeTeam}}</caption>
         <thead>
-          <tr>
-            <td>Rq</td>
-            <td>Ex</td>
-            <td>Po</td>
-            <td>Na</td>
-            <td>R</td>
-            <td>R+</td>
-            <td>$</td>
-            <td>V</td>
-            <td>V+</td>
+          <tr class="small">
+            <td class="small">Rq/Ex</td>
+            <td class="small">Po</td>
+            <td class="small">Na</td>
+            <td class="small">R</td>
+            <td class="small">R+</td>
+            <td class="small">$</td>
+            <td class="small">V</td>
+            <td class="small">V+</td>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>QB</td>
-            <td>{{matchup.hQB.lastName}}</td>
-            <td>{{matchup.hQB.rating}}</td>
-            <td>{{matchup.hQB.ratingPlus}}</td>
-            <td>{{matchup.hQB.salary}}</td>
-            <td>{{matchup.hQB.value}}</td>
-            <td>{{matchup.hQB.valuePlus}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>RB</td>
-            <td>{{matchup.hRB.lastName}}</td>
-            <td>{{matchup.hRB.rating}}</td>
-            <td>{{matchup.hRB.ratingPlus}}</td>
-            <td>{{matchup.hRB.salary}}</td>
-            <td>{{matchup.hRB.value}}</td>
-            <td>{{matchup.hRB.valuePlus}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>WR</td>
-            <td>{{matchup.hWR1.lastName}}</td>
-            <td>{{matchup.hWR1.rating}}</td>
-            <td>{{matchup.hWR1.ratingPlus}}</td>
-            <td>{{matchup.hWR1.salary}}</td>
-            <td>{{matchup.hWR1.value}}</td>
-            <td>{{matchup.hWR1.valuePlus}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>WR</td>
-            <td>{{matchup.hWR2.lastName}}</td>
-            <td>{{matchup.hWR2.rating}}</td>
-            <td>{{matchup.hWR2.ratingPlus}}</td>
-            <td>{{matchup.hWR2.salary}}</td>
-            <td>{{matchup.hWR2.value}}</td>
-            <td>{{matchup.hWR2.valuePlus}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>WR</td>
-            <td>{{matchup.hWR3.lastName}}</td>
-            <td>{{matchup.hWR3.rating}}</td>
-            <td>{{matchup.hWR3.ratingPlus}}</td>
-            <td>{{matchup.hWR3.salary}}</td>
-            <td>{{matchup.hWR3.value}}</td>
-            <td>{{matchup.hWR3.valuePlus}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>TE</td>
-            <td>{{matchup.hTE.lastName}}</td>
-            <td>{{matchup.hTE.rating}}</td>
-            <td>{{matchup.hTE.ratingPlus}}</td>
-            <td>{{matchup.hTE.salary}}</td>
-            <td>{{matchup.hTE.value}}</td>
-            <td>{{matchup.hTE.valuePlus}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>K</td>
-            <td>{{matchup.hK.lastName}}</td>
-            <td>{{matchup.hK.rating}}</td>
-            <td>{{matchup.hK.ratingPlus}}</td>
-            <td>{{matchup.hK.salary}}</td>
-            <td>{{matchup.hK.value}}</td>
-            <td>{{matchup.hK.valuePlus}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>D</td>
-            <td>{{matchup.hD.lastName}}</td>
-            <td>{{matchup.hD.rating}}</td>
-            <td>{{matchup.hD.ratingPlus}}</td>
-            <td>{{matchup.hD.salary}}</td>
-            <td>{{matchup.hD.value}}</td>
-            <td>{{matchup.hD.valuePlus}}</td>
-          </tr>
+          {{#each homePlayers as |player|}}
+            <tr>
+              {{#if player.lastName}}
+                <td class="small"></td>
+                <td class="small"><small>{{player.position}}</small></td>
+                <td class="small"><small>{{player.lastName}}</small></td>
+                <td class="small">{{player.rating}}</td>
+                <td class="small">{{player.ratingPlus}}</td>
+                <td class="small">{{player.salary}}</td>
+                <td class="small">{{player.value}}</td>
+                <td class="small">{{player.valuePlus}}</td>
+              {{else}}
+                <td class="small"></td>
+                <td class="small"><small>{{player.proto.type}}</small></td>
+                <td class="small" colspan="6"><small>{{player.proto.fullName}} not in contest.</small></td>
+              {{/if}}
+            </tr>
+          {{/each}}
         </tbody>
       </table>
     </div>
@@ -233,12 +91,21 @@
 </div>
 <div class="panel-footer">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-xs-6">
+      <h6>{{matchup.awayTeam}} Inactives</h6>
+      <ul class="list-unstyled small">
+        {{#each matchup.ainactives as |inactive|}}
+          <li>{{inactive}}</li>
+        {{/each}}
+      </ul>
     </div>
-    <div class="col-md-6">
+    <div class="col-xs-6">
+      <h6>{{matchup.homeTeam}} Inactives</h6>
+      <ul class="list-unstyled small">
+        {{#each matchup.hinactives as |inactive|}}
+          <li>{{inactive}}</li>
+        {{/each}}
+      </ul>
     </div>
   </div>
 </div>
-
-
-{{yield}}
