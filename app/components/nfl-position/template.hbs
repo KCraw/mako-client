@@ -1,0 +1,46 @@
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+	  <h3 class="panel-title">{{players.position}}</h3>
+	</div>
+	<div class="panel-body">
+	  <div class="row">
+	    <div class="table-responsive">
+	      <table class="table table-condensed small">
+	        <thead>
+	          <tr class="small">
+	            <td class="small">Rq/Ex</td>
+	            <td class="small" {{action "sortPlayers" "team"}}>T</td>
+	            <td class="small" {{action "sortPlayers" "lastName"}}>Name</td>
+	            <td class="small" {{action "sortPlayers" "ratingMinus"}}>R-</td>
+	            <td class="small" {{action "sortPlayers" "rating"}}>R</td>
+	            <td class="small" {{action "sortPlayers" "ratingPlus"}}>R+</td>
+	            <td class="small" {{action "sortPlayers" "salary"}}>$</td>
+	            <td class="small" {{action "sortPlayers" "valuePlus"}}>V-</td>
+	            <td class="small" {{action "sortPlayers" "value"}}>V</td>
+	            <td class="small" {{action "sortPlayers" "valuePlus"}}>V+</td>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          {{#each sortedPlayers as |player|}}
+	            <tr>
+                <td class="small"></td>
+                <td class="small"><small>{{player.team}}</small></td>
+                <td class="small"><small>{{player.lastName}}, {{player.firstName}}</small></td>
+                <td class="small">{{player.ratingMinus}}</td>
+                <td class="small">{{player.rating}}</td>
+                <td class="small">{{player.ratingPlus}}</td>
+                <td class="small">{{short-salary player.salary}}</td>
+                <td class="small">{{player.valueMinus}}</td>
+                <td class="small">{{player.value}}</td>
+                <td class="small">{{player.valuePlus}}</td>
+	            </tr>
+	          {{/each}}
+	        </tbody>
+	      </table>
+	    </div>
+	    </div>
+		</div>
+		<div class="panel-footer">
+		</div>
+</div>

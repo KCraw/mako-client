@@ -1,0 +1,12 @@
+<div class="row">
+{{#each playersGroups as |playerGroup|}}
+	<div class="row">
+		{{#each playerGroup as |position|}}
+			<div class="col-md-4">
+				<!-- Panel for each group goes here -->
+				{{nfl-position position}}
+			</div>
+		{{/each}}
+	</div>
+{{/each}} 
+</div>

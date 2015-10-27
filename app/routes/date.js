@@ -8,59 +8,20 @@ export default Ember.Route.extend({
     
     return Ember.RSVP.hash({
       date: today.toDate(),
-      fanduelMlbContests: this.store.query('mlb/contest', {
+      mlbContests: this.store.query('mlb/contest', {
         orderBy: 'startTime',
         startAt: start,
         endAt: end
-      }).then((contests) => {
-        return contests.filter(function(item) {
-          return item.get('site') === 'fanduel';
-        });
       }),
-      fanduelNflContests: this.store.query('nfl/contest', {
+      nflContests: this.store.query('nfl/contest', {
         orderBy: 'startTime',
         startAt: start,
         endAt: end
-      }).then((contests) => {
-        return contests.filter(function(item) {
-          return item.get('site') === 'fanduel';
-        });
       }),
-      fanduelNbaContests: this.store.query('nba/contest', {
+      nbaContests: this.store.query('nba/contest', {
         orderBy: 'startTime',
         startAt: start,
         endAt: end
-      }).then((contests) => {
-        return contests.filter(function(item) {
-          return item.get('site') === 'fanduel';
-        });
-      }),
-      draftkingsMlbContests: this.store.query('mlb/contest', {
-        orderBy: 'startTime',
-        startAt: start,
-        endAt: end
-      }).then((contests) => {
-        return contests.filter(function(item) {
-          return item.get('site') === 'draftkings';
-        });
-      }),
-      draftkingsNflContests: this.store.query('nfl/contest', {
-        orderBy: 'startTime',
-        startAt: start,
-        endAt: end
-      }).then((contests) => {
-        return contests.filter(function(item) {
-          return item.get('site') === 'draftkings';
-        });
-      }),
-      draftkingsNbaContests: this.store.query('nba/contest', {
-        orderBy: 'startTime',
-        startAt: start,
-        endAt: end
-      }).then((contests) => {
-        return contests.filter(function(item) {
-          return item.get('site') === 'draftkings';
-        });
       })
     });
   }
