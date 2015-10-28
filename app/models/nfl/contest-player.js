@@ -18,10 +18,10 @@ export default DS.Model.extend({
   value: Ember.computed('rating', 'salary', function() {
     return Math.round(this.get('rating') / this.get('salary') * 10000)/10 || 0;
   }),
-  valueMinus: Ember.computed('rating', 'salaryMinus', function() {
+  valueMinus: Ember.computed('ratingMinus', 'salary', function() {
     return Math.round(this.get('ratingMinus') / this.get('salary') * 10000)/10 || 0;
   }),
-  valuePlus: Ember.computed('rating', 'salaryPlus', function() {
+  valuePlus: Ember.computed('ratingPlus', 'salary', function() {
     return Math.round(this.get('ratingPlus') / this.get('salary') * 10000)/10 || 0;
   }),
   actual: Ember.computed('site', 'proto.fdActual', 'proto.dkActual', function() {
