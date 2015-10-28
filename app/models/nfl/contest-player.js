@@ -24,6 +24,9 @@ export default DS.Model.extend({
   valuePlus: Ember.computed('rating', 'salaryPlus', function() {
     return Math.round(this.get('ratingPlus') / this.get('salary') * 10000)/10 || 0;
   }),
+  actual: Ember.computed('site', 'proto.fdActual', 'proto.dkActual', function() {
+    return (this.get('site') === 'fanduel' && this.get('proto.fdActual')) || (this.get('site') === 'draftkings' && this.get('proto.dkRating')) || '?';
+  }),
   position: DS.attr('string'),
   salary: DS.attr('number'),
   stats: Ember.computed.alias('proto.stats'),

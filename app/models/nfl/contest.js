@@ -14,5 +14,6 @@ export default DS.Model.extend({
     return name;
   }),
 
-  meta: DS.belongsTo('nfl/contest-meta')
+  meta: DS.belongsTo('nfl/contest-meta'),
+  matchups: DS.hasMany('nfl/contest-matchup')
 });

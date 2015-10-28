@@ -10,7 +10,7 @@ This controller needs to:
 
 export default Ember.Controller.extend({
 
-  matchups: Ember.computed.alias('model.meta.matchups'),
+  matchups: Ember.computed.alias('model.matchups'),
   site: Ember.computed.alias('model.site'),
   players: Ember.computed('matchups.[]', function() {
 

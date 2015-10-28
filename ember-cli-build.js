@@ -38,6 +38,8 @@ module.exports = function(defaults) {
   });
   app.import(app.bowerDirectory + '/moment/moment.js');
   app.import(app.bowerDirectory + '/moment-timezone/builds/moment-timezone-with-data.js');
+  app.import(app.bowerDirectory + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.js');
+  app.import(app.bowerDirectory + '/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css');
 
   return app.toTree();
 };

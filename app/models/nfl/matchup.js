@@ -1,7 +1,6 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  site: DS.attr('string'),
   startTime: DS.attr('date'),
   weather: DS.attr('string'),
   awayTeam: DS.attr('string'),

@@ -7,7 +7,11 @@ export default Ember.Route.extend({
     });
   },
   actions: {
-    signIn: function(email, password, ref) {
+    dateNav(date) {
+      let formatted = moment(date).format('YYYY-MM-DD');
+      this.transitionTo('/contests/' + formatted);
+    },
+    signIn(email, password, ref) {
       this.get('session').open('firebase', {
         provider: 'password',
         email: email,
@@ -19,7 +23,7 @@ export default Ember.Route.extend({
         ref.set('hasError', true);
       });
     },
-    signOut: function() {
+    signOut() {
       this.get("session").close();
       this.transitionTo('/');
     }

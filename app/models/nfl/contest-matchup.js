@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  site: Ember.computed.alias('proto.site'),
+  site: DS.attr('string'),
   startTime: Ember.computed.alias('proto.startTime'),
   weather: Ember.computed.alias('proto.weather'),
   awayTeam: DS.attr('string'),

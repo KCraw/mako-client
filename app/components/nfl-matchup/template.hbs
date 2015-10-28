@@ -13,8 +13,9 @@
 </div>
 <div class="panel-body">
   <div class="row">
+    {{#each teams as |team|}}
       <table class="table table-condensed small">
-        <caption>{{matchup.awayTeam}}</caption>
+        <caption>{{team.name}}</caption>
         <thead>
           <tr class="small">
             <td class="small">Rq/Ex</td>
@@ -27,15 +28,16 @@
             <td class="small">V-</td>
             <td class="small">V</td>
             <td class="small">V+</td>
+            <td class="small"><em>A</em></td>
           </tr>
         </thead>
         <tbody>
-          {{#each awayPlayers as |player|}}
+          {{#each team.players as |player|}}
             <tr>
               {{#if player.lastName}}
                 <td class="small"></td>
                 <td class="small">{{player.position}}</td>
-                <td class="small">{{player.lastName}}</td>
+                <td class="small">{{first-initial player.firstName player.position}} {{player.lastName}}</td>
                 <td class="small">{{player.ratingMinus}}</td>
                 <td class="small">{{player.rating}}</td>
                 <td class="small">{{player.ratingPlus}}</td>
@@ -43,54 +45,17 @@
                 <td class="small">{{player.valueMinus}}</td>
                 <td class="small">{{player.value}}</td>
                 <td class="small">{{player.valuePlus}}</td>
+                <td class="small"><em>{{player.actual}}</em></td>
               {{else}}
                 <td class="small"></td>
                 <td class="small"><small>{{player.proto.type}}</small></td>
-                <td class="small" colspan="8"><small>{{player.proto.fullName}} not in contest.</small></td>
+                <td class="small" colspan="9"><small>{{player.proto.fullName}} not in contest.</small></td>
               {{/if}}
             </tr>
           {{/each}}
         </tbody>
       </table>
-      <table class="table table-condensed small">
-        <caption>@ {{matchup.homeTeam}}</caption>
-        <thead>
-          <tr class="small">
-            <td class="small">Rq/Ex</td>
-            <td class="small">P</td>
-            <td class="small">Name</td>
-            <td class="small">R-</td>
-            <td class="small">R</td>
-            <td class="small">R+</td>
-            <td class="small">$</td>
-            <td class="small">V-</td>
-            <td class="small">V</td>
-            <td class="small">V+</td>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each homePlayers as |player|}}
-            <tr>
-              {{#if player.lastName}}
-                <td class="small"></td>
-                <td class="small">{{player.position}}</td>
-                <td class="small">{{player.lastName}}</td>
-                <td class="small">{{player.ratingMinus}}</td>
-                <td class="small">{{player.rating}}</td>
-                <td class="small">{{player.ratingPlus}}</td>
-                <td class="small">{{short-salary player.salary}}</td>
-                <td class="small">{{player.valueMinus}}</td>
-                <td class="small">{{player.value}}</td>
-                <td class="small">{{player.valuePlus}}</td>
-              {{else}}
-                <td class="small"></td>
-                <td class="small"><small>{{player.proto.type}}</small></td>
-                <td class="small" colspan="8"><small>{{player.proto.fullName}} not in contest.</small></td>
-              {{/if}}
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
+    {{/each}}
   </div>
 </div>
 <div class="panel-footer">

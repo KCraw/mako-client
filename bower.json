@@ -15,7 +15,8 @@
     "firebase": "^2.1.0",
     "bootstrap": "~3.3.5",
     "emberfire": "~1.5.0",
-    "moment-timezone": "~0.4.1"
+    "moment-timezone": "~0.4.1",
+    "bootstrap-datepicker": "~1.5.0"
   },
   "resolutions": {
     "ember": "^2.1.0",

@@ -7,8 +7,10 @@ export default DS.Model.extend({
   fdRating: DS.attr('number'),
   fdRatingMinus: DS.attr('number'),
   fdRatingPlus: DS.attr('number'),
+  fdActual: DS.attr('number'),
   dkRating: DS.attr('number'),
   dkRatingMinus: DS.attr('number'),
   dkRatingPlus: DS.attr('number'),
+  dkActual: DS.attr('number'),
   stats: DS.belongsTo('nfl/player-stats')
 });
