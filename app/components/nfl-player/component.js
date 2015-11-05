@@ -67,17 +67,16 @@ const NflPlayerComponent = Ember.Component.extend({
 	didInsertElement() {
 		let ctx = this.$('.ratingsChart').get(0).getContext('2d');
 		let data = {
-  		labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%'],
+  		labels: ['90%', '80%', '70%', '60%', '50%', '40%', '30%', '20%', '10%'],
 	    datasets: [
         {
-            label: "Probability Distribution",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [this.get('player.ratings.r90'), this.get('player.ratings.r80'), this.get('player.ratings.r70'), this.get('player.ratings.r60'), this.get('player.ratings.r50'), this.get('player.ratings.r40'), this.get('player.ratings.r30'), this.get('player.ratings.r20'), this.get('player.ratings.r10')]
+          fillColor: "rgba(151,187,205,0.2)",
+          strokeColor: "rgba(151,187,205,1)",
+          pointColor: "rgba(151,187,205,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          data: [this.get('player.ratings.r10'), this.get('player.ratings.r20'), this.get('player.ratings.r30'), this.get('player.ratings.r40'), this.get('player.ratings.r50'), this.get('player.ratings.r60'), this.get('player.ratings.r70'), this.get('player.ratings.r80'), this.get('player.ratings.r90')]
         }
 	    ]
 		};
@@ -96,8 +95,14 @@ const NflPlayerComponent = Ember.Component.extend({
 	    // Number - The scale starting value
 	    scaleStartValue: -10,
 
-	    //Number - Tension of the bezier curve between points
-    	bezierCurveTension : 0.2,
+			// Number - Pixel offset from point x to tooltip edge
+			tooltipXOffset: 15,
+
+			//Boolean - Whether the line is curved between points
+			bezierCurve : false,
+
+	    // //Number - Tension of the bezier curve between points
+    	// bezierCurveTension : 0.1,
 
     	//Number - amount extra to add to the radius to cater for hit detection outside the drawn point
     	pointHitDetectionRadius : 5,
