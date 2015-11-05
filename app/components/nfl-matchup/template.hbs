@@ -17,7 +17,8 @@
       <caption>{{team.name}}</caption>
       <thead>
         <tr class="small">
-          <td class="small">Rq/Ex</td>
+          <td class="small">Rq</td>
+          <td class="small">Ex</td>
           <td class="small">P</td>
           <td class="small">Name</td>
           <td class="small">R-</td>
@@ -34,7 +35,12 @@
         {{#each team.players as |player|}}
           <tr>
             {{#if player.lastName}}
-              <td class="small"></td>
+              <td class="small">
+                {{input type="checkbox" checked=player.isRequired}}
+              </td>
+              <td class="small">
+                {{input type="checkbox" checked=player.isExcluded}}
+              </td>
               <td class="small">{{player.position}}</td>
               <td class="small"><a href="#" {{action "playerClicked" player}}>{{first-initial player.firstName player.position}} {{player.lastName}}</a></td>
               <td class="small">{{player.ratingMinus}}</td>

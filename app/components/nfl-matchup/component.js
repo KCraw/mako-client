@@ -15,7 +15,7 @@ const NflMatchupComponent = Ember.Component.extend({
   actions: {
   	playerClicked(player) {
   		this.sendAction('action', player);
-  	} 
+  	}
   }
 });
 

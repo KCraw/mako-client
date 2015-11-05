@@ -37,7 +37,8 @@
     <table class="table table-condensed small">
       <thead>
         <tr class="small">
-          <td class="small">Rq/Ex</td>
+          <td class="small">Rq</td>
+          <td class="small">Ex</td>
           <td class="small" {{action "sortPlayers" "team"}}>T</td>
           <td class="small" {{action "sortPlayers" "lastName"}}>Name</td>
           <td class="small" {{action "sortPlayers" "ratingMinus"}}>R-</td>
@@ -53,7 +54,12 @@
       <tbody>
         {{#each sortedPlayers as |player|}}
           <tr>
-            <td class="small"></td>
+            <td class="small">
+              {{input type="checkbox" checked=player.isRequired}}
+            </td>
+            <td class="small">
+              {{input type="checkbox" checked=player.isExcluded}}
+            </td>
             <td class="small"><small>{{player.team}}</small></td>
             <td class="small"><a href="#" {{action "playerClicked" player}}><small>{{player.lastName}}</small></a></td>
             <td class="small">{{player.ratingMinus}}</td>

@@ -6,10 +6,14 @@ export default Ember.Controller.extend({
 		this.set('rSample', 50);
 		this.set('rMSample', 25);
 		this.set('rPSample', 75);
-		this.set('required', {});
-		this.set('excluded', {});
 		this.set('modalPlayer', null);
 		this.set('modalEnabled', false);
+		this.get('players').then((players) => {
+			players.forEach(function(player) {
+				player.set('isRequired', false);
+				player.set('isExcluded', false);
+			});	
+		});
 	}),
 	// Modal for players
 	actions: {

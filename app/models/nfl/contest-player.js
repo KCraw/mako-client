@@ -68,5 +68,18 @@ export default DS.Model.extend({
   position: DS.attr('string'),
   salary: DS.attr('number'),
   stats: Ember.computed.alias('proto.stats'),
-  proto: DS.belongsTo('nfl/player')
+  proto: DS.belongsTo('nfl/player'),
+  isRequired: false,
+  required: Ember.observer('isRequired', function() {
+    if (this.get('isRequired')) {
+      this.set('isExcluded', false);
+    }
+  }),
+  isExcluded: false,
+  excluded: Ember.observer('isExcluded', function() {
+    if (this.get('isExcluded')) {
+      this.set('isRequired', false);
+    }
+  }),
+
 });

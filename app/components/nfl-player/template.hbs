@@ -1,7 +1,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<h5>Matchup Analysis <small>{{date}}</small></h5>
+		<h5>{{site-name player.site}} Matchup Analysis <small>{{date}}</small></h5>
 	</div>
 </div>
 
@@ -11,6 +11,12 @@
 		<h4>Salary: <small>${{player.salary}}</small></h4>
 		<p>{{position}}</p>
 		<h4>{{team}}</h4>
+		<label class="checkbox-inline">
+		  {{input type="checkbox" checked=player.isRequired}} Require
+		</label>
+		<label class="checkbox-inline">
+		  {{input type="checkbox" checked=player.isExcluded}} Exclude
+		</label>
 	</div>
 	<div class="col-md-5">
 		<h5>Fantasy Point Production <small>Inverse Cumulative Probability</small></h5>
