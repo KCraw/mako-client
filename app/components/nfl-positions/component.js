@@ -10,20 +10,26 @@ const NflPlayersComponent = Ember.Component.extend({
 
 	playersGroup1: Ember.computed('playersQB', 'playersRB', 'playersTE', function() {
 		let r = [];
-		r.pushObject({ position: "QB", list: this.get('playersQB') });
-		r.pushObject({ position: "RB", list: this.get('playersRB') });
-		r.pushObject({ position: "TE", list: this.get('playersTE') });
+		r.pushObject({ position: "Quarterbacks", list: this.get('playersQB') });
+		r.pushObject({ position: "Runningbacks", list: this.get('playersRB') });
+		r.pushObject({ position: "Tight Ends", list: this.get('playersTE') });
 		return r;
 	}),
 	playersGroup2: Ember.computed('playersWR', 'playersK', 'playersD', function() {
 		let r = [];
-		r.pushObject({ position: "WR", list: this.get('playersWR') });
-		r.pushObject({ position: "K", list: this.get('playersK') });
-		r.pushObject({ position: "D", list: this.get('playersD') });
+		r.pushObject({ position: "Wide Receivers", list: this.get('playersWR') });
+		r.pushObject({ position: "Kickers", list: this.get('playersK') });
+		r.pushObject({ position: "Defenses", list: this.get('playersD') });
 		return r;
 	}),
 	
-	playersGroups: Ember.computed.collect('playersGroup1', 'playersGroup2')
+	playersGroups: Ember.computed.collect('playersGroup1', 'playersGroup2'),
+
+	actions: {
+  	playerClicked(player) {
+  		this.sendAction('action', player);
+  	} 
+  }
 });
 
 NflPlayersComponent.reopenClass({

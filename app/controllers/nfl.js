@@ -1,19 +1,52 @@
 import Ember from 'ember';
 
-/*
-
-This controller needs to:
-  - Tracks whether each player is excluded
-  - Tracks whether each player is required
-
-*/
-
 export default Ember.Controller.extend({
-
+	// Controller is a Singleton!!!
+	modelDidChange: Ember.observer('model', function() {
+		this.set('rSample', 50);
+		this.set('rMSample', 25);
+		this.set('rPSample', 75);
+		this.set('required', {});
+		this.set('excluded', {});
+		this.set('modalPlayer', null);
+		this.set('modalEnabled', false);
+	}),
+	// Modal for players
+	actions: {
+		openModal(player) {
+			this.set('modalPlayer', player);
+			this.toggleProperty('modalEnabled');
+		},
+		closeModal() {
+			this.set('modalPlayer', null);
+			this.toggleProperty('modalEnabled');
+		}, 
+		resetDefaults() {
+			this.set('rSample', 50);
+			this.set('rMSample', 25);
+			this.set('rPSample', 75);
+		}
+	},
+	// Component sync stuff
+	rSampleChanged: Ember.observer('rSample', 'players.[]', function() {
+		this.get('players').forEach((player) => {
+			player.set('rSample', this.get('rSample'));
+		});
+	}),
+	rMSampleChanged: Ember.observer('rMSample', 'players.[]', function() {
+		this.get('players').forEach((player) => {
+			player.set('rMSample', this.get('rMSample'));
+		});
+	}),
+	rPSampleChanged: Ember.observer('rPSample', 'players.[]', function() {
+		this.get('players').forEach((player) => {
+			player.set('rPSample', this.get('rPSample'));
+		});
+	}),
+	contest: Ember.computed.alias('model'),
   matchups: Ember.computed.alias('model.matchups'),
   site: Ember.computed.alias('model.site'),
   players: Ember.computed('matchups.[]', function() {
-
   	return DS.PromiseArray.create({
   		promise: this.get('matchups').then((matchups) => {
 	  		return matchups.reduce(function(acc, matchup) {
@@ -37,11 +70,5 @@ export default Ember.Controller.extend({
 		  	}, []);
   		})
   	});
-  	
-  }),
-	required: {},
-	// This tracks each excluded player by id
-	// 	Ex:
-	// 		excluded: { -Xoda1-ssa: true }
-	excluded: {}
+  })
 });

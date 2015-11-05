@@ -1,8 +1,8 @@
 
-
 {{#if session.isAuthenticated}}
 <!-- This section (including the applicatino outlet) is only visible if a user is logged in -->
 
+  <!-- TODO: Turn the navbar into a component -->
   <!-- Nav bar at the top -->
   <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
@@ -16,7 +16,6 @@
         </button>
         {{link-to "Mako" "index" class="navbar-brand"}}
       </div>
-
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
@@ -43,16 +42,15 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-
   <!-- Container and the main application outlet -->
-{{outlet}}
+  {{outlet}}
 
 {{else}}
 <!-- This section is only displayed if a user has not logged in -->
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-2" style="margin-top: 20%">
-        {{#simple-login action="signIn"}}
+        {{#simple-login hasError=authError action="signIn"}}
           <h2>Mako | <small>Advanced DFS Analytics Toolset</small></h2>
           <p>To get started, login with your email and password:</p>
         {{/simple-login}}

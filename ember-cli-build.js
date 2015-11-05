@@ -36,10 +36,14 @@ module.exports = function(defaults) {
   app.import(app.bowerDirectory + '/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2', {
     destDir: 'fonts'
   });
+  app.import(app.bowerDirectory + '/mathjs/dist/math.js');
   app.import(app.bowerDirectory + '/moment/moment.js');
   app.import(app.bowerDirectory + '/moment-timezone/builds/moment-timezone-with-data.js');
   app.import(app.bowerDirectory + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.js');
   app.import(app.bowerDirectory + '/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css');
+  app.import(app.bowerDirectory + '/Chart.js/Chart.js');
+  // app.import(app.bowerDirectory + '/Chart.js/src/Chart.Core.js');
+  // app.import(app.bowerDirectory + '/Chart.js/src/Chart.Line.js');
 
   return app.toTree();
 };

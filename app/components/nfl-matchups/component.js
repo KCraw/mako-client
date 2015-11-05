@@ -12,7 +12,13 @@ const NflMatchupsComponent =  Ember.Component.extend({
 			r.push(matchups.slice(i, i + size));
 		}
 		return r;
-	})
+	}),
+
+	actions: {
+  	playerClicked(player) {
+  		this.sendAction('action', player);
+  	} 
+  }
 });
 
 NflMatchupsComponent.reopenClass({

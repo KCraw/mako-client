@@ -1,17 +1,89 @@
-<div class="container">
-  <h3>Lineup Generator <small>Coming Eventually!</small></h3>
 
-  <h3>Matchups <small>by start time</small></h3>
-  {{#if matchups.length}}
-    {{nfl-matchups matchups}}
-  {{else}}
-    <p>No matchups yet for {{model.displayName}}.</p>
+{{!-- Modal --}}
+{{#modal-lg isEnabled=modalEnabled isShown=modalShown title='NFL Player Stats' action="closeModal"}}
+  {{#if modalShown}}
+    {{#if modalPlayer.stats.isLoaded}}
+      {{nfl-player modalPlayer modalPlayer.stats}}
+    {{else}}
+      <div class="text-center text-muted">
+        <h3>Loading player stats...</h3>
+        <span class="glyphicon glyphicon-refresh glyphicon-spin glyphicon-lg"></span>
+      </div>
+    {{/if}}
   {{/if}}
-  
-  <h3>Players <small>by position</small></h3>
-  {{#if players.length}}
-    {{nfl-positions players}}
-  {{else}}
-    <p>No players yet for {{model.displayName}}.</p>
-  {{/if}}
+{{/modal-lg}}
+
+{{!-- Main --}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="text-info text-right">{{contest.displayName}}</h5>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 well">
+      <h4>Controls</h4>
+      <div class="row">
+        <div class="col-md-12">
+          <h5>Ratings <small>customize percentiles</small></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon">R-</span>
+            {{input type="range" class="form-control" min="1" max=rSample value=rMSample}}
+            <span class="input-group-addon">{{rMSample}}</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon">R</span>
+            {{input type="range" class="form-control" min=rMSample max=rPSample value=rSample}}
+            <span class="input-group-addon">{{rSample}}</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon">R+</span>
+            {{input type="range" class="form-control" min=rSample max="99" value=rPSample}}
+            <span class="input-group-addon">{{rPSample}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-md-offset-9 text-right">
+          <h6><a href="#" {{action "resetDefaults"}}>reset defaults</a></h6>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Lineup Generator <small>Coming Eventually!</small></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Matchups <small>by start time</small></h3>
+      {{#if matchups.length}}
+        {{nfl-matchups matchups action="openModal"}}
+      {{else}}
+        <p>No matchups yet for {{contest.displayName}}.</p>
+      {{/if}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Players <small>by position</small></h3>
+      {{#if players.length}}
+        {{nfl-positions players action="openModal"}}
+      {{else}}
+        <p>No players yet for {{contest.displayName}}.</p>
+      {{/if}}
+    </div>
+  </div>
 </div>

@@ -6,26 +6,64 @@ export default DS.Model.extend({
   lastName: DS.attr('string'),
   team: DS.attr('string'),
   game: DS.attr('string'),
-  rating: Ember.computed('site', 'proto.fdRating', 'proto.dkRating', function() {
-    return (this.get('site') === 'fanduel' && (this.get('proto.fdRating') || 0)) || (this.get('site') === 'draftkings' && (this.get('proto.dkRating') || 0)) || 0;
+  ratings: Ember.computed('site', 'proto.fdRatings', 'proto.dkRatings', function() {
+    return (this.get('site') === 'fanduel' && this.get('proto.fdRatings')) || (this.get('site') === 'draftkings' && this.get('proto.dkRatings'));
   }),
-  ratingMinus: Ember.computed('site', 'proto.fdRatingMinus', 'proto.dkRatingMinus', function() {
-    return (this.get('site') === 'fanduel' && (this.get('proto.fdRatingMinus') || 0)) || (this.get('site') === 'draftkings' && (this.get('proto.dkRatingMinus') || 0)) || 0;
+  rSample: '50',
+  rName: Ember.computed('rSample', function() {
+    let num = this.get('rSample');
+    let end = num[num.length-1];
+    let mod = (num == 11 && 'th') || (num == 12 && 'th') || (num == 13 && 'th') || (end == 1 && 'st') || (end == 2 && 'nd') || (end == 3 && 'rd') || 'th';
+    return `${num}${mod} percentile`;
   }),
-  ratingPlus: Ember.computed('site', 'proto.fdRatingPlus', 'proto.dkRatingPlus', function() {
-    return (this.get('site') === 'fanduel' && (this.get('proto.fdRatingPlus') || 0)) || (this.get('site') === 'draftkings' && (this.get('proto.dkRatingPlus') || 0)) || 0;
+  rMSample: '25',
+  rMName: Ember.computed('rMSample', function() {
+    let num = this.get('rMSample');
+    let end = num[num.length-1];
+    let mod = (num == 11 && 'th') || (num == 12 && 'th') || (num == 13 && 'th') || (end == 1 && 'st') || (end == 2 && 'nd') || (end == 3 && 'rd') || 'th';
+    return `${num}${mod} percentile`;
+  }),
+  rPSample: '75',
+  rPName: Ember.computed('rPSample', function() {
+    let num = this.get('rPSample');
+    let end = num[num.length-1];
+    let mod = (num == 11 && 'th') || (num == 12 && 'th') || (num == 13 && 'th') || (end == 1 && 'st') || (end == 2 && 'nd') || (end == 3 && 'rd') || 'th';
+    return `${num}${mod} percentile`;
+  }),
+  rating: Ember.computed('ratings', 'rSample', function() {
+    return this.get(`ratings.r${this.get('rSample')}`) || 0;
+  }),
+  ratingMinus: Ember.computed('ratings', 'rMSample', function() {
+    return this.get(`ratings.r${this.get('rMSample')}`) || 0;
+  }),
+  ratingPlus: Ember.computed('ratings', 'rPSample', function() {
+    return this.get(`ratings.r${this.get('rPSample')}`) || 0;
+  }),
+  rComposite: Ember.computed('ratings', function() {
+    let rC = 0;
+    let keys = Object.keys(this.get('ratings'));
+    keys.forEach((key) => {
+      rC += this.get('ratings')[key]
+    });
+    return math.round(rC/keys.length || 0, 1);
   }),
   value: Ember.computed('rating', 'salary', function() {
-    return Math.round(this.get('rating') / this.get('salary') * 10000)/10 || 0;
+    return math.round(this.get('rating') / this.get('salary') * 1000, 1) || 0;
   }),
   valueMinus: Ember.computed('ratingMinus', 'salary', function() {
-    return Math.round(this.get('ratingMinus') / this.get('salary') * 10000)/10 || 0;
+    return math.round(this.get('ratingMinus') / this.get('salary') * 1000, 1) || 0;
   }),
   valuePlus: Ember.computed('ratingPlus', 'salary', function() {
-    return Math.round(this.get('ratingPlus') / this.get('salary') * 10000)/10 || 0;
+    return math.round(this.get('ratingPlus') / this.get('salary') * 1000, 1) || 0;
   }),
   actual: Ember.computed('site', 'proto.fdActual', 'proto.dkActual', function() {
-    return (this.get('site') === 'fanduel' && this.get('proto.fdActual')) || (this.get('site') === 'draftkings' && this.get('proto.dkRating')) || '?';
+    if (this.get('site') === 'fanduel') {
+      return this.get('proto.fdActual') != null ? this.get('proto.fdActual') : '?';
+    } else if (this.get('site') === 'draftkings') {
+      return this.get('proto.dkActual') != null ? this.get('proto.dkActual') : '?';
+    } else {
+      return '?';
+    }
   }),
   position: DS.attr('string'),
   salary: DS.attr('number'),

@@ -10,7 +10,13 @@ const NflMatchupComponent = Ember.Component.extend({
 		r.pushObject({ name: `${this.get('matchup.awayTeam')}`, players: this.get('awayPlayers') });
 		r.pushObject({ name: `@${this.get('matchup.homeTeam')}`, players: this.get('homePlayers') });
 		return r;
-  })
+  }),
+
+  actions: {
+  	playerClicked(player) {
+  		this.sendAction('action', player);
+  	} 
+  }
 });
 
 NflMatchupComponent.reopenClass({
