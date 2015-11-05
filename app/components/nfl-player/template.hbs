@@ -1,0 +1,132 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<h5>Matchup Analysis <small>{{date}}</small></h5>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-3">
+		<h3>{{fullName}}</h3>
+		<h4>Salary: <small>${{player.salary}}</small></h4>
+		<p>{{position}}</p>
+		<h4>{{team}}</h4>
+	</div>
+	<div class="col-md-5">
+		<h5>Fantasy Point Production <small>Inverse Cumulative Probability</small></h5>
+		<div class="chartBox">
+			<canvas class="ratingsChart" width="400" height="400"></canvas>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+			<div class="col-xs-9">
+				<p><strong>Rating</strong> <small>({{player.rName}})</small>:</p>
+			</div>
+			<div class="col-xs-2">
+				<p>{{player.rating}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-9">
+				<p><strong>Rating Minus</strong> <small>({{player.rMName}})</small>:</p>
+			</div>
+			<div class="col-xs-2">
+				<p>{{player.ratingMinus}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-9">
+				<p><strong>Rating Plus</strong> <small>({{player.rPName}})</small>:</p>
+			</div>
+			<div class="col-xs-2">
+				<p>{{player.ratingPlus}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-9">
+				<p><strong>Mean</strong> <small>(of R<sub>0</sub>..R<sub>100</sub>)</small>:</p>
+			</div>
+			<div class="col-xs-2">
+				<p>{{player.rComposite}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		{{#if means}}
+		<div class="table-responsive">
+			<table class="table table-condensed">
+				<caption>Statistical Averages <small>(mean per game)</small></caption>
+				<thead>
+				  <tr class="small text-center">
+				  	{{#each labels as |label|}}
+				  		<td class="small">{{label}}</td>
+				  	{{/each}}
+				  </tr>
+				</thead>
+				<tbody>
+			    <tr class='small text-center'>
+			    	{{#each means as |data|}}
+			    		<td class="small">{{data}}</td>
+			    	{{/each}}
+			    </tr>
+				</tbody>
+			</table>
+		</div>
+		{{/if}}
+		{{#if medians}}
+		<div class="table-responsive">
+			<table class="table table-condensed">
+				<caption>Statistical Averages <small>(median per game)</small></caption>
+				<thead>
+				  <tr class="small text-center">
+				  	{{#each labels as |label|}}
+				  		<td class="small">{{label}}</td>
+				  	{{/each}}
+				  </tr>
+				</thead>
+				<tbody>
+			    <tr class='small text-center'>
+			    	{{#each medians as |data|}}
+			    		<td class="small">{{data}}</td>
+			    	{{/each}}
+			    </tr>
+				</tbody>
+			</table>
+		</div>
+		{{/if}}
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		{{#if logs.length}}
+		<div class="table-responsive">
+			<table class="table table-condensed">
+				<caption>T16 Game Logs <small>(current/previous season and current team only)</small></caption>
+				<thead>
+				  <tr class="small text-center">
+				  	<td class="small">Date</td>
+				  	<td class="small">Team</td>
+				  	<td class="small">Opp</td>
+				  	{{#each labels as |label|}}
+				  		<td class="small">{{label}}</td>
+				  	{{/each}}
+				  	<td class="small info">Fantasy Points</td>
+				  </tr>
+				</thead>
+				<tbody>
+				  {{#each logs as |log|}}
+				    <tr class='small text-center'>
+				    	{{#each log as |data|}}
+				    		<td class="small">{{data}}</td>
+				    	{{/each}}
+				    </tr>
+				  {{/each}}
+				</tbody>
+			</table>
+		</div>
+		{{/if}}
+	</div>
+</div>
