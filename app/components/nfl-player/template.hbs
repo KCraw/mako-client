@@ -11,8 +11,8 @@
 		<h4>Salary: <small>${{player.salary}}</small></h4>
 		<p>{{position}}</p>
 		<h4>{{team}}</h4>
-		<label class="checkbox-inline">
-		  {{input type="checkbox" checked=player.isRequired}} Require
+		<label class="checkbox-inline {{if player.isDisabled "disabled"}}">
+		  {{input type="checkbox" checked=player.isRequired disabled=player.isDisabled}} <span class="{{if player.isDisabled "text-muted"}}">Require</span>
 		</label>
 		<label class="checkbox-inline">
 		  {{input type="checkbox" checked=player.isExcluded}} Exclude

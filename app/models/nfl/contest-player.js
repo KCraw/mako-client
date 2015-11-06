@@ -81,5 +81,6 @@ export default DS.Model.extend({
       this.set('isRequired', false);
     }
   }),
+  isDisabled: false
 
 });

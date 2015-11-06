@@ -64,6 +64,11 @@
   <div class="row">
     <div class="col-md-12">
       <h3>Lineup Generator <small>Coming Eventually!</small></h3>
+      {{#if players.length}}
+        {{nfl-fanduel-lgen players}}
+      {{else}}
+        <p>NO players yet for {{contest.displayName}}.</p>
+      {{/if}}
     </div>
   </div>
   <div class="row">

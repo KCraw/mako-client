@@ -55,7 +55,7 @@
         {{#each sortedPlayers as |player|}}
           <tr>
             <td class="small">
-              {{input type="checkbox" checked=player.isRequired}}
+              {{input type="checkbox" checked=player.isRequired disabled=player.isDisabled}}
             </td>
             <td class="small">
               {{input type="checkbox" checked=player.isExcluded}}
