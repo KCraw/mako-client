@@ -1,0 +1,97 @@
+QB: {{solutionQB1.lastName}}
+{{#if solutionQB1}}
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionQB1.isRequired}} Require
+</label>
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionQB1.isExcluded}} Exclude
+</label>
+{{/if}}
+<br>
+RB1: {{solutionRB1.lastName}}
+{{#if solutionRB1}}
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionRB1.isRequired}} Require
+</label>
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionRB1.isExcluded}} Exclude
+</label>
+{{/if}}
+<br>
+RB2: {{solutionRB2.lastName}}
+{{#if solutionRB2}}
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionRB2.isRequired}} Require
+</label>
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionRB2.isExcluded}} Exclude
+</label>
+{{/if}}
+<br>
+WR1: {{solutionWR1.lastName}}
+{{#if solutionWR1}}
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionWR1.isRequired}} Require
+</label>
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionWR1.isExcluded}} Exclude
+</label>
+{{/if}}
+<br>
+WR2: {{solutionWR2.lastName}}
+{{#if solutionWR2}}
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionWR2.isRequired}} Require
+</label>
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionWR2.isExcluded}} Exclude
+</label>
+{{/if}}
+<br>
+WR3: {{solutionWR3.lastName}}
+{{#if solutionWR3}}
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionWR3.isRequired}} Require
+</label>
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionWR3.isExcluded}} Exclude
+</label>
+{{/if}}
+<br>
+TE: {{solutionTE1.lastName}}
+{{#if solutionTE1}}
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionTE1.isRequired}} Require
+</label>
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionTE1.isExcluded}} Exclude
+</label>
+{{/if}}
+<br>
+K: {{solutionK1.lastName}}
+{{#if solutionK1}}
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionK1.isRequired}} Require
+</label>
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionK1.isExcluded}} Exclude
+</label>
+{{/if}}
+<br>
+D: {{solutionD1.lastName}}
+{{#if solutionD1}}
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionD1.isRequired}} Require
+</label>
+<label class="checkbox-inline">
+  {{input type="checkbox" checked=solutionD1.isExcluded}} Exclude
+</label>
+{{/if}}
+<br>
+Total R: {{math-round solutionTotalRating decimals=1}}
+<br>
+Total R-: {{math-round solutionTotalRatingMinus decimals=1}}
+<br>
+Total R+: {{math-round solutionTotalRatingPlus decimals=1}}
+<br>
+Total Salary: ${{solutionTotalSalary}}
