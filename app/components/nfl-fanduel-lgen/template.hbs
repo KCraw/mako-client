@@ -1,97 +1,154 @@
-QB: {{solutionQB1.lastName}}
-{{#if solutionQB1}}
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionQB1.isRequired}} Require
-</label>
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionQB1.isExcluded}} Exclude
-</label>
-{{/if}}
-<br>
-RB1: {{solutionRB1.lastName}}
-{{#if solutionRB1}}
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionRB1.isRequired}} Require
-</label>
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionRB1.isExcluded}} Exclude
-</label>
-{{/if}}
-<br>
-RB2: {{solutionRB2.lastName}}
-{{#if solutionRB2}}
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionRB2.isRequired}} Require
-</label>
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionRB2.isExcluded}} Exclude
-</label>
-{{/if}}
-<br>
-WR1: {{solutionWR1.lastName}}
-{{#if solutionWR1}}
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionWR1.isRequired}} Require
-</label>
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionWR1.isExcluded}} Exclude
-</label>
-{{/if}}
-<br>
-WR2: {{solutionWR2.lastName}}
-{{#if solutionWR2}}
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionWR2.isRequired}} Require
-</label>
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionWR2.isExcluded}} Exclude
-</label>
-{{/if}}
-<br>
-WR3: {{solutionWR3.lastName}}
-{{#if solutionWR3}}
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionWR3.isRequired}} Require
-</label>
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionWR3.isExcluded}} Exclude
-</label>
-{{/if}}
-<br>
-TE: {{solutionTE1.lastName}}
-{{#if solutionTE1}}
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionTE1.isRequired}} Require
-</label>
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionTE1.isExcluded}} Exclude
-</label>
-{{/if}}
-<br>
-K: {{solutionK1.lastName}}
-{{#if solutionK1}}
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionK1.isRequired}} Require
-</label>
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionK1.isExcluded}} Exclude
-</label>
-{{/if}}
-<br>
-D: {{solutionD1.lastName}}
-{{#if solutionD1}}
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionD1.isRequired}} Require
-</label>
-<label class="checkbox-inline">
-  {{input type="checkbox" checked=solutionD1.isExcluded}} Exclude
-</label>
-{{/if}}
-<br>
-Total R: {{math-round solutionTotalRating decimals=1}}
-<br>
-Total R-: {{math-round solutionTotalRatingMinus decimals=1}}
-<br>
-Total R+: {{math-round solutionTotalRatingPlus decimals=1}}
-<br>
-Total Salary: ${{solutionTotalSalary}}
+<div class="row">
+	<div class="col-md-1">
+		<strong>QB:</strong>
+	</div>
+	<div class="col-md-3">
+		{{solutionQB1.lastName}}
+		{{#if solutionQB1}}
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionQB1.isRequired}} Rq
+			</label>
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionQB1.isExcluded}} Ex
+			</label>
+		{{/if}}
+	</div>
+	<div class="col-md-1">
+		<strong>RB1:</strong>
+	</div>
+	<div class="col-md-3">
+		{{solutionRB1.lastName}}
+		{{#if solutionRB1}}
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionRB1.isRequired}} Rq
+			</label>
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionRB1.isExcluded}} Ex
+			</label>
+		{{/if}}
+	</div>
+	<div class="col-md-1">
+		<strong>RB2:</strong>
+	</div>
+	<div class="col-md-3">
+		{{solutionRB2.lastName}}
+		{{#if solutionRB2}}
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionRB2.isRequired}} Rq
+			</label>
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionRB2.isExcluded}} Ex
+			</label>
+		{{/if}}
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-1">
+		<strong>WR1:</strong>
+	</div>
+	<div class="col-md-3">
+		{{solutionWR1.lastName}}
+		{{#if solutionWR1}}
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionWR1.isRequired}} Rq
+			</label>
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionWR1.isExcluded}} Ex
+			</label>
+		{{/if}}
+	</div>
+	<div class="col-md-1">
+		<strong>WR2:</strong> 
+	</div>
+	<div class="col-md-3">
+		{{solutionWR2.lastName}}
+		{{#if solutionWR2}}
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionWR2.isRequired}} Rq
+			</label>
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionWR2.isExcluded}} Ex
+			</label>
+		{{/if}}
+	</div>
+	<div class="col-md-1">
+		<strong>WR3:</strong>
+	</div>
+	<div class="col-md-3">
+		{{solutionWR3.lastName}}
+		{{#if solutionWR3}}
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionWR3.isRequired}} Rq
+			</label>
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionWR3.isExcluded}} Ex
+			</label>
+		{{/if}}
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-1">
+		<strong>TE:</strong> 
+	</div>
+	<div class="col-md-3">
+		{{solutionTE1.lastName}}
+		{{#if solutionTE1}}
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionTE1.isRequired}} Rq
+			</label>
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionTE1.isExcluded}} Ex
+			</label>
+		{{/if}}
+	</div>
+	<div class="col-md-1">
+		<strong>K:</strong>
+	</div>
+	<div class="col-md-3">
+		{{solutionK1.lastName}}
+		{{#if solutionK1}}
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionK1.isRequired}} Rq
+			</label>
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionK1.isExcluded}} Ex
+			</label>
+		{{/if}}
+	</div>
+	<div class="col-md-1">
+		<strong>D:</strong> 
+	</div>
+	<div class="col-md-3">
+		{{solutionD1.lastName}}
+		{{#if solutionD1}}
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionD1.isRequired}} Rq
+			</label>
+			<label class="checkbox-inline small">
+			  {{input type="checkbox" checked=solutionD1.isExcluded}} Ex
+			</label>
+		{{/if}}
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-2">
+		<strong>Total R:</strong> {{math-round solutionTotalRating decimals=1}}
+	</div>
+	<div class="col-md-2">
+		<strong>Total R-:</strong> {{math-round solutionTotalRatingMinus decimals=1}}
+	</div>
+	<div class="col-md-2">
+		<strong>Total R+:</strong> {{math-round solutionTotalRatingPlus decimals=1}}
+	</div>
+	<div class="col-md-3">
+		<strong>Salary Remaining:</strong> ${{solutionRemainingSalary}}
+	</div>
+	<div class="col-md-3">
+		<strong>Avg/Player:</strong> ${{solutionRemainingSalaryPer}}
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<strong>Total Actual:</strong> {{solutionTotalActual}}
+	</div>
+</div>

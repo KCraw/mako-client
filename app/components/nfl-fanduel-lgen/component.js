@@ -307,9 +307,104 @@ const NFLFanduelLgenComponent = Ember.Component.extend({
  	solutionRatingsMinus: Ember.computed.collect('solutionQB1.ratingMinus', 'solutionRB1.ratingMinus', 'solutionRB2.ratingMinus', 'solutionWR1.ratingMinus', 'solutionWR2.ratingMinus', 'solutionWR3.ratingMinus', 'solutionTE1.ratingMinus', 'solutionK1.ratingMinus', 'solutionD1.ratingMinus'),
  	solutionTotalRatingMinus: Ember.computed.sum('solutionRatingsMinus'),
   solutionRatingsPlus: Ember.computed.collect('solutionQB1.ratingPlus', 'solutionRB1.ratingPlus', 'solutionRB2.ratingPlus', 'solutionWR1.ratingPlus', 'solutionWR2.ratingPlus', 'solutionWR3.ratingPlus', 'solutionTE1.ratingPlus', 'solutionK1.ratingPlus', 'solutionD1.ratingPlus'),
- 	solutionTotalRatingPlus: Ember.computed.sum('solutionRatingsPlus'),	
+ 	solutionTotalRatingPlus: Ember.computed.sum('solutionRatingsPlus'),
+ 	solutionTotalActual: Ember.computed('solutionQB1.actual', 'solutionRB1.actual', 'solutionRB2.actual', 'solutionWR1.actual', 'solutionWR2.actual', 'solutionWR3.actual', 'solutionTE1.actual', 'solutionK1.actual', 'solutionD1.actual', function() {
+ 		let r = 0;
+ 		if (this.get('solutionQB1')) {
+ 			if (this.get('solutionQB1.actual') !== '?') {
+ 				r += this.get('solutionQB1.actual');
+ 			}
+ 		}
+ 		if (this.get('solutionRB1')) {
+ 			if (this.get('solutionRB1.actual') !== '?') {
+ 				r += this.get('solutionRB1.actual');
+ 			}
+ 		}
+ 		if (this.get('solutionRB2')) {
+ 			if (this.get('solutionRB2.actual') !== '?') {
+ 				r += this.get('solutionRB2.actual');
+ 			}
+ 		}
+ 		if (this.get('solutionWR1')) {
+ 			if (this.get('solutionWR1.actual') !== '?') {
+ 				r += this.get('solutionWR1.actual');
+ 			}
+ 		}
+ 		if (this.get('solutionWR2')) {
+ 			if (this.get('solutionWR2.actual') !== '?') {
+ 				r += this.get('solutionWR2.actual');
+ 			}
+ 		}
+ 		if (this.get('solutionWR3')) {
+ 			if (this.get('solutionWR3.actual') !== '?') {
+ 				r += this.get('solutionWR3.actual');
+ 			}
+ 		}
+ 		if (this.get('solutionTE1')) {
+ 			if (this.get('solutionTE1.actual') !== '?') {
+ 				r += this.get('solutionTE1.actual');
+ 			}
+ 		}
+ 		if (this.get('solutionK1')) {
+ 			if (this.get('solutionK1.actual') !== '?') {
+ 				r += this.get('solutionK1.actual');
+ 			}
+ 		}
+ 		if (this.get('solutionD1')) {
+ 			if (this.get('solutionD1.actual') !== '?') {
+ 				r += this.get('solutionD1.actual');
+ 			}
+ 		}
+ 		return Math.round(r, 2);
+ 	}),		
  	solutionSalaries: Ember.computed.collect('solutionQB1.salary', 'solutionRB1.salary', 'solutionRB2.salary', 'solutionWR1.salary', 'solutionWR2.salary', 'solutionWR3.salary', 'solutionTE1.salary', 'solutionK1.salary', 'solutionD1.salary'),
  	solutionTotalSalary: Ember.computed.sum('solutionSalaries'),
+ 	solutionRemainingSalary: Ember.computed('solutionTotalSalary', function() {
+ 		return 60000 - this.get('solutionTotalSalary');
+ 	}),
+ 	solutionCount: Ember.computed('solutionQB1', 'solutionRB1', 'solutionRB2', 'solutionWR1', 'solutionWR2', 'solutionWR3', 'solutionTE1', 'solutionK1', 'solutionD1', function() {
+ 		let r = 0;
+ 		if (this.get('solutionQB1')) {
+ 			r++;
+ 		}
+ 		if (this.get('solutionRB1')) {
+ 			r++;
+ 		}
+ 		if (this.get('solutionRB2')) {
+ 			r++;
+ 		}
+ 		if (this.get('solutionWR1')) {
+ 			r++;
+ 		}
+ 		if (this.get('solutionWR2')) {
+ 			r++;
+ 		}
+ 		if (this.get('solutionWR3')) {
+ 			r++;
+ 		}
+ 		if (this.get('solutionTE1')) {
+ 			r++;
+ 		}
+ 		if (this.get('solutionK1')) {
+ 			r++;
+ 		}
+ 		if (this.get('solutionD1')) {
+ 			r++;
+ 		}
+ 		return r;
+ 	}),
+ 	solutionRemainingSalaryPer: Ember.computed('solutionRemainingSalary', 'solutionCount', function() {
+ 		if (this.get('solutionCount') === 9) {
+ 			return 0;
+ 		} else if (math.sign(this.get('solutionRemainingSalary')) === -1) {
+ 			return 0;
+ 		} else if (this.get('solutionRemainingSalary') === 0) {
+ 			return 0;
+ 		} else {
+			return Math.floor(this.get('solutionRemainingSalary') / (9 - this.get('solutionCount'))); 
+ 		}
+ 		
+ 	}),
 	actions: {
 		solve() {
 			// This is the meat of the thing... generate an optimal lineup based on player pools

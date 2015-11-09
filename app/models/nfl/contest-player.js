@@ -9,52 +9,52 @@ export default DS.Model.extend({
   ratings: Ember.computed('site', 'proto.fdRatings', 'proto.dkRatings', function() {
     return (this.get('site') === 'fanduel' && this.get('proto.fdRatings')) || (this.get('site') === 'draftkings' && this.get('proto.dkRatings'));
   }),
-  rSample: '50',
-  rName: Ember.computed('rSample', function() {
-    let num = this.get('rSample');
-    let end = num[num.length-1];
-    let mod = (num == 11 && 'th') || (num == 12 && 'th') || (num == 13 && 'th') || (end == 1 && 'st') || (end == 2 && 'nd') || (end == 3 && 'rd') || 'th';
-    return `${num}${mod} percentile`;
+  rCSample: '50',
+  rCustom: Ember.computed('ratings', 'rCSample', function() {
+    return this.get(`ratings.r${this.get('rCSample')}`) || 0;
   }),
-  rMSample: '25',
-  rMName: Ember.computed('rMSample', function() {
-    let num = this.get('rMSample');
-    let end = num[num.length-1];
-    let mod = (num == 11 && 'th') || (num == 12 && 'th') || (num == 13 && 'th') || (end == 1 && 'st') || (end == 2 && 'nd') || (end == 3 && 'rd') || 'th';
-    return `${num}${mod} percentile`;
+  rMid: Ember.computed('ratings', function() {
+    return this.get('ratings.r50') || 0;
   }),
-  rPSample: '75',
-  rPName: Ember.computed('rPSample', function() {
-    let num = this.get('rPSample');
-    let end = num[num.length-1];
-    let mod = (num == 11 && 'th') || (num == 12 && 'th') || (num == 13 && 'th') || (end == 1 && 'st') || (end == 2 && 'nd') || (end == 3 && 'rd') || 'th';
-    return `${num}${mod} percentile`;
+  rFloor: Ember.computed('ratings', function() {
+    return this.get('ratings.r20') || 0;
   }),
-  rating: Ember.computed('ratings', 'rSample', function() {
-    return this.get(`ratings.r${this.get('rSample')}`) || 0;
+  rCeil: Ember.computed('ratings', function() {
+    return this.get('ratings.r80') || 0;
   }),
-  ratingMinus: Ember.computed('ratings', 'rMSample', function() {
-    return this.get(`ratings.r${this.get('rMSample')}`) || 0;
-  }),
-  ratingPlus: Ember.computed('ratings', 'rPSample', function() {
-    return this.get(`ratings.r${this.get('rPSample')}`) || 0;
-  }),
-  rComposite: Ember.computed('ratings', function() {
-    let rC = 0;
+  rMean: Ember.computed('ratings', function() {
+    let r = 0;
     let keys = Object.keys(this.get('ratings'));
-    keys.forEach((key) => {
-      rC += this.get('ratings')[key]
+    keys.forEach((key, index) => {
+      r += this.get('ratings')[key];
     });
-    return math.round(rC/keys.length || 0, 1);
+    return math.round(r/keys.length || 0, 1);
   }),
-  value: Ember.computed('rating', 'salary', function() {
-    return math.round(this.get('rating') / this.get('salary') * 1000, 1) || 0;
+  rWInt: Ember.computed('ratings', function() {
+    // We use an integral approx using area of trapezoid
+    let r = 0;
+    let keys = Object.keys(this.get('ratings'));
+    keys.forEach((key, index) => {
+      if (index < keys.length - 1) {
+        let aprob = (1 - +key.replace('r','')/100);
+        let bprob = (1 - +keys[index+1].replace('r','')/100);
+        let a = this.get('ratings')[key];
+        let b = this.get('ratings')[keys[index+1]];
+        let h = ((aprob) + (bprob))/2;
+
+        r += (a+b)/2 * h;
+      }
+    });
+    return math.round(r || 0);
   }),
-  valueMinus: Ember.computed('ratingMinus', 'salary', function() {
-    return math.round(this.get('ratingMinus') / this.get('salary') * 1000, 1) || 0;
+  vCustom: Ember.computed('rating', 'salary', function() {
+    return math.round(this.get('rCustom') / this.get('salary') * 1000, 1) || 0;
   }),
-  valuePlus: Ember.computed('ratingPlus', 'salary', function() {
-    return math.round(this.get('ratingPlus') / this.get('salary') * 1000, 1) || 0;
+  vMean: Ember.computed('ratingMinus', 'salary', function() {
+    return math.round(this.get('rMean') / this.get('salary') * 1000, 1) || 0;
+  }),
+  vWInt: Ember.computed('ratingPlus', 'salary', function() {
+    return math.round(this.get('rWInt') / this.get('salary') * 1000, 1) || 0;
   }),
   actual: Ember.computed('site', 'proto.fdActual', 'proto.dkActual', function() {
     if (this.get('site') === 'fanduel') {

@@ -23,34 +23,30 @@
 </div>
 
 <div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3>Lineup Optimizer <small>Coming Soon!</small></h3>
+      {{#if players.length}}
+        {{nfl-fanduel-lgen players}}
+      {{else}}
+        <p>No players yet for {{contest.displayName}}.</p>
+      {{/if}}
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-8 col-md-offset-2 well">
       <h4>Controls</h4>
       <div class="row">
         <div class="col-md-12">
-          <h5>Ratings <small>customize percentiles</small></h5>
+          <h5>Rating Custom <small>customize percentile</small></h5>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <div class="input-group input-group-sm">
-            <span class="input-group-addon">R-</span>
-            {{input type="range" class="form-control" min="1" max=rSample value=rMSample}}
-            <span class="input-group-addon">{{rMSample}}</span>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="input-group input-group-sm">
-            <span class="input-group-addon">R</span>
-            {{input type="range" class="form-control" min=rMSample max=rPSample value=rSample}}
-            <span class="input-group-addon">{{rSample}}</span>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="input-group input-group-sm">
-            <span class="input-group-addon">R+</span>
-            {{input type="range" class="form-control" min=rSample max="99" value=rPSample}}
-            <span class="input-group-addon">{{rPSample}}</span>
+            <span class="input-group-addon">rC =</span>
+            {{input type="range" class="form-control" min="10" max='90' value=rCSample}}
+            <span class="input-group-addon">{{rCSample}}</span>
           </div>
         </div>
       </div>
@@ -59,16 +55,6 @@
           <h6><a href="#" {{action "resetDefaults"}}>reset defaults</a></h6>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <h3>Lineup Generator <small>Coming Eventually!</small></h3>
-      {{#if players.length}}
-        {{nfl-fanduel-lgen players}}
-      {{else}}
-        <p>NO players yet for {{contest.displayName}}.</p>
-      {{/if}}
     </div>
   </div>
   <div class="row">

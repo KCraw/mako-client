@@ -3,9 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 	// Controller is a Singleton!!!
 	modelDidChange: Ember.observer('model', function() {
-		this.set('rSample', 50);
-		this.set('rMSample', 25);
-		this.set('rPSample', 75);
+		this.set('rCSample', 50);
 		this.set('modalPlayer', null);
 		this.set('modalEnabled', false);
 		this.get('players').then((players) => {
@@ -26,25 +24,13 @@ export default Ember.Controller.extend({
 			this.toggleProperty('modalEnabled');
 		}, 
 		resetDefaults() {
-			this.set('rSample', 50);
-			this.set('rMSample', 25);
-			this.set('rPSample', 75);
+			this.set('rCSample', 50);
 		}
 	},
 	// Component sync stuff
-	rSampleChanged: Ember.observer('rSample', 'players.[]', function() {
+	rCSampleChanged: Ember.observer('rCSample', 'players.[]', function() {
 		this.get('players').forEach((player) => {
-			player.set('rSample', this.get('rSample'));
-		});
-	}),
-	rMSampleChanged: Ember.observer('rMSample', 'players.[]', function() {
-		this.get('players').forEach((player) => {
-			player.set('rMSample', this.get('rMSample'));
-		});
-	}),
-	rPSampleChanged: Ember.observer('rPSample', 'players.[]', function() {
-		this.get('players').forEach((player) => {
-			player.set('rPSample', this.get('rPSample'));
+			player.set('rCSample', this.get('rCSample'));
 		});
 	}),
 	contest: Ember.computed.alias('model'),

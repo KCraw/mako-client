@@ -27,34 +27,50 @@
 	<div class="col-md-4">
 		<div class="row">
 			<div class="col-xs-9">
-				<p><strong>Rating</strong> <small>({{player.rName}})</small>:</p>
-			</div>
-			<div class="col-xs-2">
-				<p>{{player.rating}}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-9">
-				<p><strong>Rating Minus</strong> <small>({{player.rMName}})</small>:</p>
-			</div>
-			<div class="col-xs-2">
-				<p>{{player.ratingMinus}}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-9">
-				<p><strong>Rating Plus</strong> <small>({{player.rPName}})</small>:</p>
-			</div>
-			<div class="col-xs-2">
-				<p>{{player.ratingPlus}}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-9">
 				<p><strong>Mean</strong> <small>(of R<sub>0</sub>..R<sub>100</sub>)</small>:</p>
 			</div>
 			<div class="col-xs-2">
-				<p>{{player.rComposite}}</p>
+				<p>{{player.rMean}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-9">
+				<p><strong>Weighted &#x222b;</strong>:</p>
+			</div>
+			<div class="col-xs-2">
+				<p>{{player.rWInt}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-9">
+				<p><strong>Floor</strong> <small>({{th-percent 20}})</small>:</p>
+			</div>
+			<div class="col-xs-2">
+				<p>{{player.rFloor}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-9">
+				<p><strong>Mid</strong> <small>({{th-percent 50}})</small>:</p>
+			</div>
+			<div class="col-xs-2">
+				<p>{{player.rMid}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-9">
+				<p><strong>Ceiling</strong> <small>({{th-percent 80}})</small>:</p>
+			</div>
+			<div class="col-xs-2">
+				<p>{{player.rCeil}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-9">
+				<p><strong>R Custom</strong> <small>({{th-percent player.rCSample}})</small>:</p>
+			</div>
+			<div class="col-xs-2">
+				<p>{{player.rCustom}}</p>
 			</div>
 		</div>
 	</div>

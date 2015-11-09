@@ -21,13 +21,13 @@
           <td class="small">Ex</td>
           <td class="small">P</td>
           <td class="small">Name</td>
-          <td class="small">R-</td>
-          <td class="small">R</td>
-          <td class="small">R+</td>
+          <td class="small">rM</td>
+          <td class="small">rWI</td>
+          <td class="small">rC</td>
           <td class="small">$</td>
-          <td class="small">V-</td>
-          <td class="small">V</td>
-          <td class="small">V+</td>
+          <td class="small">vM</td>
+          <td class="small">vWI</td>
+          <td class="small">vC</td>
           <td class="small"><em>A</em></td>
         </tr>
       </thead>
@@ -43,13 +43,13 @@
               </td>
               <td class="small">{{player.position}}</td>
               <td class="small"><a href="#" {{action "playerClicked" player}}>{{first-initial player.firstName player.position}} {{player.lastName}}</a></td>
-              <td class="small">{{player.ratingMinus}}</td>
-              <td class="small">{{player.rating}}</td>
-              <td class="small">{{player.ratingPlus}}</td>
+              <td class="small">{{player.rMean}}</td>
+              <td class="small">{{player.rWInt}}</td>
+              <td class="small">{{player.rCustom}}</td>
               <td class="small">{{short-salary player.salary}}</td>
-              <td class="small">{{player.valueMinus}}</td>
-              <td class="small">{{player.value}}</td>
-              <td class="small">{{player.valuePlus}}</td>
+              <td class="small">{{player.vMean}}</td>
+              <td class="small">{{player.vWInt}}</td>
+              <td class="small">{{player.vCustom}}</td>
               <td class="small"><em>{{player.actual}}</em></td>
             {{else}}
               <td class="small"></td>
