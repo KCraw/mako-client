@@ -1,23 +1,13 @@
 import Ember from 'ember';
 
 const NflFdOptimizer = Ember.Component.extend({
+	classNames: ['container'],
 	init() {
 		this._super(...arguments);
 
-		// Track which positions have disabled controls (required is full)
-		this.set('disabledPositions', {});
-
-		// Track which players have been excluded
-		this.set('excludedPlayers', {});
-
-		// Track all required players
-		this.set('requiredPlayers', {});
-
-		// Default select for
-		this.set('selectFor', 'rMean');
+		this.send('resetDefaults');
 	},
 	// rC -- passed to child componenents for display purposes
-	rCSample: 50,
 	rCSampleChanged: Ember.on('init', Ember.observer('rCSample', function() {
 		let s = this.get('rCSample');
 		this.get('players').setEach('rCSample', s);
@@ -78,138 +68,171 @@ const NflFdOptimizer = Ember.Component.extend({
 	}),
 
 	// Track the pool at each contest position
-	solutionQB1: null,
 	requiredQB1DidChange: Ember.on('init', Ember.observer('requiredQB1', function() {
-		this.set('solutionQB1', this.get('requiredQB1'));
+		if (this.get('requiredQB1')) {
+			this.set('solutionQB1', this.get('requiredQB1'));
+		}
 	})),
-	requiredQB1: null,
 	poolQB1: Ember.computed('poolQB', 'excludedPlayers', 'requiredQB1', function() {
 		if (this.get('requiredQB1')) {
-			return this.get('requiredQB1');	// If a player has been required at this position, then the pool is only that player
+			return [this.get('requiredQB1')];	// If a player has been required at this position, then the pool is only that player
 		} else {   // The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players	
 			return this.get('poolQB').filter((item) => {
-				return this.get(`excludedPlayers.${item.get('id')}`);
+				return !this.get(`excludedPlayers.${item.get('id')}`);
 			});
 		}
 	}),
-	solutionRB1: null,
+	sortedPoolQB1: Ember.computed.sort('poolQB1', 'poolSorting'), 
+
 	requiredRB1DidChange: Ember.on('init', Ember.observer('requiredRB1', function() {
-		this.set('solutionRB1', this.get('requiredRB1'));
+		if (this.get('requiredRB1')) {
+			this.set('solutionRB1', this.get('requiredRB1'));
+		}
 	})),
-	requiredRB1: null,
 	poolRB1: Ember.computed('poolRB', 'excludedPlayers', 'requiredRB1', 'solutionRB2', function() {
 		if (this.get('requiredRB1')) {
-			return this.get('requiredRB1');	// If a player has been required at this position, then the pool is only that player
+			return [this.get('requiredRB1')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
 			return this.get('poolRB').filter((item) => {
-				return this.get(`excludedPlayers.${item.get('id')}`) && item !== this.get('solutionRB2');
+				return !this.get(`excludedPlayers.${item.get('id')}`) && item !== this.get('solutionRB2');
 			});
 		}
 	}),
-	solutionRB2: null,
+	sortedPoolRB1: Ember.computed.sort('poolRB1', 'poolSorting'), 
+
 	requiredRB2DidChange: Ember.on('init', Ember.observer('requiredRB2', function() {
-		this.set('solutionRB2', this.get('requiredRB2'));
+		if (this.get('requiredRB2')) {
+			this.set('solutionRB2', this.get('requiredRB2'));
+		}
 	})),
-	requiredRB2: null,
 	poolRB2: Ember.computed('poolRB', 'excludedPlayers', 'requiredRB2', 'solutionRB1', function() {
 		if (this.get('requiredRB2')) {
-			return this.get('requiredRB2');	// If a player has been required at this position, then the pool is only that player
+			return [this.get('requiredRB2')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
 			return this.get('poolRB').filter((item) => {
-				return this.get(`excludedPlayers.${item.get('id')}`) && item !== this.get('solutionRB1');
+				return !this.get(`excludedPlayers.${item.get('id')}`) && item !== this.get('solutionRB1');
 			});
 		}
 	}),
-	solutionWR1: null,
+	sortedPoolRB2: Ember.computed.sort('poolRB2', 'poolSorting'), 
+
 	requiredWR1DidChange: Ember.on('init', Ember.observer('requiredWR1', function() {
-		this.set('solutionWR1', this.get('requiredWR1'));
+		if (this.get('requiredWR1')) {
+			this.set('solutionWR1', this.get('requiredWR1'));
+		}
 	})),
-	requiredWR1: null,
 	poolWR1: Ember.computed('poolWR', 'excludedPlayers', 'requiredWR1', 'solutionWR2', 'solutionWR3', function() {
 		if (this.get('requiredWR1')) {
-			return this.get('requiredWR1');	// If a player has been required at this position, then the pool is only that player
+			return [this.get('requiredWR1')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
 			return this.get('poolWR').filter((item) => {
-				return this.get(`excludedPlayers.${item.get('id')}`) && item !== this.get('solutionWR2') && item !== this.get('solutionWR3');
+				return !this.get(`excludedPlayers.${item.get('id')}`) && item !== this.get('solutionWR2') && item !== this.get('solutionWR3');
 			});
 		}
 	}),
-	solutionWR2: null,
+	sortedPoolWR1: Ember.computed.sort('poolWR1', 'poolSorting'), 
+
 	requiredWR2DidChange: Ember.on('init', Ember.observer('requiredWR2', function() {
-		this.set('solutionWR2', this.get('requiredWR2'));
+		if (this.get('requiredWR2')) {
+			this.set('solutionWR2', this.get('requiredWR2'));
+		}
 	})),
-	requiredWR2: null,
 	poolWR2: Ember.computed('poolWR', 'excludedPlayers', 'requiredWR2', 'solutionWR1', 'solutionWR3', function() {
 		if (this.get('requiredWR2')) {
-			return this.get('requiredWR2');	// If a player has been required at this position, then the pool is only that player
+			return [this.get('requiredWR2')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
 			return this.get('poolWR').filter((item) => {
-				return this.get(`excludedPlayers.${item.get('id')}`) && item !== this.get('solutionWR1') && item !== this.get('solutionWR3');
+				return !this.get(`excludedPlayers.${item.get('id')}`) && item !== this.get('solutionWR1') && item !== this.get('solutionWR3');
 			});
 		}
 	}),
-	solutionWR3: null,
+	sortedPoolWR2: Ember.computed.sort('poolWR2', 'poolSorting'), 
+
+
 	requiredWR3DidChange: Ember.on('init', Ember.observer('requiredWR3', function() {
-		this.set('solutionWR3', this.get('requiredWR3'));
+		if (this.get('requiredWR3')) {
+			this.set('solutionWR3', this.get('requiredWR3'));
+		}
 	})),
-	requiredWR3: null,
 	poolWR3: Ember.computed('poolWR', 'excludedPlayers', 'requiredWR3', 'solutionWR1', 'solutionWR2', function() {
 		if (this.get('requiredWR3')) {
-			return this.get('requiredWR3');	// If a player has been required at this position, then the pool is only that player
+			return [this.get('requiredWR3')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
 			return this.get('poolWR').filter((item) => {
-				return this.get(`excludedPlayers.${item.get('id')}`) && item !== this.get('solutionWR1') && item !== this.get('solutionWR2');
+				return !this.get(`excludedPlayers.${item.get('id')}`) && item !== this.get('solutionWR1') && item !== this.get('solutionWR2');
 			});
 		}
 	}),
-	solutionTE1: null,
+	sortedPoolWR3: Ember.computed.sort('poolWR3', 'poolSorting'), 
+
+
 	requiredTE1DidChange: Ember.on('init', Ember.observer('requiredTE1', function() {
-		this.set('solutionTE1', this.get('requiredTE1'));
+		if (this.get('requiredTE1')) {				
+			this.set('solutionTE1', this.get('requiredTE1'));
+		}
 	})),
-	requiredTE1: null,
-	poolK1: Ember.computed('poolTE', 'excludedPlayers', 'requiredTE1', function() {
+	poolTE1: Ember.computed('poolTE', 'excludedPlayers', 'requiredTE1', function() {
 		if (this.get('requiredTE1')) {
-			return this.get('requiredTE1');	// If a player has been required at this position, then the pool is only that player
+			return [this.get('requiredTE1')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
 			return this.get('poolTE').filter((item) => {
-				return this.get(`excludedPlayers.${item.get('id')}`);
+				return !this.get(`excludedPlayers.${item.get('id')}`);
 			});
 		}
 	}),
-	solutionK1: null,
+	sortedPoolTE1: Ember.computed.sort('poolTE1', 'poolSorting'), 
+
 	requiredK1DidChange: Ember.on('init', Ember.observer('requiredK1', function() {
-		this.set('solutionK1', this.get('requiredK1'));
+		if (this.get('requiredK1')) {
+			this.set('solutionK1', this.get('requiredK1'));
+		}
 	})),
-	requiredK1: null,
 	poolK1: Ember.computed('poolK', 'excludedPlayers', 'requiredK1', function() {
 		if (this.get('requiredK1')) {
-			return this.get('requiredK1');	// If a player has been required at this position, then the pool is only that player
+			return [this.get('requiredK1')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
 			return this.get('poolK').filter((item) => {
-				return this.get(`excludedPlayers.${item.get('id')}`);
+				return !this.get(`excludedPlayers.${item.get('id')}`);
 			});
 		}
 	}),
-	solutionD1: null,
+	sortedPoolK1: Ember.computed.sort('poolK1', 'poolSorting'), 
+
 	requiredD1DidChange: Ember.on('init', Ember.observer('requiredD1', function() {
-		this.set('solutionD1', this.get('requiredD1'));
+		if (this.get('requiredD1')) {
+			this.set('solutionD1', this.get('requiredD1'));
+		}
 	})),
-	requiredD1: null,
 	poolD1: Ember.computed('poolD', 'excludedPlayers', 'requiredD1', function() {
 		if (this.get('requiredD1')) {
-			return this.get('requiredD1');	// If a player has been required at this position, then the pool is only that player
+			return [this.get('requiredD1')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
 			return this.get('poolD').filter((item) => {
-				return this.get(`excludedPlayers.${item.get('id')}`);
+				return !this.get(`excludedPlayers.${item.get('id')}`);
 			});
 		}
-	}),    
+	}),   
+	sortedPoolD1: Ember.computed.sort('poolD1', 'poolSorting'), 
 
+	poolSorting: ['salary:desc'],
+	pools: Ember.computed.collect('poolQB1', 'poolRB1', 'poolRB2', 'poolWR1', 'poolWR2', 'poolWR3', 'poolTE1', 'poolK1', 'poolD1'),
 
 	// Current solution sums
 	solution: Ember.computed.collect('solutionQB1', 'solutionRB1', 'solutionRB2', 'solutionWR1', 'solutionWR2', 'solutionWR3', 'solutionTE1', 'solutionK1', 'solutionD1'),
-	solutionCount: Ember.computed('solution', function() {
-		return this.get('solution').compact().get('length');
+	solutionCurrent: Ember.computed('solution.[]', function() {
+		return this.get('solution').compact();
+	}),
+	solutionCount: Ember.computed.alias('solutionCurrent.length'),
+	solutionTeams: Ember.computed('solutionCurrent.[]', function(){
+		let tTeams = new Map();
+		this.get('solutionCurrent').forEach(function(player) {
+			if (!tTeams[player.get('team')]) {
+				tTeams[player.get('team')] = 1;
+			} else {
+				tTeams[player.get('team')]++;
+			}
+		});
+		return tTeams;
 	}),
 	solutionRMeans: Ember.computed.collect('solutionQB1.rMean', 'solutionRB1.rMean', 'solutionRB2.rMean', 'solutionWR1.rMean', 'solutionWR2.rMean', 'solutionWR3.rMean', 'solutionTE1.rMean', 'solutionK1.rMean', 'solutionD1.rMean'),
  	solutionTotalRMean: Ember.computed.sum('solutionRMeans'),
@@ -222,7 +245,7 @@ const NflFdOptimizer = Ember.Component.extend({
 	solutionSalaries: Ember.computed.collect('solutionQB1.salary', 'solutionRB1.salary', 'solutionRB2.salary', 'solutionWR1.salary', 'solutionWR2.salary', 'solutionWR3.salary', 'solutionTE1.salary', 'solutionK1.salary', 'solutionD1.salary'),
  	solutionTotalSalary: Ember.computed.sum('solutionSalaries'),
 	solutionRemainingSalary: Ember.computed('solutionTotalSalary', function() {
- 		return 60000 - this.get('solutionTotalSalary');
+ 		return this.get('salaryCap') - this.get('solutionTotalSalary');
  	}),
  	solutionRemainingSalaryPer: Ember.computed('solutionRemainingSalary', 'solutionCount', function() {
  		if (this.get('solutionCount') === 9) {
@@ -277,27 +300,23 @@ const NflFdOptimizer = Ember.Component.extend({
 			this.set('excludedPlayers', {});
 			this.set('requiredPlayers', {});
 			this.set('selectFor', 'rMean');
-			this.$('input[name="selectFor"][value="rMean"]').prop('checked', true);
+			this.set('salaryCap', 60000);
+			this.set('teamCap', 4);
+			if (this.$()) {
+				this.$('input[name="selectFor"][value="rMean"]').prop('checked', true);	
+			}
 			this.set('preventOppD', false);
 			this.set('preventTeamK', false);
-			this.set('solutionQB1', null);
 			this.set('requiredQB1', null);
-			this.set('solutionRB1', null);
 			this.set('requiredRB1', null);
-			this.set('solutionRB2', null);
 			this.set('requiredRB2', null);
-			this.set('solutionWR1', null);
 			this.set('requiredWR1', null);
-			this.set('solutionWR2', null);
 			this.set('requiredWR2', null);
-			this.set('solutionWR3', null);
 			this.set('requiredWR3', null);
-			this.set('solutionTE1', null);
 			this.set('requiredTE1', null);
-			this.set('solutionK1', null);
 			this.set('requiredK1', null);
-			this.set('solutionD1', null);
 			this.set('requiredD1', null);
+			this.clearSolution();
 		},
 		openPlayerModal(player) {
 			this.set('modalPlayer', player);
@@ -429,7 +448,27 @@ const NflFdOptimizer = Ember.Component.extend({
 		},
 		excludePlayer(player, toggle) {
 			if (toggle) {
-				this.send('requirePlayer', player, false)
+				this.send('requirePlayer', player, false);
+
+				if (player === this.get('solutionQB1')) {
+					this.set('solutionQB1', null);
+				} else if (player === this.get('solutionRB1')) {
+					this.set('solutionRB1', null);
+				} else if (player === this.get('solutionRB2')) {
+					this.set('solutionRB2', null);
+				} else if (player === this.get('solutionWR1')) {
+					this.set('solutionWR1', null);
+				} else if (player === this.get('solutionWR2')) {
+					this.set('solutionWR2', null);
+				} else if (player === this.get('solutionWR3')) {
+					this.set('solutionWR3', null);
+				} else if (player === this.get('solutionTE1')) {
+					this.set('solutionTE1', null);
+				} else if (player === this.get('solutionK1')) {
+					this.set('solutionK1', null);
+				} else if (player === this.get('solutionTE1')) {
+					this.set('solutionD1', null);
+				}
 			}
 		},
 		changeSelectFor(value) {
@@ -437,11 +476,236 @@ const NflFdOptimizer = Ember.Component.extend({
 		},
 		optimizeLineup(button) {
 			// Finally the meat of the thing... solve optimal lineup
+			this.set('isGenerating', true);
 			this.$(button).blur();
-			alert('Yo, Dawg! We heard you like optimal lineups! So we took your optimal lineup and we optimally optimized it for optimal optimalness.');
+			this.generateLineup();
+			this.set('isGenerating', false);
 		}
+	},
+	clearSolution() {
+		this.set('solutionQB1', this.get('requiredQB1'));
+		this.set('solutionRB1', this.get('requiredRB1'));
+		this.set('solutionRB2', this.get('requiredRB2'));
+		this.set('solutionWR1', this.get('requiredWR1'));
+		this.set('solutionWR2', this.get('requiredWR2'));
+		this.set('solutionWR3', this.get('requiredWR3'));
+		this.set('solutionTE1', this.get('requiredTE1'));
+		this.set('solutionK1', this.get('requiredK1'));
+		this.set('solutionD1', this.get('requiredD1'));
+	},
+	generateLineup() {
+		this.clearSolution();
+
+		// Sort the pools by descending value
+		this.set('poolSorting', [`${this.get('selectFor').replace('r', 'v')}:desc`]);
+
+		// Run fillMax
+		let success = this.fillMax();
+
+		if (!success) {
+			return alert('Could not find any valid lineup solutions! Requiring/excluding fewer players should fix this.');
+		}
+
+		// Sort the pools by descending profit
+		this.set('poolSorting', [`${this.get('selectFor')}:desc`]);
+
+		// Run subMax
+		this.subMax();
+
+		// The End!!!
+	},
+	fillMax() {
+
+		// Before we do anything, we need to see if we have a complete solution
+		if (this.get('solutionCount') === 9) {
+			return true; // We return true to signal that a solution was found
+		}
+
+		let profitStat = this.get('selectFor').replace('r', 'v');
+		let temp = null;
+
+		// Loop through each position
+		PositionLoop:
+		for (let i = 0, ilen = positions.length; i < ilen; i++) {
+
+			// Skip filled positions
+			if (this.get(`solution${positions[i]}`)) {
+				continue;
+			}
+
+			// Start at the top and move down each position to find a valid addition
+			let position = positions[i];
+
+			PlayerLoop:
+			for (let j = 0, jlen = this.get(`sortedPool${position}.length`); j < jlen; j++ ) {
+				let potential = this.get(`sortedPool${position}`).objectAt(j);
+
+				// See if potential would put us over the team or salary cap
+				if (math.larger(potential.get('salary'), this.get('solutionRemainingSalary'))) {
+					continue PlayerLoop;
+				}
+
+				let pTeam = potential.get('team');
+
+				if (this.get(`solutionTeams.${pTeam}`) && math.largerEq(this.get(`solutionTeams.${pTeam}`), this.get('teamCap'))) {
+					continue PlayerLoop;
+				}
+
+				// Special check for kickers
+				if (position === 'K1' && this.get('preventTeamK') && this.get('solutionQB1.team') === pTeam) {
+					continue;
+				} else if (position === 'QB1' && this.get('preventTeamK') && this.get('solutionK1.team') === pTeam) {
+					continue PlayerLoop;
+				}
+
+				// Special check for defenses
+				if (position === 'D1' && this.get('preventOppD')) {
+					if (this.get('solutionQB1.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionRB1.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionRB2.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionWR1.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionWR2.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionWR3.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionTE1.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionK1.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionD1.team') === pTeam) {
+						continue PlayerLoop;
+					}
+				} else if (this.get('preventOppD') && this.get('solutionD1.team') === pTeam) {
+					continue PlayerLoop;
+				}
+
+				// Now we can see if there is a temp solution, or if this player is better than the temp solution
+				if (!temp || math.larger(potential.get(`${profitStat}`), temp.player.get(`${profitStat}`))) {
+					temp = { position: position, player:potential };
+				}
+			} // -- End of PlayerLoop
+
+		} // -- End of PositionLoop
+
+		if (temp) {
+			this.set(`solution${temp.position}`, temp.player);
+			return this.fillMax();
+		} else {
+			return false; // Return false to signal that no solution could be found
+		}
+
+	},
+	subMax() {
+		let profitStat = this.get('selectFor');
+
+		let temp = null;
+
+		// Loop through each position
+		PositionLoop:
+		for (let i = 0, ilen = positions.length; i < ilen; i++) {
+
+			// Start at the top and move down each position to find a valid substitution
+			let position = positions[i];
+
+			PlayerLoop:
+			for (let j = 0, jlen = this.get(`sortedPool${position}.length`); j < jlen; j++ ) {
+
+				let potential = this.get(`sortedPool${position}`).objectAt(j);
+
+				// Don't sub yourself, that's recursive!!! And rude.
+				if (potential === this.get(`solution${position}`)) {
+					continue PositionLoop; // Once we get to the current solution, everyone below is worse
+				}
+
+				// The solution salary minus the current solution at the position
+				let tempSalaryRemaining = this.get('solutionRemainingSalary') + this.get(`solution${position}.salary`);
+
+				// See if potential would put us over the team or salary cap
+				if (math.larger(potential.get('salary'), tempSalaryRemaining)) {
+					continue PlayerLoop;
+				}
+
+				let pTeam = potential.get('team');
+
+				// The solution team totals, minus the current solution at the position
+				let tempTeams = new Map(this.get('solutionTeams'));
+				tempTeams[this.get(`solution${position}.team`)]--;
+
+				if (tempTeams[pTeam] && math.largerEq(tempTeams[pTeam], this.get('teamCap'))) {
+					continue PlayerLoop;
+				}
+
+				// Special check for kickers
+				if (position === 'K1' && this.get('preventTeamK') && this.get('solutionQB1.team') === pTeam) {
+					continue;
+				} else if (position === 'QB1' && this.get('preventTeamK') && this.get('solutionK1.team') === pTeam) {
+					continue PlayerLoop;
+				}
+
+				// Special check for defenses
+				if (position === 'D1' && this.get('preventOppD')) {
+					if (this.get('solutionQB1.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionRB1.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionRB2.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionWR1.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionWR2.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionWR3.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionTE1.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionK1.team') === pTeam) {
+						continue PlayerLoop;
+					}
+					if (this.get('solutionD1.team') === pTeam) {
+						continue PlayerLoop;
+					}
+				} else if (this.get('preventOppD') && this.get('solutionD1.team') === pTeam) {
+					continue PlayerLoop;
+				}
+
+				// Now we can see if there is a temp solution, or if this player is better than the temp solution
+				if (!temp || math.larger(potential.get(`${profitStat}`), temp.player.get(`${profitStat}`))) {
+					temp = { position: position, player: potential };
+				}
+			} // -- End of PlayerLoop
+
+		} // -- End of PositionLoop
+
+		if (temp) {
+			this.set(`solution${temp.position}`, temp.player);
+			return this.subMax();
+		} else {
+			return false; // Return false to signal that no better solution was found
+		}
+
 	}
 });
+
+const positions = ['QB1', 'RB1', 'RB2', 'WR1', 'WR2', 'WR3', 'TE1', 'K1', 'D1'];
 
 NflFdOptimizer.reopenClass({
 	positionalParams: ['contest']
