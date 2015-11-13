@@ -302,12 +302,12 @@ const NFLFanduelLgenComponent = Ember.Component.extend({
 			});
 		});
 	})),
- 	solutionRatings: Ember.computed.collect('solutionQB1.rating', 'solutionRB1.rating', 'solutionRB2.rating', 'solutionWR1.rating', 'solutionWR2.rating', 'solutionWR3.rating', 'solutionTE1.rating', 'solutionK1.rating', 'solutionD1.rating'),
- 	solutionTotalRating: Ember.computed.sum('solutionRatings'),
- 	solutionRatingsMinus: Ember.computed.collect('solutionQB1.ratingMinus', 'solutionRB1.ratingMinus', 'solutionRB2.ratingMinus', 'solutionWR1.ratingMinus', 'solutionWR2.ratingMinus', 'solutionWR3.ratingMinus', 'solutionTE1.ratingMinus', 'solutionK1.ratingMinus', 'solutionD1.ratingMinus'),
- 	solutionTotalRatingMinus: Ember.computed.sum('solutionRatingsMinus'),
-  solutionRatingsPlus: Ember.computed.collect('solutionQB1.ratingPlus', 'solutionRB1.ratingPlus', 'solutionRB2.ratingPlus', 'solutionWR1.ratingPlus', 'solutionWR2.ratingPlus', 'solutionWR3.ratingPlus', 'solutionTE1.ratingPlus', 'solutionK1.ratingPlus', 'solutionD1.ratingPlus'),
- 	solutionTotalRatingPlus: Ember.computed.sum('solutionRatingsPlus'),
+ 	solutionRMeans: Ember.computed.collect('solutionQB1.rMean', 'solutionRB1.rMean', 'solutionRB2.rMean', 'solutionWR1.rMean', 'solutionWR2.rMean', 'solutionWR3.rMean', 'solutionTE1.rMean', 'solutionK1.rMean', 'solutionD1.rMean'),
+ 	solutionTotalRMean: Ember.computed.sum('solutionRMeans'),
+ 	solutionRWIs: Ember.computed.collect('solutionQB1.rWInt', 'solutionRB1.rWInt', 'solutionRB2.rWInt', 'solutionWR1.rWInt', 'solutionWR2.rWInt', 'solutionWR3.rWInt', 'solutionTE1.rWInt', 'solutionK1.rWInt', 'solutionD1.rWInt'),
+ 	solutionTotalRWI: Ember.computed.sum('solutionRWIs'),
+  solutionRCustoms: Ember.computed.collect('solutionQB1.rCustom', 'solutionRB1.rCustom', 'solutionRB2.rCustom', 'solutionWR1.rCustom', 'solutionWR2.rCustom', 'solutionWR3.rCustom', 'solutionTE1.rCustom', 'solutionK1.rCustom', 'solutionD1.rCustom'),
+ 	solutionTotalRCustom: Ember.computed.sum('solutionRCustoms'),
  	solutionTotalActual: Ember.computed('solutionQB1.actual', 'solutionRB1.actual', 'solutionRB2.actual', 'solutionWR1.actual', 'solutionWR2.actual', 'solutionWR3.actual', 'solutionTE1.actual', 'solutionK1.actual', 'solutionD1.actual', function() {
  		let r = 0;
  		if (this.get('solutionQB1')) {

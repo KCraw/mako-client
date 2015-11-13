@@ -1,0 +1,39 @@
+{{#if format-inline}}
+	<label class="checkbox-inline {{if isDisabled "disabled"}}">
+		<input type="checkbox" disabled={{isDisabled}} checked={{isRequired}} onclick={{action "playerRequired" player}}><span class="{{if isDisabled "text-muted"}}">Require</span>
+	</label>
+	<label class="checkbox-inline">
+	  <input type="checkbox" checked={{isExcluded}} onclick={{action "playerExcluded" player}}> Exclude
+	</label>
+{{/if}}
+
+{{#if format-stacked}}
+	<label class="checkbox {{if isDisabled "disabled"}}">
+		<input type="checkbox" disabled={{isDisabled}} checked={{isRequired}} onclick={{action "playerRequired" player}}> Require
+	</label>
+	<label class="checkbox">
+	  <input type="checkbox" checked={{isExcluded}} onclick={{action "playerExcluded" player}}> Exclude
+	</label>
+{{/if}}
+
+{{#if format-table}}
+	<td>
+		<input type="checkbox" disabled={{isDisabled}} checked={{isRequired}} onclick={{action "playerRequired" player}}>
+	</td>
+	<td>
+	  <input type="checkbox" checked={{isExcluded}} onclick={{action "playerExcluded" player}}>
+	</td>
+{{/if}}
+
+{{#if format-table-sm}}
+	<td class="small">
+		<input type="checkbox" disabled={{isDisabled}} checked={{isRequired}} onclick={{action "playerRequired" player}}>
+	</td>
+	<td class="small">
+	  <input type="checkbox" checked={{isExcluded}} onclick={{action "playerExcluded" player}}>
+	</td>
+{{/if}}
+
+
+
+

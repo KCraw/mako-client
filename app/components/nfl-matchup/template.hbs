@@ -28,19 +28,14 @@
           <td class="small">vM</td>
           <td class="small">vWI</td>
           <td class="small">vC</td>
-          <td class="small"><em>A</em></td>
+          {{#if isBacktested}}<td class="small"><em>A</em></td>{{/if}}
         </tr>
       </thead>
       <tbody>
         {{#each team.players as |player|}}
           <tr>
-            {{#if player.lastName}}
-              <td class="small">
-                {{input type="checkbox" checked=player.isRequired disabled=player.isDisabled}}
-              </td>
-              <td class="small">
-                {{input type="checkbox" checked=player.isExcluded}}
-              </td>
+            {{#if player.salary}}
+              {{rq-ex-boxes player disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-table-sm=true onPlayerRequired=requirePlayer onPlayerExcluded=excludePlayer}}
               <td class="small">{{player.position}}</td>
               <td class="small"><a href="#" {{action "playerClicked" player}}>{{first-initial player.firstName player.position}} {{player.lastName}}</a></td>
               <td class="small">{{player.rMean}}</td>
@@ -50,11 +45,12 @@
               <td class="small">{{player.vMean}}</td>
               <td class="small">{{player.vWInt}}</td>
               <td class="small">{{player.vCustom}}</td>
-              <td class="small"><em>{{player.actual}}</em></td>
+              {{#if isBacktested}}<td class="small"><em>{{if player.actual player.actual "-"}}</em></td>{{/if}}
             {{else}}
               <td class="small"></td>
+              <td class="small"></td>
               <td class="small"><small>{{player.proto.type}}</small></td>
-              <td class="small" colspan="9"><small>{{player.proto.fullName}} not in contest.</small></td>
+              <td class="small" colspan={{if isBackTested "9" "8"}}><small>{{player.proto.fullName}} not in contest.</small></td>
             {{/if}}
           </tr>
         {{/each}}

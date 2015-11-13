@@ -1,56 +1,34 @@
 
+<!-- This section is only visible if a user is logged in -->
 {{#if session.isAuthenticated}}
-<!-- This section (including the applicatino outlet) is only visible if a user is logged in -->
-
-  <!-- TODO: Turn the navbar into a component -->
-  <!-- Nav bar at the top -->
-  <nav class="navbar navbar-inverse navbar-static-top">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        {{link-to "Mako" "index" class="navbar-brand"}}
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <form class="navbar-form navbar-right" role="nav">
-              <div class="form-group form-group-sm">
-                {{date-nav action="dateNav"}}
-              </div>
-            </form>
-          </li>
-          <li>
-            {{link-to "Upcoming Contests" "contests"}}
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li class="dropdown-header">Signed in as <br><small>{{session.currentUser.email}}</small></li>
-              <li><a href="#">Edit Profile</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#" {{action "signOut"}}>Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-  <!-- Container and the main application outlet -->
+  {{#nav-bar navBrand="Mako"}}
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          {{link-to "Upcoming Contests" "contests"}}
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">Signed in as <br><small>{{session.currentUser.email}}</small></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" {{action "signOut"}}>Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-right">
+        <div class="form-group">
+          {{date-picker dateSelected=(action "navToDate") hideControl=true}}
+        </div>
+      </form>
+  {{/nav-bar}}
   {{outlet}}
 
-{{else}}
 <!-- This section is only displayed if a user has not logged in -->
+{{else}}
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-2" style="margin-top: 20%">
-        {{#simple-login hasError=authError action="signIn"}}
+        {{#simple-login hasError=authError onSignIn=(action 'signIn')}}
           <h2>Mako | <small>Advanced DFS Analytics Toolset</small></h2>
           <p>To get started, login with your email and password:</p>
         {{/simple-login}}

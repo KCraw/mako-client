@@ -8,10 +8,10 @@ export default Ember.Component.extend({
 		});
 		this.$('.modal').on('shown.bs.modal', (event) => {
 			this.set('isEnabled', true);
-			this.set('isShown', true)
+			this.set('isShown', true);
 		});
 	},
-	toggle: Ember.observer('isEnabled', function() {
+	isEnabledDidChange: Ember.observer('isEnabled', function() {
 		if (this.get('isEnabled')) {
 			this.$('.modal').modal('show');
 		} else {
@@ -21,7 +21,7 @@ export default Ember.Component.extend({
 	isEnabled: false,
 	actions: {
 		closeModal() {
-			this.sendAction('action');
+			this.get('onModalClose')();
 		}
 	}, 
 });

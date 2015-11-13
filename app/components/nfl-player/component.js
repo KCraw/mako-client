@@ -146,7 +146,7 @@ const NflPlayerComponent = Ember.Component.extend({
 			});
 		}
 	}),
-	means: Ember.computed('player.position', 'stats.totals', 'stats.gamelogs.length', function() {
+	means: Ember.computed('player.position', 'stats.totals', function() {
 		if (!this.get('stats.totals')) {
 			return null;
 		} else {
@@ -155,11 +155,7 @@ const NflPlayerComponent = Ember.Component.extend({
 			let numGames = 0;
 
 			// Set the number of games uniformly
-			if (this.get('player.position') !== 'D') {
-				numGames = this.get('stats.gamelogs.length');	
-			} else {
-				numGames = this.get('stats.totals.games');
-			}
+			numGames = this.get('stats.totals.games');
 
 			for (let i = 0, len = logkeys[this.get('player.position')].length; i < len; i++) {
 				let stat = logkeys[this.get('player.position')][i];
@@ -181,7 +177,7 @@ const NflPlayerComponent = Ember.Component.extend({
 			return r;
 		}
 	}),
-	medians: Ember.computed('player.position', 'stats.totals', 'stats.gamelogs.length', function() {
+	medians: Ember.computed('player.position', 'stats.totals', function() {
 		if (!this.get('stats.totals') || this.get('player.position') === 'D') {
 			return null;
 		} else {

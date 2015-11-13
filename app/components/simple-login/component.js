@@ -10,7 +10,7 @@ export default Ember.Component.extend({
     signIn(email, password) {
       this.set('userEmail', '');
       this.set('userPassword', '');
-      this.sendAction('action', email, password);
+      this.get('onSignIn')(email, password);
     }
   }
 });

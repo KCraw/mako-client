@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" {{action "toggleCollapse"}}>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    {{#link-to "index" class="navbar-brand"}}{{navBrand}}{{/link-to}}
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse">
+  	{{yield}}
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->

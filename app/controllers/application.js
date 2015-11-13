@@ -18,10 +18,10 @@ export default Ember.Controller.extend({
 		}
 	}),
   actions: {
-    dateNav(date) {
-      let formatted = moment(date).format('YYYY-MM-DD');
-      this.transitionToRoute('/contests/' + formatted);
-    },
+  	navToDate(date) {
+      let formattedDate = moment(date).format('YYYY-MM-DD');
+      this.transitionToRoute(`/contests/${formattedDate}`);
+		},
     signIn(email, password) {
       this.get('session').open('firebase', {
         provider: 'password',

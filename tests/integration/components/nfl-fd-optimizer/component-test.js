@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('nfl-positions', 'Integration | Component | nfl positions', {
+moduleForComponent('nfl-fd-optimizer', 'Integration | Component | nfl fd optimizer', {
   integration: true
 });
 
@@ -11,15 +11,15 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{nfl-positions}}`);
+  this.render(hbs`{{nfl-fd-optimizer}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#nfl-positions}}
+    {{#nfl-fd-optimizer}}
       template block text
-    {{/nfl-positions}}
+    {{/nfl-fd-optimizer}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');

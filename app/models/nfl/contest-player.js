@@ -47,40 +47,20 @@ export default DS.Model.extend({
     });
     return math.round(r || 0);
   }),
-  vCustom: Ember.computed('rating', 'salary', function() {
+  vCustom: Ember.computed('rCustom', 'salary', function() {
     return math.round(this.get('rCustom') / this.get('salary') * 1000, 1) || 0;
   }),
-  vMean: Ember.computed('ratingMinus', 'salary', function() {
+  vMean: Ember.computed('rMean', 'salary', function() {
     return math.round(this.get('rMean') / this.get('salary') * 1000, 1) || 0;
   }),
-  vWInt: Ember.computed('ratingPlus', 'salary', function() {
-    return math.round(this.get('rWInt') / this.get('salary') * 1000, 1) || 0;
+  vWInt: Ember.computed('rWInt', 'salary', function() {
+    return math.round(this.get('rWInt') / this.get('salary') * 100, 1) || 0;
   }),
   actual: Ember.computed('site', 'proto.fdActual', 'proto.dkActual', function() {
-    if (this.get('site') === 'fanduel') {
-      return this.get('proto.fdActual') != null ? this.get('proto.fdActual') : '?';
-    } else if (this.get('site') === 'draftkings') {
-      return this.get('proto.dkActual') != null ? this.get('proto.dkActual') : '?';
-    } else {
-      return '?';
-    }
+    return (this.get('site') === 'fanduel' && this.get('proto.fdActual')) || (this.get('site') === 'draftkings' && this.get('proto.dkActual'));
   }),
   position: DS.attr('string'),
   salary: DS.attr('number'),
   stats: Ember.computed.alias('proto.stats'),
-  proto: DS.belongsTo('nfl/player'),
-  isRequired: false,
-  required: Ember.observer('isRequired', function() {
-    if (this.get('isRequired')) {
-      this.set('isExcluded', false);
-    }
-  }),
-  isExcluded: false,
-  excluded: Ember.observer('isExcluded', function() {
-    if (this.get('isExcluded')) {
-      this.set('isRequired', false);
-    }
-  }),
-  isDisabled: false
-
+  proto: DS.belongsTo('nfl/player')
 });

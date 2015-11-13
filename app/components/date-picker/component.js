@@ -2,19 +2,17 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 	classNames: ['input-group', 'date'],
+	hideControl: false,
 	didInsertElement() {
 		this.$().datepicker({
 			autoclose: true,
-			title: 'Past Contests',
+			title: this.get('title'),
 			todayBtn: 'linked',
-			todayHighlight: true,
-			endDate: new Date()
+			todayHighlight: true
 		});
 		this.$().on('changeDate', (event) => {
-			if (!event.date) {
-				return;
-			} else {
-				this.sendAction('action', event.date);
+			if (event.date) {
+				this.get('dateSelected')(event.date);
 				this.$().datepicker('clearDates');
 			}
 		});

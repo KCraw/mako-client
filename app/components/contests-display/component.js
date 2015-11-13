@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+export default Ember.Component.extend({
 	fanduelMlbContests: Ember.computed.filterBy('model.mlbContests', 'site', 'fanduel'),
 	fanduelNflContests: Ember.computed.filterBy('model.nflContests', 'site', 'fanduel'),
 	fanduelNbaContests: Ember.computed.filterBy('model.nbaContests', 'site', 'fanduel'),
