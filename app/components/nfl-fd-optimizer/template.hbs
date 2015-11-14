@@ -4,7 +4,7 @@
   {{#if playerModalShown}}
   	{{!-- This starts loading the stats, btw --}}
 		{{#if modalPlayer.stats.isLoaded}} 
-			{{#nfl-player modalPlayer modalPlayer.stats}}
+			{{#nfl-player modalPlayer modalPlayer.stats isBacktested=isBacktested }}
 				{{rq-ex-boxes modalPlayer isBacktested=isBacktested disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}
 			{{/nfl-player}}
 		{{else}}
@@ -219,7 +219,7 @@
 		    {{#if isBacktested}}
 			  <div class="row">
 			  	<div class="col-xs-6">
-			  		<h5>Total Actual Fantasy Points: {{math-round solutionTotalActual decimals=2}}</h5>
+			  		<h5>Total Actual Fantasy Points: {{math-round solutionTotalActual decimals=2}} <small>(not including D)</small></h5>
 			  	</div>
 			  </div>
 			  {{/if}}
@@ -228,6 +228,15 @@
 		  	<div class="row">
 			  	<div class="col-md-4">
 			  		<form class="form-inline" onsubmit="return false;">
+				  		<div>
+				  			<label for="strategy">Strategy: &nbsp;</label>
+				  			<label class="radio-inline">
+								  <input type="radio" name="strategy" value="sands" onclick={{action "changeStrategy" value="target.value"}}> Stars & Scrubs
+								</label>
+					  		<label class="radio-inline">
+								  <input type="radio" name="strategy" value="balanced" checked onclick={{action "changeStrategy" value="target.value"}}> Balanced
+								</label>
+							</div>
 				  		<div class="form-group">
 				  			<label for="rCSample">rC Sample: &nbsp;</label>
 				  			{{input type="range" class="form-control input-sm" name="rCSample" value=rCSample min="10" max="90"}}

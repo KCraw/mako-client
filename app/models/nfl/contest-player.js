@@ -6,6 +6,7 @@ export default DS.Model.extend({
   lastName: DS.attr('string'),
   team: DS.attr('string'),
   game: DS.attr('string'),
+  opp: DS.attr('string'),
   ratings: Ember.computed('site', 'proto.fdRatings', 'proto.dkRatings', function() {
     return (this.get('site') === 'fanduel' && this.get('proto.fdRatings')) || (this.get('site') === 'draftkings' && this.get('proto.dkRatings'));
   }),
@@ -24,27 +25,25 @@ export default DS.Model.extend({
   }),
   rMean: Ember.computed('ratings', function() {
     let r = 0;
-    let keys = Object.keys(this.get('ratings'));
-    keys.forEach((key, index) => {
-      r += this.get('ratings')[key];
-    });
-    return math.round(r/keys.length || 0, 1);
+    let num = 0;
+    for (let i = 20, len = 80; i <= len; i++) {
+      r += this.get('ratings')['r'+i];
+      num++;
+    }
+    return math.round(r/num || 0, 1);
   }),
   rWInt: Ember.computed('ratings', function() {
     // We use an integral approx using area of trapezoid
     let r = 0;
-    let keys = Object.keys(this.get('ratings'));
-    keys.forEach((key, index) => {
-      if (index < keys.length - 1) {
-        let aprob = (1 - +key.replace('r','')/100);
-        let bprob = (1 - +keys[index+1].replace('r','')/100);
-        let a = this.get('ratings')[key];
-        let b = this.get('ratings')[keys[index+1]];
-        let h = ((aprob) + (bprob))/2;
+    for (let i = 20, len = 80; i < len; i++) {
+      let aprob = 1 - i/100;
+      let bprob = 1 - (i+1)/100;
+      let a = this.get('ratings')['r'+i];
+      let b = this.get('ratings')['r'+(i+1)];
+      let h = ((aprob) + (bprob))/2;
 
-        r += (a+b)/2 * h;
-      }
-    });
+      r += (a+b)/2 * h;
+    }
     return math.round(r || 0);
   }),
   vCustom: Ember.computed('rCustom', 'salary', function() {

@@ -67,7 +67,7 @@ const NflPlayerComponent = Ember.Component.extend({
 	didInsertElement() {
 		let ctx = this.$('.ratingsChart').get(0).getContext('2d');
 		let data = {
-  		labels: ['90%', '80%', '70%', '60%', '50%', '40%', '30%', '20%', '10%'],
+  		labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%'],
 	    datasets: [
         {
           fillColor: "rgba(151,187,205,0.2)",

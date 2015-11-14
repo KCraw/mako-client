@@ -12,14 +12,16 @@
 		<p>{{position}}</p>
 		<h4>{{team}}</h4>
 		{{yield}}
-		{{#if isBacktested}}
-			<p>Actual: {{player.actual}}</p>
-		{{/if}}
 	</div>
 	<div class="col-md-5">
-		<h5>Fantasy Point Production <small>Probability of Scoring At Least</small></h5>
+		<h5 class="text-center">Expected Fantasy Point Production 
+		<br><small>Individual performance variablility adjusted for current opponent</small></h5>
 		<div>
 			<canvas class="ratingsChart" width="300" height="150"></canvas>
+			<p class="text-center small">Percentile Performance In All Categories</p>
+			{{#if isBacktested}}
+			<h5 class="text-center">Actual: {{player.actual}}</h5>
+			{{/if}}
 		</div>
 	</div>
 	<div class="col-md-4">
