@@ -1,5 +1,5 @@
 {
-  "firebase": "mako-dev",
+  "firebase": "mako",
   "public": "dist",
   "ignore": [
     "firebase.json",
