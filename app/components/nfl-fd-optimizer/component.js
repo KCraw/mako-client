@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const positions = ['QB1', 'RB1', 'RB2', 'WR1', 'WR2', 'WR3', 'TE1', 'K1', 'D1'];
+
 const NflFdOptimizer = Ember.Component.extend({
 	classNames: ['container'],
 	init() {
@@ -288,18 +290,24 @@ const NflFdOptimizer = Ember.Component.extend({
 	actions: {
 		resetDefaults() {
 			this.set('rCSample', 50);
-			this.set('disabledPositions', {});
-			this.set('excludedPlayers', {});
-			this.set('requiredPlayers', {});
 			this.set('selectFor', 'rMean');
 			this.set('strategy', 'balanced');
+			this.set('preventOppD', false);
+			this.set('preventTeamK', false);
 			this.set('salaryCap', 60000);
 			this.set('teamCap', 4);
 			if (this.$()) {
-				this.$('input[name="selectFor"][value="rMean"]').prop('checked', true);	
+				this.$('input[name="selectFor"][value="rWMean"]').prop('checked', true);	
 			}
-			this.set('preventOppD', false);
-			this.set('preventTeamK', false);
+			if (this.$()) {
+				this.$('input[name="strategy"][value="balanced"]').prop('checked', true);	
+			}
+			this.send('resetPlayers');
+		},
+		resetPlayers() {
+			this.set('disabledPositions', {});
+			this.set('excludedPlayers', {});
+			this.set('requiredPlayers', {});
 			this.set('requiredQB1', null);
 			this.set('requiredRB1', null);
 			this.set('requiredRB2', null);
@@ -342,10 +350,15 @@ const NflFdOptimizer = Ember.Component.extend({
 					break;
 				case 'RB':
 					if (toggle) {
-						if (!this.get('requiredRB1')) {
+						if (player === this.get('solutionRB1')) {
+							this.set('requiredRB1', player);
+						} else if (player === this.get('solutionRB2')) {
+							this.set('requiredRB2', player);
+						}
+						else if (!this.get('requiredRB1')) {
 							this.set('requiredRB1', player);
 						} else if (!this.get('requiredRB2')) {
-							this.set('requiredRB2', player)
+							this.set('requiredRB2', player);
 						}
 					} else {
 						if (player === this.get('requiredRB1')) {
@@ -363,12 +376,18 @@ const NflFdOptimizer = Ember.Component.extend({
 					break;
 				case 'WR':
 					if (toggle) {
-						if (!this.get('requiredWR1')) {
+						if (player === this.get('solutionWR1')) {
+							this.set('requiredWR1', player);
+						} else if (player === this.get('solutionWR2')) {
+							this.set('requiredWR2', player);
+						} else if (player === this.get('solutionWR3')) {
+							this.set('requiredWR3', player);
+						} else if (!this.get('requiredWR1')) {
 							this.set('requiredWR1', player);
 						} else if (!this.get('requiredWR2')) {
-							this.set('requiredWR2', player)
+							this.set('requiredWR2', player);
 						} else if (!this.get('requiredWR3')) {
-							this.set('requiredWR3', player)
+							this.set('requiredWR3', player);
 						}
 					} else {
 						if (player === this.get('requiredWR1')) {
@@ -459,7 +478,7 @@ const NflFdOptimizer = Ember.Component.extend({
 					this.set('solutionTE1', null);
 				} else if (player === this.get('solutionK1')) {
 					this.set('solutionK1', null);
-				} else if (player === this.get('solutionTE1')) {
+				} else if (player === this.get('solutionD1')) {
 					this.set('solutionD1', null);
 				}
 			}
@@ -522,10 +541,11 @@ const NflFdOptimizer = Ember.Component.extend({
 			return true; // We return true to signal that a solution was found
 		}
 
+		let profitStat;
 		if (this.get('strategy') === 'balanced') {
-			var profitStat = this.get('selectFor').replace('r', 'v');
+			profitStat = this.get('selectFor').replace('r', 'v');
 		} else if (this.get('strategy') === 'sands') {
-			var profitStat = this.get('selectFor');
+			profitStat = this.get('selectFor');
 		}
 
 		let temp = null;
@@ -589,15 +609,13 @@ const NflFdOptimizer = Ember.Component.extend({
 					if (this.get('solutionTE1.team') === pOpp) {
 						continue PlayerLoop;
 					}
-					if (this.get('solutionK1.team') === pOpp) {
-						continue PlayerLoop;
-					}
-					if (this.get('solutionD1.team') === pOpp) {
-						continue PlayerLoop;
-					}
 				} else if (this.get('preventOppD') && this.get('solutionD1.team') === pOpp) {
 					continue PlayerLoop;
 				}
+				// CHANGE back to this to make an exception for kickers, and change below
+				// } else if (position !== 'K1' && this.get('preventOppD') && this.get('solutionD1.team') === pOpp) {
+				// 	continue PlayerLoop;
+				// }
 
 				// Now we can see if there is a temp solution, or if this player is better than the temp solution
 				if (!temp || math.larger(potential.get(`${profitStat}`), temp.player.get(`${profitStat}`))) {
@@ -616,10 +634,12 @@ const NflFdOptimizer = Ember.Component.extend({
 
 	},
 	subMin() {
+
+		let profitStat;
 		if (this.get('strategy') === 'balanced') {
-			var profitStat = this.get('selectFor').replace('r', 'v');
+			profitStat = this.get('selectFor').replace('r', 'v');
 		} else if (this.get('strategy') === 'sands') {
-			var profitStat = this.get('selectFor');
+			profitStat = this.get('selectFor');
 		}
 		
 		let temp = null;
@@ -688,12 +708,6 @@ const NflFdOptimizer = Ember.Component.extend({
 					if (this.get('solutionTE1.team') === pOpp) {
 						continue PlayerLoop;
 					}
-					if (this.get('solutionK1.team') === pOpp) {
-						continue PlayerLoop;
-					}
-					if (this.get('solutionD1.team') === pOpp) {
-						continue PlayerLoop;
-					}
 				} else if (this.get('preventOppD') && this.get('solutionD1.team') === pOpp) {
 					continue PlayerLoop;
 				}
@@ -753,13 +767,9 @@ const NflFdOptimizer = Ember.Component.extend({
 					continue PlayerLoop;
 				}
 
+				// See if the potential would put us over the team cap
 				let pTeam = potential.get('team');
-
-				// The solution team totals, minus the current solution at the position
-				let tempTeams = new Map(this.get('solutionTeams'));
-				tempTeams[this.get(`solution${position}.team`)]--;
-
-				if (tempTeams[pTeam] && math.largerEq(tempTeams[pTeam], this.get('teamCap'))) {
+				if (this.get(`solutionTeams.${pTeam}`) && this.get(`solution${position}.team`) !== potential.get('team') && math.largerEq(this.get(`solutionTeams.${pTeam}`), this.get('teamCap'))) {
 					continue PlayerLoop;
 				}
 
@@ -794,12 +804,6 @@ const NflFdOptimizer = Ember.Component.extend({
 					if (this.get('solutionTE1.team') === pOpp) {
 						continue PlayerLoop;
 					}
-					if (this.get('solutionK1.team') === pOpp) {
-						continue PlayerLoop;
-					}
-					if (this.get('solutionD1.team') === pOpp) {
-						continue PlayerLoop;
-					}
 				} else if (this.get('preventOppD') && this.get('solutionD1.team') === pOpp) {
 					continue PlayerLoop;
 				}
@@ -822,7 +826,7 @@ const NflFdOptimizer = Ember.Component.extend({
 	}
 });
 
-const positions = ['QB1', 'RB1', 'RB2', 'WR1', 'WR2', 'WR3', 'TE1', 'K1', 'D1'];
+
 
 NflFdOptimizer.reopenClass({
 	positionalParams: ['contest']

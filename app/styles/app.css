@@ -3,32 +3,79 @@
   cursor: pointer;
 }
 
+.navbar-inverse {
+	background-color: #2d363b;
+	border-bottom: 1px solid #6ea73d;
+}
+
+
 /*Make the pretty icons spin*/
 .glyphicon-spin {
-  -webkit-animation: spin 1000ms infinite linear;
+-webkit-animation: spin 1000ms infinite linear;
   animation: spin 1000ms infinite linear;
 }
 @-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
 }
 @keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
 }
 .glyphicon-lg {
 	font-size: 2rem;
+}
+
+/*Special formatting for the lineup generator*/
+.lgen-group-container {
+	margin: 0;
+}
+.lgen-group {
+	padding-right: 0;
+	margin-bottom: 0;
+}
+.lgen-group .list-group-item {
+	border: none;
+	border-radius: 0;
+	border-top: solid 1px #ddd;
+}
+@media screen and (min-width: 992px) {
+	.lgen-group:not(.lgen-group-last) > .list-group-item {
+			border-right: solid 1px #ddd;
+	}
+}
+
+.lgen-control {
+	vertical-align: middle;
+	margin-top: 5px;
+}
+input[name="rCSampleRange"], input[name="teamCapRange"] {
+	display: inline-block;
+  vertical-align: middle;
+  max-width: 33.3333%;
+  height: 30px;
+}
+input[name="teamCapRange"] {
+	max-width: 25%;
+}
+input[name="rCSampleNumber"] {
+	display: inline-block;
+  max-width: 50px;
+}
+input[name="teamCap"] {
+	display: inline-block;
+  max-width: 45px;
 }
 

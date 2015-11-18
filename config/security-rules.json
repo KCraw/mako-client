@@ -1,0 +1,48 @@
+{
+    "rules": {
+        "mlb": {
+            ".read": "auth != null",
+            ".write": false,
+            "contests": {
+                ".indexOn": ["startTime"]
+            },
+            "matchups": {
+                ".indexOn": ["startTime", "isAnalyzed"]
+            },
+            "contestMatchups": {
+                ".indexOn": ["proto"]
+            }
+        },
+        "nfl": {
+            ".read": "auth != null",
+            ".write": false,
+            "contests": {
+                ".indexOn": ["startTime"]
+            },
+            "matchups": {
+                ".indexOn": ["startTime", "isAnalyzed"]
+            },
+            "contestMatchups": {
+                ".indexOn": ["proto"]
+            },
+            "players": {
+              "$player": {
+                ".indexOn": ["fdRating", "dkRating"]
+              }
+            }
+        },
+        "nba": {
+            ".read": "auth != null",
+            ".write": false,
+            "contests": {
+                ".indexOn": ["startTime"]
+            },
+            "matchups": {
+                ".indexOn": ["startTime", "isAnalyzed"]
+            },
+            "contestMatchups": {
+                ".indexOn": ["proto"]
+            }
+        }
+    }
+}

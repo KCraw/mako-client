@@ -37,7 +37,7 @@
             {{#if player.salary}}
               {{rq-ex-boxes player disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-table-sm=true onPlayerRequired=requirePlayer onPlayerExcluded=excludePlayer}}
               <td class="small">{{player.position}}</td>
-              <td class="small"><a href="#" {{action "playerClicked" player}}>{{first-initial player.firstName player.position}} {{player.lastName}}</a></td>
+              <td class="small"><a {{action "playerClicked" player}}>{{first-initial player.firstName player.position}} {{player.lastName}}</a></td>
               <td class="small">{{player.rMean}}</td>
               <td class="small">{{player.rWInt}}</td>
               <td class="small">{{player.rCustom}}</td>

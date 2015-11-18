@@ -1,11 +1,12 @@
 {
-  "firebase": "mako-dev",
+  "firebase": "mako",
   "public": "dist",
   "ignore": [
     "firebase.json",
     "**/.*",
     "**/node_modules/**"
   ],
+  "rules": "config/security-rules.json",
   "rewrites": [{
     "source": "**",
     "destination": "/index.html"

@@ -23,197 +23,21 @@
 		    <h3 class="panel-title">FanDuel Lineup Optimizer</h3>
 		  </div>
 		  <div class="panel-body">
-			  <div class="row">
-					<div class="col-md-4">
-					  <ul class="list-group small">
-					    <li class="list-group-item">
-					    	<div class="row">
-					    		<div class="col-xs-2">
-					    			<span class="{{if solutionQB1 "text-muted"}}">QB</span>
-					    		</div>
-					    		<div class="col-xs-6">
-					    			{{#if solutionQB1}}
-					    			<span class="pull-right">{{solutionQB1.team}}</span>
-					    			<a href="#" {{action "openPlayerModal" solutionQB1}}> {{first-initial solutionQB1.firstName}} {{solutionQB1.lastName}}</a>
-					    			{{/if}}
-					    		</div>	
-					    		<div class="col-xs-4">
-					    			{{#if solutionQB1}}
-					    			<span class="small pull-right">{{rq-ex-boxes solutionQB1 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
-					    			{{/if}}
-					    		</div>
-					    	</div>
-					    </li>
-					    <li class="list-group-item">
-					    	<div class="row">
-					    		<div class="col-xs-2">
-					    			<span class="{{if solutionRB1 "text-muted"}}">RB1</span>
-					    		</div>
-					    		<div class="col-xs-6">
-					    			{{#if solutionRB1}}
-					    			<span class="pull-right">{{solutionRB1.team}}</span>
-					    			<a href="#" {{action "openPlayerModal" solutionRB1}}> {{first-initial solutionRB1.firstName}} {{solutionRB1.lastName}}</a>
-					    			{{/if}}
-					    		</div>	
-					    		<div class="col-xs-4">
-					    			{{#if solutionRB1}}
-					    			<span class="small pull-right">{{rq-ex-boxes solutionRB1 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
-					    			{{/if}}
-					    		</div>
-					    	</div>
-					    </li>
-					    <li class="list-group-item">
-					    	<div class="row">
-					    		<div class="col-xs-2">
-					    			<span class="{{if solutionRB2 "text-muted"}}">RB2</span>
-					    		</div>
-					    		<div class="col-xs-6">
-					    			{{#if solutionRB2}}
-					    			<span class="pull-right">{{solutionRB2.team}}</span>
-					    			<a href="#" {{action "openPlayerModal" solutionRB2}}> {{first-initial solutionRB2.firstName}} {{solutionRB2.lastName}}</a>
-					    			{{/if}}
-					    		</div>	
-					    		<div class="col-xs-4">
-					    			{{#if solutionRB2}}
-					    			<span class="small pull-right">{{rq-ex-boxes solutionRB2 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
-					    			{{/if}}
-					    		</div>
-					    	</div>
-					    </li>
-					  </ul>
-				  </div>
-				  <div class="col-md-4">
-					  <ul class="list-group small">
-					    <li class="list-group-item">
-					    	<div class="row">
-					    		<div class="col-xs-2">
-					    			<span class="{{if solutionWR1 "text-muted"}}">WR1</span>
-					    		</div>
-					    		<div class="col-xs-6">
-					    			{{#if solutionWR1}}
-					    			<span class="pull-right">{{solutionWR1.team}}</span>
-					    			<a href="#" {{action "openPlayerModal" solutionWR1}}> {{first-initial solutionWR1.firstName}} {{solutionWR1.lastName}}</a>
-					    			{{/if}}
-					    		</div>	
-					    		<div class="col-xs-4">
-					    			{{#if solutionWR1}}
-					    			<span class="small pull-right">{{rq-ex-boxes solutionWR1 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
-					    			{{/if}}
-					    		</div>
-					    	</div>
-					    </li>
-					    <li class="list-group-item">
-					    	<div class="row">
-					    		<div class="col-xs-2">
-					    			<span class="{{if solutionWR2 "text-muted"}}">WR2</span>
-					    		</div>
-					    		<div class="col-xs-6">
-					    			{{#if solutionWR2}}
-					    			<span class="pull-right">{{solutionWR2.team}}</span>
-					    			<a href="#" {{action "openPlayerModal" solutionWR2}}> {{first-initial solutionWR2.firstName}} {{solutionWR2.lastName}}</a>
-					    			{{/if}}
-					    		</div>	
-					    		<div class="col-xs-4">
-					    			{{#if solutionWR2}}
-					    			<span class="small pull-right">{{rq-ex-boxes solutionWR2 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
-					    			{{/if}}
-					    		</div>
-					    	</div>
-					    </li>
-					    <li class="list-group-item">
-					    	<div class="row">
-					    		<div class="col-xs-2">
-					    			<span class="{{if solutionWR3 "text-muted"}}">WR3</span>
-					    		</div>
-					    		<div class="col-xs-6">
-					    			{{#if solutionWR3}}
-					    			<span class="pull-right">{{solutionWR3.team}}</span>
-					    			<a href="#" {{action "openPlayerModal" solutionWR3}}> {{first-initial solutionWR3.firstName}} {{solutionWR3.lastName}}</a>
-					    			{{/if}}
-					    		</div>	
-					    		<div class="col-xs-4">
-					    			{{#if solutionWR3}}
-					    			<span class="small pull-right">{{rq-ex-boxes solutionWR3 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
-					    			{{/if}}
-					    		</div>
-					    	</div>
-					    </li>
-					  </ul>
-				  </div>
-					<div class="col-md-4">
-					  <ul class="list-group small">
-					    <li class="list-group-item">
-					    	<div class="row">
-					    		<div class="col-xs-2">
-					    			<span class="{{if solutionTE1 "text-muted"}}">TE</span>
-					    		</div>
-					    		<div class="col-xs-6">
-					    			{{#if solutionTE1}}
-					    			<span class="pull-right">{{solutionTE1.team}}</span>
-					    			<a href="#" {{action "openPlayerModal" solutionTE1}}> {{first-initial solutionTE1.firstName}} {{solutionTE1.lastName}}</a>
-					    			{{/if}}
-					    		</div>	
-					    		<div class="col-xs-4">
-					    			{{#if solutionTE1}}
-					    			<span class="small pull-right">{{rq-ex-boxes solutionTE1 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
-					    			{{/if}}
-					    		</div>
-					    	</div>
-					    </li>
-					    <li class="list-group-item">
-					    	<div class="row">
-					    		<div class="col-xs-2">
-					    			<span class="{{if solutionK1 "text-muted"}}">K</span>
-					    		</div>
-					    		<div class="col-xs-6">
-					    			{{#if solutionK1}}
-					    			<span class="pull-right">{{solutionK1.team}}</span>
-					    			<a href="#" {{action "openPlayerModal" solutionK1}}> {{first-initial solutionK1.firstName}} {{solutionK1.lastName}}</a>
-					    			{{/if}}
-					    		</div>	
-					    		<div class="col-xs-4">
-					    			{{#if solutionK1}}
-					    			<span class="small pull-right">{{rq-ex-boxes solutionK1 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
-					    			{{/if}}
-					    		</div>
-					    	</div>
-					    </li>
-					    <li class="list-group-item">
-					    	<div class="row">
-					    		<div class="col-xs-2">
-					    			<span class="{{if solutionD1 "text-muted"}}">D</span>
-					    		</div>
-					    		<div class="col-xs-6">
-					    			{{#if solutionD1}}
-					    			<span class="pull-right">{{solutionD1.team}}</span>
-					    			<a href="#" {{action "openPlayerModal" solutionD1}}>{{solutionD1.lastName}}</a>
-					    			{{/if}}
-					    		</div>	
-					    		<div class="col-xs-4">
-					    			{{#if solutionD1}}
-					    			<span class="small pull-right">{{rq-ex-boxes solutionD1 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
-					    			{{/if}}
-					    		</div>
-					    	</div>
-					    </li>
-					  </ul>
-				  </div>
-			  </div>
 		    <div class="row">
-		    	<div class="col-xs-2">
-		    		Total rMean: {{math-round solutionTotalRMean decimals="1"}}
-		    	</div>
-		    	<div class="col-xs-2">
-		    		Total rWI: {{math-round solutionTotalRWI decimals=1}}
-		    	</div>
-		    	<div class="col-xs-2">
-		    		Total rC: {{math-round solutionTotalRCustom decimals=1}}
-		    	</div>
-		    	<div class="col-xs-3">
+		    	<div class="col-sm-3">
 		    		Remaining Salary: ${{solutionRemainingSalary}}
 		    	</div>
-		    	<div class="col-xs-3">
+		    	<div class="col-sm-3">
 		    		Avg / Player: ${{math-round solutionRemainingSalaryPer}}
+		    	</div>
+		    	<div class="col-xs-4 col-sm-2">
+		    		Total rM: {{math-round solutionTotalRMean decimals="1"}}
+		    	</div>
+		    	<div class="col-xs-4 col-sm-2">
+		    		Total rWI: {{math-round solutionTotalRWI decimals=1}}
+		    	</div>
+		    	<div class="col-xs-4 col-sm-2">
+		    		Total rC: {{math-round solutionTotalRCustom decimals=1}}
 		    	</div>
 		    </div>
 		    {{#if isBacktested}}
@@ -223,12 +47,182 @@
 			  	</div>
 			  </div>
 			  {{/if}}
+			 </div>
+			 <div class="row lgen-group-container">
+			  <ul class="list-group col-md-4 small lgen-group">
+			    <li class="list-group-item">
+			    	<div class="row">
+			    		<div class="col-xs-2">
+			    			<span class="{{if solutionQB1 "text-muted"}}">QB</span>
+			    		</div>
+			    		<div class="col-xs-5">
+			    			{{#if solutionQB1}}
+			    			<span class="pull-right">{{solutionQB1.team}}</span>
+			    			<a href="#" {{action "openPlayerModal" solutionQB1}}> {{first-initial solutionQB1.firstName}} {{solutionQB1.lastName}}</a>
+			    			{{/if}}
+			    		</div>	
+			    		<div class="col-xs-5">
+			    			{{#if solutionQB1}}
+			    			<span class="small pull-right">{{rq-ex-boxes solutionQB1 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
+			    			{{/if}}
+			    		</div>
+			    	</div>
+			    </li>
+			    <li class="list-group-item">
+			    	<div class="row">
+			    		<div class="col-xs-2">
+			    			<span class="{{if solutionRB1 "text-muted"}}">RB1</span>
+			    		</div>
+			    		<div class="col-xs-5">
+			    			{{#if solutionRB1}}
+			    			<span class="pull-right">{{solutionRB1.team}}</span>
+			    			<a href="#" {{action "openPlayerModal" solutionRB1}}> {{first-initial solutionRB1.firstName}} {{solutionRB1.lastName}}</a>
+			    			{{/if}}
+			    		</div>	
+			    		<div class="col-xs-5">
+			    			{{#if solutionRB1}}
+			    			<span class="small pull-right">{{rq-ex-boxes solutionRB1 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
+			    			{{/if}}
+			    		</div>
+			    	</div>
+			    </li>
+			    <li class="list-group-item">
+			    	<div class="row">
+			    		<div class="col-xs-2">
+			    			<span class="{{if solutionRB2 "text-muted"}}">RB2</span>
+			    		</div>
+			    		<div class="col-xs-5">
+			    			{{#if solutionRB2}}
+			    			<span class="pull-right">{{solutionRB2.team}}</span>
+			    			<a href="#" {{action "openPlayerModal" solutionRB2}}> {{first-initial solutionRB2.firstName}} {{solutionRB2.lastName}}</a>
+			    			{{/if}}
+			    		</div>	
+			    		<div class="col-xs-5">
+			    			{{#if solutionRB2}}
+			    			<span class="small pull-right">{{rq-ex-boxes solutionRB2 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
+			    			{{/if}}
+			    		</div>
+			    	</div>
+			    </li>
+			  </ul>
+			  <ul class="list-group col-md-4 small lgen-group">
+			    <li class="list-group-item">
+			    	<div class="row">
+			    		<div class="col-xs-2">
+			    			<span class="{{if solutionWR1 "text-muted"}}">WR1</span>
+			    		</div>
+			    		<div class="col-xs-5">
+			    			{{#if solutionWR1}}
+			    			<span class="pull-right">{{solutionWR1.team}}</span>
+			    			<a href="#" {{action "openPlayerModal" solutionWR1}}> {{first-initial solutionWR1.firstName}} {{solutionWR1.lastName}}</a>
+			    			{{/if}}
+			    		</div>	
+			    		<div class="col-xs-5">
+			    			{{#if solutionWR1}}
+			    			<span class="small pull-right">{{rq-ex-boxes solutionWR1 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
+			    			{{/if}}
+			    		</div>
+			    	</div>
+			    </li>
+			    <li class="list-group-item">
+			    	<div class="row">
+			    		<div class="col-xs-2">
+			    			<span class="{{if solutionWR2 "text-muted"}}">WR2</span>
+			    		</div>
+			    		<div class="col-xs-5">
+			    			{{#if solutionWR2}}
+			    			<span class="pull-right">{{solutionWR2.team}}</span>
+			    			<a href="#" {{action "openPlayerModal" solutionWR2}}> {{first-initial solutionWR2.firstName}} {{solutionWR2.lastName}}</a>
+			    			{{/if}}
+			    		</div>	
+			    		<div class="col-xs-5">
+			    			{{#if solutionWR2}}
+			    			<span class="small pull-right">{{rq-ex-boxes solutionWR2 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
+			    			{{/if}}
+			    		</div>
+			    	</div>
+			    </li>
+			    <li class="list-group-item">
+			    	<div class="row">
+			    		<div class="col-xs-2">
+			    			<span class="{{if solutionWR3 "text-muted"}}">WR3</span>
+			    		</div>
+			    		<div class="col-xs-5">
+			    			{{#if solutionWR3}}
+			    			<span class="pull-right">{{solutionWR3.team}}</span>
+			    			<a href="#" {{action "openPlayerModal" solutionWR3}}> {{first-initial solutionWR3.firstName}} {{solutionWR3.lastName}}</a>
+			    			{{/if}}
+			    		</div>	
+			    		<div class="col-xs-5">
+			    			{{#if solutionWR3}}
+			    			<span class="small pull-right">{{rq-ex-boxes solutionWR3 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
+			    			{{/if}}
+			    		</div>
+			    	</div>
+			    </li>
+			  </ul>
+			  <ul class="list-group col-md-4 small lgen-group lgen-group-last">
+			    <li class="list-group-item">
+			    	<div class="row">
+			    		<div class="col-xs-2">
+			    			<span class="{{if solutionTE1 "text-muted"}}">TE</span>
+			    		</div>
+			    		<div class="col-xs-5">
+			    			{{#if solutionTE1}}
+			    			<span class="pull-right">{{solutionTE1.team}}</span>
+			    			<a href="#" {{action "openPlayerModal" solutionTE1}}> {{first-initial solutionTE1.firstName}} {{solutionTE1.lastName}}</a>
+			    			{{/if}}
+			    		</div>	
+			    		<div class="col-xs-5">
+			    			{{#if solutionTE1}}
+			    			<span class="small pull-right">{{rq-ex-boxes solutionTE1 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
+			    			{{/if}}
+			    		</div>
+			    	</div>
+			    </li>
+			    <li class="list-group-item">
+			    	<div class="row">
+			    		<div class="col-xs-2">
+			    			<span class="{{if solutionK1 "text-muted"}}">K</span>
+			    		</div>
+			    		<div class="col-xs-5">
+			    			{{#if solutionK1}}
+			    			<span class="pull-right">{{solutionK1.team}}</span>
+			    			<a href="#" {{action "openPlayerModal" solutionK1}}> {{first-initial solutionK1.firstName}} {{solutionK1.lastName}}</a>
+			    			{{/if}}
+			    		</div>	
+			    		<div class="col-xs-5">
+			    			{{#if solutionK1}}
+			    			<span class="small pull-right">{{rq-ex-boxes solutionK1 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
+			    			{{/if}}
+			    		</div>
+			    	</div>
+			    </li>
+			    <li class="list-group-item">
+			    	<div class="row">
+			    		<div class="col-xs-2">
+			    			<span class="{{if solutionD1 "text-muted"}}">D</span>
+			    		</div>
+			    		<div class="col-xs-5">
+			    			{{#if solutionD1}}
+			    			<span class="pull-right">{{solutionD1.team}}</span>
+			    			<a href="#" {{action "openPlayerModal" solutionD1}}>{{solutionD1.lastName}}</a>
+			    			{{/if}}
+			    		</div>	
+			    		<div class="col-xs-5">
+			    			{{#if solutionD1}}
+			    			<span class="small pull-right">{{rq-ex-boxes solutionD1 disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline-short=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}</span>
+			    			{{/if}}
+			    		</div>
+			    	</div>
+			    </li>
+			  </ul>
 		  </div>
-		  <div class="panel-footer text-center">
+		  <div class="panel-footer lgen-footer">
 		  	<div class="row">
-			  	<div class="col-md-4">
+			  	<div class="text-center col-sm-6 col-md-4">
 			  		<form class="form-inline" onsubmit="return false;">
-				  		<div>
+				  		<div class="lgen-control">
 				  			<label for="strategy">Strategy: &nbsp;</label>
 				  			<label class="radio-inline">
 								  <input type="radio" name="strategy" value="sands" onclick={{action "changeStrategy" value="target.value"}}> Stars & Scrubs
@@ -237,15 +231,15 @@
 								  <input type="radio" name="strategy" value="balanced" checked onclick={{action "changeStrategy" value="target.value"}}> Balanced
 								</label>
 							</div>
-				  		<div class="form-group">
-				  			<label for="rCSample">rC Sample: &nbsp;</label>
-				  			{{input type="range" class="form-control input-sm" name="rCSample" value=rCSample min="10" max="90"}}
-				  			{{input type="number" class="form-control input-sm" name="rCSample" size="3" min="10" max="90" value=rCSample}}
+				  		<div class="form-group lgen-control">
+				  			<label for="rCSampleRange">rC Sample: &nbsp;</label>
+				  			{{input type="range" class="input-sm" name="rCSampleRange" value=rCSample min="10" max="90"}}
+				  			{{input type="number" class="form-control input-sm" name="rCSampleNumber" value=rCSample min="10" max="90"}}
 							</div>
 						</form>
 					</div>
-					<div class="col-md-4">
-						<div>
+					<div class="text-center col-sm-6 col-md-4">
+						<div class="lgen-control">
 			  			<label for="selectFor">Select For: &nbsp;</label>
 				  		<label class="radio-inline">
 							  <input type="radio" name="selectFor" value="rMean" checked onclick={{action "changeSelectFor" value="target.value"}}> rM
@@ -257,7 +251,7 @@
 							  <input type="radio" name="selectFor" value="rCustom" onclick={{action "changeSelectFor" value="target.value"}}> rC
 							</label>	
 						</div>
-						<div>
+						<div class="lgen-control">
 							<label>Prevent: &nbsp;</label>
 							<label class="checkbox-inline">
 								{{input type="checkbox" checked=preventOppD}} Opp D
@@ -266,19 +260,24 @@
 								{{input type="checkbox" checked=preventTeamK}} QB Team K
 							</label>
 						</div>
+						<div class="lgen-control">
+			  			<label for="teamCap">Team Cap: &nbsp;</label>
+			  			{{input type="range" class="input-sm" name="teamCapRange" value=teamCap min="1" max="4"}}
+			  			{{input type="number" class="form-control input-sm" name="teamCap" value=teamCap min="1" max="4"}}
+						</div>
 					</div>				
-					<div class="col-md-4">
-						<div>
+					<div class="text-center col-sm-12 col-md-4">
+						<div class="lgen-control">
 							<button type="submit" class="btn btn-primary" onclick={{action "optimizeLineup" value="target"}}>
-							{{#if isGenerating}}
-							Solving optimal... <span class="glyphicon glyphicon-refresh glyphicon-spin"></span> &nbsp;
-							{{else}}
-							Generate Optimal Lineup
-							{{/if}}
+								{{#if isGenerating}}
+								Solving optimal... <span class="glyphicon glyphicon-refresh glyphicon-spin"></span> &nbsp;
+								{{else}}
+								Generate Optimal Lineup
+								{{/if}}
 							</button>
 						</div>
-						<div style="margin-top: 5px;">
-							<a href="#" {{action "resetDefaults" value="target"}}>Reset All</a>
+						<div class="lgen-control">
+							<a {{action "resetPlayers" value="target"}}>Clear</a> | <a {{action "resetDefaults" value="target"}}>Reset All</a>
 						</div>
 					</div>
 				</div>
@@ -321,7 +320,7 @@
 				</div>
 			{{/each}}
     {{else}}
-      <p>No players yet for {{contest.displayName}}.</p>
+      <p>No players yet for contest.</p>
     {{/if}}
   </div>
 </div>
