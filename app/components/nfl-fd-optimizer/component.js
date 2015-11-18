@@ -3,7 +3,6 @@ import Ember from 'ember';
 const positions = ['QB1', 'RB1', 'RB2', 'WR1', 'WR2', 'WR3', 'TE1', 'K1', 'D1'];
 
 const NflFdOptimizer = Ember.Component.extend({
-	classNames: ['container'],
 	init() {
 		this._super(...arguments);
 
