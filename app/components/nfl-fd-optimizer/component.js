@@ -296,7 +296,7 @@ const NflFdOptimizer = Ember.Component.extend({
 			this.set('salaryCap', 60000);
 			this.set('teamCap', 4);
 			if (this.$()) {
-				this.$('input[name="selectFor"][value="rWMean"]').prop('checked', true);	
+				this.$('input[name="selectFor"][value="rMean"]').prop('checked', true);	
 			}
 			if (this.$()) {
 				this.$('input[name="strategy"][value="balanced"]').prop('checked', true);	
