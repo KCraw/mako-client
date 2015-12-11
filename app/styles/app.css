@@ -61,7 +61,7 @@
 	vertical-align: middle;
 	margin-top: 5px;
 }
-input[name="rCSampleRange"], input[name="teamCapRange"] {
+input[name="rCSampleRange"], input[name="rCFSampleRange"], input[name="rCCSampleRange"], input[name="teamCapRange"] {
 	display: inline-block;
   vertical-align: middle;
   max-width: 33.3333%;
@@ -70,7 +70,7 @@ input[name="rCSampleRange"], input[name="teamCapRange"] {
 input[name="teamCapRange"] {
 	max-width: 25%;
 }
-input[name="rCSampleNumber"] {
+input[name="rCSampleNumber"], input[name="rCFSampleNumber"], input[name="rCCSampleNumber"] {
 	display: inline-block;
   max-width: 50px;
 }

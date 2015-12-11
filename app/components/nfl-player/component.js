@@ -52,7 +52,7 @@ const labels = {
 	'TE': ['Pass Tgt', 'Pass Rec', 'Pass Rec %', 'Pass Yds', 'Pass Y/T', 'Pass Y/R', 'Pass TD', 'Pass TD/T', 'Pass TD/R'],
 	'K': ['XPM', 'XPA', 'XP %', 'FGM', 'FGA', 'FG %'],
 	'D': ['Pass Att', 'Pass Cmp', 'Pass Cmp %', 'Pass Sack', 'Pass Sack %', 'Pass Int', 'Pass Int %', 'Pass Yds', 'Pass Y/A', 'Pass Y/C', 'Pass TD', 'Pass TD/A', 'Pass TD/C', 'Rush Att', 'Rush Yds', 'Rush Y/A', 'Rush TD', 'Rush TD/A', 'Fumbles Rec\'d', 'XPM', 'XPA', 'XP %', 'FGM', 'FGA', 'FG %']
-}
+};
 
 const logkeys = {
 	'QB': ['passAtt', 'passCmp', 'passCmpPer', 'passInt', 'passIntPerAtt', 'passYds', 'passYdsPerAtt', 'passYdsPerCmp', 'passTD', 'passTDPerAtt', 'passTDPerCmp', 'rushAtt', 'rushYds', 'rushYdsPerAtt', 'rushTD', 'rushTDPerAtt'],
@@ -61,7 +61,7 @@ const logkeys = {
 	'TE': ['passTgt', 'passRec', 'passRecPer', 'passYds', 'passYdsPerTgt', 'passYdsPerRec', 'passTD', 'passTDPerTgt', 'passTDPerRec'],
 	'K': ['XPM', 'XPA', 'XPMPer', 'FGM', 'FGA', 'FGMPer'],
 	'D': ['passAtt', 'passCmp', 'passCmpPer', 'passSack', 'passSackPer', 'passInt', 'passIntPerAtt', 'passYds', 'passYdsPerAtt', 'passYdsPerCmp', 'passTD', 'passTDPerAtt', 'passTDPerCmp', 'rushAtt', 'rushYds', 'rushYdsPerAtt', 'rushTD', 'rushTDPerAtt', 'fumRec', 'XPM', 'XPA', 'XPMPer', 'FGM', 'FGA', 'FGMPer']
-}
+};
 
 const NflPlayerComponent = Ember.Component.extend({
 	didInsertElement() {
@@ -152,27 +152,23 @@ const NflPlayerComponent = Ember.Component.extend({
 		} else {
 
 			let r = [];
-			let numGames = 0;
-
-			// Set the number of games uniformly
-			numGames = this.get('stats.totals.games');
+			let numGames = this.get('stats.totals.games');
 
 			for (let i = 0, len = logkeys[this.get('player.position')].length; i < len; i++) {
 				let stat = logkeys[this.get('player.position')][i];
 				let statArray = this.get('stats.totals')[stat];
-				if (Array.isArray(statArray)) {
-					statArray = statArray.reduce(function(acc, next) {
-			  		return Math.round((acc + next) * 10)/10;
-			  	}, 0);
-				}
-				if (statArray == null) {
-					statArray = '-'
+
+				let statValue;
+				if (statArray == null || numGames === 0) {
+					statValue = '-';
 				} else if (stat.indexOf('Per') === -1) {
-					statArray = Math.round(statArray/numGames * 10)/10 || 0;
-				} else if (this.get('player.position') !== 'D') {
-					statArray = Math.round(statArray/numGames * 100)/100 || 0;
+					statValue = math.round(math.sum(statArray)/numGames, 1);
+				} else if (this.get('player.position') === 'D') {
+					statValue = statArray;
+				} else {
+					statValue = math.round(math.sum(statArray)/numGames, 2);
 				}
-				r.pushObject(statArray);
+				r.pushObject(statValue);
 			}
 			return r;
 		}
@@ -189,7 +185,7 @@ const NflPlayerComponent = Ember.Component.extend({
 				let statArray = this.get('stats.totals')[stat];
 				let statValue;
 				if (statArray == null) {
-					statValue = '-'
+					statValue = '-';
 				} else if (stat.indexOf('Per') === -1) {
 					statValue = math.round(math.quantileSeq(statArray, 0.50), 1);
 				} else {

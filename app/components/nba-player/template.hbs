@@ -25,7 +25,6 @@
 		</div>
 	</div>
 	<div class="col-md-4">
-		<h5 class="text-info">Mako Official</h5>
 		<div class="row">
 			<div class="col-xs-9">
 				<p><strong>Floor</strong> <small>({{th-percent 20}})</small>:</p>
@@ -51,7 +50,6 @@
 			</div>
 		</div>
 		<hr>
-		<h5 class="text-danger">User Custom</h5>
 		<div class="row">
 			<div class="col-xs-9">
 				<p><strong>R Custom</strong> <small>({{th-percent player.rCSample}})</small>:</p>
@@ -62,7 +60,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-9">
-				<p><strong>R Mean</strong> <small>(of R<sub>{{player.rCFSample}}</sub>..R<sub>{{player.rCCSample}}</sub>)</small>:</p>
+				<p><strong>Mean</strong> <small>(of R<sub>{{player.rCFSample}}</sub>..R<sub>{{player.rCCSample}}</sub>)</small>:</p>
 			</div>
 			<div class="col-xs-2">
 				<p>{{player.rMean}}</p>
@@ -70,7 +68,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-9">
-				<p><strong>R Weighted &#x222b;</strong> <small>(of R<sub>{{player.rCFSample}}</sub>..R<sub>{{player.rCCSample}}</sub>)</small>:</p>
+				<p><strong>Weighted &#x222b;</strong> <small>(of R<sub>{{player.rCFSample}}</sub>..R<sub>{{player.rCCSample}}</sub>)</small>:</p>
 			</div>
 			<div class="col-xs-2">
 				<p>{{player.rWInt}}</p>
@@ -129,12 +127,14 @@
 		{{#if logs.length}}
 		<div class="table-responsive">
 			<table class="table table-condensed">
-				<caption>T16 Game Logs <small>(current/previous season and current team only)</small></caption>
+				<caption>Game Logs <small>(current season and current team only)</small></caption>
 				<thead>
 				  <tr class="small text-center">
 				  	<td class="small">Date</td>
 				  	<td class="small">Team</td>
+				  	<td class="small">Loc</td>
 				  	<td class="small">Opp</td>
+				  	<td class="small">Start</td>
 				  	{{#each labels as |label|}}
 				  		<td class="small">{{label}}</td>
 				  	{{/each}}

@@ -1,2 +1,14 @@
 
-{{outlet}}
+{{!-- Main --}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="text-info text-center">{{site-name model.site}} {{et-date model.startTime format="ddd MM/DD/YYYY h:mmA"}} ET ({{model.slotName}})</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      {{component mainComponent model}}
+    </div>
+  </div>
+</div>

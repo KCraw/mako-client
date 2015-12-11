@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const NflPositionComponent = Ember.Component.extend({
+const NbaPositionComponent = Ember.Component.extend({
 	playersSorting: ['team'],
 	sortedPlayers: Ember.computed.sort('players.list', 'playersSorting'),
 	actions: {
@@ -41,8 +41,8 @@ const NflPositionComponent = Ember.Component.extend({
 	})
 });
 
-NflPositionComponent.reopenClass({
+NbaPositionComponent.reopenClass({
 	positionalParams: ['players']
 });
 
-export default NflPositionComponent;
+export default NbaPositionComponent;

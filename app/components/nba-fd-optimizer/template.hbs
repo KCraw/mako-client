@@ -1,12 +1,12 @@
 
-{{#modal-lg isEnabled=playerModalEnabled isShown=playerModalShown title="NFL Player Stats" onModalClose=(action "closePlayerModal")}}
+{{#modal-lg isEnabled=playerModalEnabled isShown=playerModalShown title="NBA Player Stats" onModalClose=(action "closePlayerModal")}}
   {{!-- This prevents the component from loading before the modal is shown, which causes problems with Chartjs --}}
   {{#if playerModalShown}}
   	{{!-- This starts loading the stats, btw --}}
 		{{#if modalPlayer.stats.isLoaded}} 
-			{{#nfl-player modalPlayer modalPlayer.stats isBacktested=isBacktested }}
+			{{#nba-player modalPlayer modalPlayer.stats isBacktested=isBacktested }}
 				{{rq-ex-boxes modalPlayer isBacktested=isBacktested disabledList=disabledPositions requiredList=requiredPlayers excludedList=excludedPlayers format-inline=true onPlayerRequired=(action "requirePlayer") onPlayerExcluded=(action "excludePlayer")}}
-			{{/nfl-player}}
+			{{/nba-player}}
 		{{else}}
 		  <div class="text-center text-muted">
 		    <h3>Loading player stats...</h3>
@@ -30,6 +30,7 @@
 		    	<div class="col-sm-3">
 		    		Avg / Player: ${{math-round solutionRemainingSalaryPer}}
 		    	</div>
+		  {{!-- Change these to custom settings? --}}
 		    	<div class="col-xs-4 col-sm-2">
 		    		Total rM: {{math-round solutionTotalRMean decimals="1"}}
 		    	</div>
@@ -118,15 +119,6 @@
 							</label>	
 						</div>
 						<div class="lgen-control">
-							<label>Prevent: &nbsp;</label>
-							<label class="checkbox-inline">
-								{{input type="checkbox" checked=preventOppD}} Opp D
-							</label>
-							<label class="checkbox-inline">
-								{{input type="checkbox" checked=preventTeamK}} QB Team K
-							</label>
-						</div>
-						<div class="lgen-control">
 			  			<label for="teamCap">Team Cap: &nbsp;</label>
 			  			{{input type="range" class="input-sm" name="teamCapRange" value=teamCap min="1" max="4"}}
 			  			{{input type="number" class="form-control input-sm" name="teamCap" value=teamCap min="1" max="4"}}
@@ -160,7 +152,7 @@
 				<div class="row">
 					{{#each row as |matchup|}}
 						<div class="col-md-6">
-							{{nfl-matchup matchup isBacktested=isBacktested requiredPlayers=requiredPlayers excludedPlayers=excludedPlayers disabledPositions=disabledPositions requirePlayer=(action "requirePlayer") excludePlayer=(action "excludePlayer") onPlayerClicked=(action "openPlayerModal")}}
+							{{nba-matchup matchup isBacktested=isBacktested requiredPlayers=requiredPlayers excludedPlayers=excludedPlayers disabledPositions=disabledPositions requirePlayer=(action "requirePlayer") excludePlayer=(action "excludePlayer") onPlayerClicked=(action "openPlayerModal")}}
 						</div>
 					{{/each}}
 				</div>
@@ -180,7 +172,7 @@
 					{{#each positionGroup as |position|}}
 						<div class="col-md-4">
 							<!-- Panel for each group goes here -->
-							{{nfl-position position isBacktested=isBacktested requiredPlayers=requiredPlayers excludedPlayers=excludedPlayers disabledPositions=disabledPositions requirePlayer=(action "requirePlayer") excludePlayer=(action "excludePlayer") onPlayerClicked=(action "openPlayerModal")}}
+							{{nba-position position isBacktested=isBacktested requiredPlayers=requiredPlayers excludedPlayers=excludedPlayers disabledPositions=disabledPositions requirePlayer=(action "requirePlayer") excludePlayer=(action "excludePlayer") onPlayerClicked=(action "openPlayerModal")}}
 						</div>
 					{{/each}}
 				</div>

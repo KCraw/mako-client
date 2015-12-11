@@ -13,6 +13,14 @@ const NflFdOptimizer = Ember.Component.extend({
 		let s = this.get('rCSample');
 		this.get('players').setEach('rCSample', s);
 	})),
+	rCFSampleChanged: Ember.on('init', Ember.observer('rCFSample', function() {
+		let s = this.get('rCFSample');
+		this.get('players').setEach('rCFSample', s);
+	})),
+	rCCSampleChanged: Ember.on('init', Ember.observer('rCCSample', function() {
+		let s = this.get('rCCSample');
+		this.get('players').setEach('rCCSample', s);
+	})),
 
 	isBacktested: Ember.computed('players.@each.actual', function() {
 		return !this.get('players').isEvery('actual', false);
@@ -74,7 +82,7 @@ const NflFdOptimizer = Ember.Component.extend({
 			this.set('solutionQB1', this.get('requiredQB1'));
 		}
 	})),
-	poolQB1: Ember.computed('poolQB', 'requiredQB1', function() {
+	poolQB1: Ember.computed('poolQB.[]', 'requiredQB1', function() {
 		if (this.get('requiredQB1')) {
 			return [this.get('requiredQB1')];	// If a player has been required at this position, then the pool is only that player
 		} else {   // The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players	
@@ -88,7 +96,7 @@ const NflFdOptimizer = Ember.Component.extend({
 			this.set('solutionRB1', this.get('requiredRB1'));
 		}
 	})),
-	poolRB1: Ember.computed('poolRB', 'requiredRB1', 'solutionRB2', function() {
+	poolRB1: Ember.computed('poolRB.[]', 'requiredRB1', 'solutionRB2', function() {
 		if (this.get('requiredRB1')) {
 			return [this.get('requiredRB1')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
@@ -104,7 +112,7 @@ const NflFdOptimizer = Ember.Component.extend({
 			this.set('solutionRB2', this.get('requiredRB2'));
 		}
 	})),
-	poolRB2: Ember.computed('poolRB', 'requiredRB2', 'solutionRB1', function() {
+	poolRB2: Ember.computed('poolRB.[]', 'requiredRB2', 'solutionRB1', function() {
 		if (this.get('requiredRB2')) {
 			return [this.get('requiredRB2')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
@@ -120,7 +128,7 @@ const NflFdOptimizer = Ember.Component.extend({
 			this.set('solutionWR1', this.get('requiredWR1'));
 		}
 	})),
-	poolWR1: Ember.computed('poolWR', 'requiredWR1', 'solutionWR2', 'solutionWR3', function() {
+	poolWR1: Ember.computed('poolWR.[]', 'requiredWR1', 'solutionWR2', 'solutionWR3', function() {
 		if (this.get('requiredWR1')) {
 			return [this.get('requiredWR1')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
@@ -136,7 +144,7 @@ const NflFdOptimizer = Ember.Component.extend({
 			this.set('solutionWR2', this.get('requiredWR2'));
 		}
 	})),
-	poolWR2: Ember.computed('poolWR', 'requiredWR2', 'solutionWR1', 'solutionWR3', function() {
+	poolWR2: Ember.computed('poolWR.[]', 'requiredWR2', 'solutionWR1', 'solutionWR3', function() {
 		if (this.get('requiredWR2')) {
 			return [this.get('requiredWR2')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
@@ -153,7 +161,7 @@ const NflFdOptimizer = Ember.Component.extend({
 			this.set('solutionWR3', this.get('requiredWR3'));
 		}
 	})),
-	poolWR3: Ember.computed('poolWR', 'requiredWR3', 'solutionWR1', 'solutionWR2', function() {
+	poolWR3: Ember.computed('poolWR.[]', 'requiredWR3', 'solutionWR1', 'solutionWR2', function() {
 		if (this.get('requiredWR3')) {
 			return [this.get('requiredWR3')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
@@ -170,7 +178,7 @@ const NflFdOptimizer = Ember.Component.extend({
 			this.set('solutionTE1', this.get('requiredTE1'));
 		}
 	})),
-	poolTE1: Ember.computed('poolTE', 'requiredTE1', function() {
+	poolTE1: Ember.computed('poolTE.[]', 'requiredTE1', function() {
 		if (this.get('requiredTE1')) {
 			return [this.get('requiredTE1')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
@@ -184,7 +192,7 @@ const NflFdOptimizer = Ember.Component.extend({
 			this.set('solutionK1', this.get('requiredK1'));
 		}
 	})),
-	poolK1: Ember.computed('poolK', 'requiredK1', function() {
+	poolK1: Ember.computed('poolK.[]', 'requiredK1', function() {
 		if (this.get('requiredK1')) {
 			return [this.get('requiredK1')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
@@ -198,7 +206,7 @@ const NflFdOptimizer = Ember.Component.extend({
 			this.set('solutionD1', this.get('requiredD1'));
 		}
 	})),
-	poolD1: Ember.computed('poolD', 'requiredD1', function() {
+	poolD1: Ember.computed('poolD.[]', 'requiredD1', function() {
 		if (this.get('requiredD1')) {
 			return [this.get('requiredD1')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
@@ -252,10 +260,36 @@ const NflFdOptimizer = Ember.Component.extend({
  		}
  		
  	}),
+
+
+ 	// Formatting for lineup display
+ 	lineupGroup1: Ember.computed('solutionQB1', 'solutionRB1', 'solutionRB2', function() {
+ 		return [
+ 			{ label: 'QB', player: this.get('solutionQB1') },
+ 			{ label: 'RB', player: this.get('solutionRB1') },
+ 			{ label: 'RB', player: this.get('solutionRB2') }, 
+ 		];
+ 	}),
+ 	lineupGroup2: Ember.computed('solutionWR1', 'solutionWR2', 'solutionWR3', function() {
+ 		return [
+ 			{ label: 'WR', player: this.get('solutionWR1') },
+ 			{ label: 'WR', player: this.get('solutionWR2') },
+ 			{ label: 'WR', player: this.get('solutionWR3') }, 
+ 		];	
+ 	}),
+ 	lineupGroup3: Ember.computed('solutionTE1', 'solutionK1', 'solutionD1', function() {
+ 		return [
+ 			{ label: 'TE', player: this.get('solutionTE1') },
+ 			{ label: 'K', player: this.get('solutionK1') },
+ 			{ label: 'D', player: this.get('solutionD1') }, 
+ 		];	 		
+ 	}),
+ 	lineupGroups: Ember.computed.collect('lineupGroup1', 'lineupGroup2', 'lineupGroup3'),
+
  	// Formatting for nfl-matchup components
 	matchupsSorting: ['startTime'],
 	sortedMatchups: Ember.computed.sort('contest.matchups', 'matchupsSorting'),
-	matchupRows: Ember.computed('sortedMatchups', function() {
+	matchupRows: Ember.computed('sortedMatchups.[]', function() {
 		let matchups = this.get('sortedMatchups');
 		let size = 2;
 		let r = [];
@@ -266,14 +300,14 @@ const NflFdOptimizer = Ember.Component.extend({
 	}),
 
 	// Formatting for nfl-position components
-	positionsGroup1: Ember.computed('poolQB', 'poolRB', 'poolTE', function() {
+	positionsGroup1: Ember.computed('poolQB.[]', 'poolRB.[]', 'poolTE.[]', function() {
 		let r = [];
 		r.push({ name: "Quarterbacks", list: this.get('poolQB') });
 		r.push({ name: "Runningbacks", list: this.get('poolRB') });
 		r.push({ name: "Tight Ends", list: this.get('poolTE') });
 		return r;
 	}),
-	positionsGroup2: Ember.computed('poolWR', 'poolK', 'poolD', function() {
+	positionsGroup2: Ember.computed('poolWR.[]', 'poolK.[]', 'poolD.[]', function() {
 		let r = [];
 		r.push({ name: "Wide Receivers", list: this.get('poolWR') });
 		r.push({ name: "Kickers", list: this.get('poolK') });
@@ -282,13 +316,15 @@ const NflFdOptimizer = Ember.Component.extend({
 	}),
 	
 	positionsGroups: Ember.computed.collect('positionsGroup1', 'positionsGroup2'),
-	players: Ember.computed('poolQB', 'poolRB', 'poolWR', 'poolTE', 'poolK', 'poolD', function() {
+	players: Ember.computed('poolQB.[]', 'poolRB.[]', 'poolWR.[]', 'poolTE.[]', 'poolK.[]', 'poolD.[]', function() {
 		return [].concat(this.get('poolQB'), this.get('poolRB'), this.get('poolWR'), this.get('poolTE'), this.get('poolK'), this.get('poolD'));
 	}),
 
 	actions: {
 		resetDefaults() {
 			this.set('rCSample', 50);
+			this.set('rCFSample', 20);
+			this.set('rCCSample', 80);
 			this.set('selectFor', 'rMean');
 			this.set('strategy', 'balanced');
 			this.set('preventOppD', false);

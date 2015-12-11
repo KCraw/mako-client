@@ -25,16 +25,16 @@ export default DS.Model.extend({
   rCeil: Ember.computed('ratings', function() {
     return this.get('ratings.r80') || 0;
   }),
-  // rMean: Ember.computed('ratings', function() {
-  //   let r = 0;
-  //   let num = 0;
-  //   for (let i = 20, len = 80; i <= len; i++) {
-  //     r += this.get('ratings')['r'+i];
-  //     num++;
-  //   }
-  //   return math.round(r/num || 0, 1);
-  // }),
-  rMean: Ember.computed('ratings', 'rCFSample', 'rCCSample', function() {
+  rMean: Ember.computed('ratings', function() {
+    let r = 0;
+    let num = 0;
+    for (let i = 20, len = 80; i <= len; i++) {
+      r += this.get('ratings')['r'+i];
+      num++;
+    }
+    return math.round(r/num || 0, 1);
+  }),
+  rCMean: Ember.computed('ratings', 'rCFSample', 'rCCSample', function() {
     let r = 0;
     let num = 0;
     for (let i = +this.get('rCFSample'), len = +this.get('rCCSample'); i <= len; i++) {
@@ -43,21 +43,21 @@ export default DS.Model.extend({
     }
     return math.round(r/num || 0, 1);
   }),
-  // rWInt: Ember.computed('ratings', function() {
-  //   // We use an integral approx using area of trapezoid
-  //   let r = 0;
-  //   for (let i = 20, len = 80; i < len; i++) {
-  //     let aprob = 1 - i/100;
-  //     let bprob = 1 - (i+1)/100;
-  //     let a = this.get('ratings')['r'+i];
-  //     let b = this.get('ratings')['r'+(i+1)];
-  //     let h = ((aprob) + (bprob))/2;
+  rWInt: Ember.computed('ratings', function() {
+    // We use an integral approx using area of trapezoid
+    let r = 0;
+    for (let i = 20, len = 80; i < len; i++) {
+      let aprob = 1 - i/100;
+      let bprob = 1 - (i+1)/100;
+      let a = this.get('ratings')['r'+i];
+      let b = this.get('ratings')['r'+(i+1)];
+      let h = ((aprob) + (bprob))/2;
 
-  //     r += (a+b)/2 * h;
-  //   }
-  //   return math.round(r || 0);
-  // }),
-  rWInt: Ember.computed('ratings', 'rCFSample', 'rCCSample', function() {
+      r += (a+b)/2 * h;
+    }
+    return math.round(r || 0);
+  }),
+  rCWInt: Ember.computed('ratings', 'rCFSample', 'rCCSample', function() {
     // We use an integral approx using area of trapezoid
     let r = 0;
     for (let i = +this.get('rCFSample'), len = +this.get('rCCSample'); i < len; i++) {
@@ -84,7 +84,8 @@ export default DS.Model.extend({
     return (this.get('site') === 'fanduel' && this.get('proto.fdActual')) || (this.get('site') === 'draftkings' && this.get('proto.dkActual'));
   }),
   position: DS.attr('string'),
+  status: Ember.computed.alias('proto.status'),
   salary: DS.attr('number'),
   stats: Ember.computed.alias('proto.stats'),
-  proto: DS.belongsTo('nfl/player')
+  proto: DS.belongsTo('nba/player')
 });
