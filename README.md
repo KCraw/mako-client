@@ -1,7 +1,9 @@
 # Mako
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This is the front-end code for Mako. Since it is a data visualization and manipulation layer, this repository is being left public as a portfolio project. Feel free to see how I did things with Ember.js.
+
+Most of the real work is done on the backend, which scrapes publicly available sports statistics and upcoming matchup data, caches them in a NoSQL database, and uses a custom algorithm to perform statistical analysis on the matchups and generate rating distrubituions tuned to each major DFS site.
+Since it generally works and releasing it into the wild would decrease its value, the backend repository is obviously kept private.
 
 ## Prerequisites
 
