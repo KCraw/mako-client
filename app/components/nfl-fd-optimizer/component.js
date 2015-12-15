@@ -547,7 +547,11 @@ const NflFdOptimizer = Ember.Component.extend({
 		this.clearSolution();
 
 		// Sort the pools by descending value
-		this.set('poolSorting', [`${this.get('selectFor').replace('r', 'v')}:desc`]);
+		if (this.get('strategy') === 'balanced') {
+			this.set('poolSorting', [`${this.get('selectFor').replace('r', 'v')}:desc`]);
+		} else if (this.get('strategy') === 'sands') {
+			this.set('poolSorting', [`${this.get('selectFor')}:desc`]);
+		}
 
 		// Run fillMax
 		let success = this.fillMax();

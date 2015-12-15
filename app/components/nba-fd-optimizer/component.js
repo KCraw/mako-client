@@ -26,45 +26,39 @@ const NbaFdOptimizer = Ember.Component.extend({
 		return !this.get('players').isEvery('actual', false);
 	}),
 
+	players: Ember.computed('contest.matchups.@each.aPG', 'contest.matchups.@each.hPG', 'contest.matchups.@each.aSG', 'contest.matchups.@each.hSG', 'contest.matchups.@each.aSF', 'contest.matchups.@each.hSF', 'contest.matchups.@each.aC', 'contest.matchups.@each.hC', function() {
+		return this.get('contest.matchups').reduce(function(acc, item) {
+			acc.push(item.get('aPG'), item.get('hPG'), item.get('aSG'), item.get('hSG'), item.get('aSF'), item.get('hSF'), item.get('aPF'), item.get('hPF'), item.get('aC'), item.get('hC'));
+			return acc;
+		}, []).filter(function(item) {
+			return item.get('salary') != null;
+		});
+	}),
+
 	// Track players at each position
-	poolPG: Ember.computed('contest.matchups.@each.aPG', 'contest.matchups.@each.hPG', function() {
-		return this.get('contest.matchups').reduce(function(acc, item) {
-			acc.push(item.get('aPG'), item.get('hPG'));
-			return acc;
-		}, []).filter(function(item) {
-			return item.get('salary') != null;
+	poolPG: Ember.computed('players.[]', function() {
+		return this.get('players').filter(function(item) {
+			return item.get('position') === 'PG';
 		});
 	}),
-	poolSG: Ember.computed('contest.matchups.@each.aSG', 'contest.matchups.@each.hSG', function() {
-		return this.get('contest.matchups').reduce(function(acc, item) {
-			acc.push(item.get('aSG'), item.get('hSG'));
-			return acc;
-		}, []).filter(function(item) {
-			return item.get('salary') != null;
+	poolSG: Ember.computed('players.[]', function() {
+		return this.get('players').filter(function(item) {
+			return item.get('position') === 'SG';
 		});
 	}),
-	poolSF: Ember.computed('contest.matchups.@each.aSF', 'contest.matchups.@each.hSF', function() {
-		return this.get('contest.matchups').reduce(function(acc, item) {
-			acc.push(item.get('aSF'), item.get('hSF'));
-			return acc;
-		}, []).filter(function(item) {
-			return item.get('salary') != null;
+	poolSF: Ember.computed('players.[]', function() {
+		return this.get('players').filter(function(item) {
+			return item.get('position') === 'SF';
 		});
 	}),
-	poolPF: Ember.computed('contest.matchups.@each.aPF', 'contest.matchups.@each.hPF', function() {
-		return this.get('contest.matchups').reduce(function(acc, item) {
-			acc.push(item.get('aPF'), item.get('hPF'));
-			return acc;
-		}, []).filter(function(item) {
-			return item.get('salary') != null;
+	poolPF: Ember.computed('players.[]', function() {
+		return this.get('players').filter(function(item) {
+			return item.get('position') === 'PF';
 		});
 	}),
-	poolC: Ember.computed('contest.matchups.@each.aC', 'contest.matchups.@each.hC', function() {
-		return this.get('contest.matchups').reduce(function(acc, item) {
-			acc.push(item.get('aC'), item.get('hC'));
-			return acc;
-		}, []).filter(function(item) {
-			return item.get('salary') != null;
+	poolC: Ember.computed('players.[]', function() {
+		return this.get('players').filter(function(item) {
+			return item.get('position') === 'C';
 		});
 	}),
 
@@ -79,7 +73,7 @@ const NbaFdOptimizer = Ember.Component.extend({
 			return [this.get('requiredPG1')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
 			return this.get('poolPG').filter((item) => {
-				return item !== this.get('solutionPG2');
+				return item !== this.get('solutionPG2.[]');
 			});
 		}
 	}),
@@ -99,7 +93,7 @@ const NbaFdOptimizer = Ember.Component.extend({
 			});
 		}
 	}),
-	sortedPoolPG2: Ember.computed.sort('poolPG2', 'poolSorting'), 
+	sortedPoolPG2: Ember.computed.sort('poolPG2.[]', 'poolSorting'), 
 
 	requiredSG1DidChange: Ember.on('init', Ember.observer('requiredSG1', function() {
 		if (this.get('requiredSG1')) {
@@ -115,7 +109,7 @@ const NbaFdOptimizer = Ember.Component.extend({
 			});
 		}
 	}),
-	sortedPoolSG1: Ember.computed.sort('poolSG1', 'poolSorting'), 
+	sortedPoolSG1: Ember.computed.sort('poolSG1.[]', 'poolSorting'), 
 
 	requiredSG2DidChange: Ember.on('init', Ember.observer('requiredSG2', function() {
 		if (this.get('requiredSG2')) {
@@ -131,7 +125,7 @@ const NbaFdOptimizer = Ember.Component.extend({
 			});
 		}
 	}),
-	sortedPoolSG2: Ember.computed.sort('poolSG2', 'poolSorting'), 
+	sortedPoolSG2: Ember.computed.sort('poolSG2.[]', 'poolSorting'), 
 
 	requiredSF1DidChange: Ember.on('init', Ember.observer('requiredSF1', function() {
 		if (this.get('requiredSF1')) {
@@ -147,7 +141,7 @@ const NbaFdOptimizer = Ember.Component.extend({
 			});
 		}
 	}),
-	sortedPoolSF1: Ember.computed.sort('poolSF1', 'poolSorting'), 
+	sortedPoolSF1: Ember.computed.sort('poolSF1.[]', 'poolSorting'), 
 
 	requiredSF2DidChange: Ember.on('init', Ember.observer('requiredSF2', function() {
 		if (this.get('requiredSF2')) {
@@ -163,7 +157,7 @@ const NbaFdOptimizer = Ember.Component.extend({
 			});
 		}
 	}),
-	sortedPoolSF2: Ember.computed.sort('poolSF2', 'poolSorting'), 
+	sortedPoolSF2: Ember.computed.sort('poolSF2.[]', 'poolSorting'), 
 
 	requiredPF1DidChange: Ember.on('init', Ember.observer('requiredPF1', function() {
 		if (this.get('requiredPF1')) {
@@ -179,7 +173,7 @@ const NbaFdOptimizer = Ember.Component.extend({
 			});
 		}
 	}),
-	sortedPoolPF1: Ember.computed.sort('poolPF1', 'poolSorting'), 
+	sortedPoolPF1: Ember.computed.sort('poolPF1.[]', 'poolSorting'), 
 
 	requiredPF2DidChange: Ember.on('init', Ember.observer('requiredPF2', function() {
 		if (this.get('requiredPF2')) {
@@ -195,7 +189,7 @@ const NbaFdOptimizer = Ember.Component.extend({
 			});
 		}
 	}),
-	sortedPoolPF2: Ember.computed.sort('poolPF2', 'poolSorting'), 
+	sortedPoolPF2: Ember.computed.sort('poolPF2.[]', 'poolSorting'), 
 
 	requiredC1DidChange: Ember.on('init', Ember.observer('requiredC1', function() {
 		if (this.get('requiredC1')) {				
@@ -209,7 +203,7 @@ const NbaFdOptimizer = Ember.Component.extend({
 			return this.get('poolC');
 		}
 	}),
-	sortedPoolC1: Ember.computed.sort('poolC1', 'poolSorting'), 
+	sortedPoolC1: Ember.computed.sort('poolC1.[]', 'poolSorting'), 
 
 
 	poolSorting: ['salary:desc'],
@@ -312,9 +306,7 @@ const NbaFdOptimizer = Ember.Component.extend({
 	}),
 	
 	positionsGroups: Ember.computed.collect('positionsGroup1', 'positionsGroup2'),
-	players: Ember.computed('poolPG.[]', 'poolSG.[]', 'poolSF.[]', 'poolPF.[]', 'poolC.[]', function() {
-		return [].concat(this.get('poolPG'), this.get('poolSG'), this.get('poolSF'), this.get('poolPF'), this.get('poolC'));
-	}),
+
 
 	actions: {
 		resetDefaults() {
@@ -537,7 +529,11 @@ const NbaFdOptimizer = Ember.Component.extend({
 		this.clearSolution();
 
 		// Sort the pools by descending value
-		this.set('poolSorting', [`${this.get('selectFor').replace('r', 'v')}:desc`]);
+		if (this.get('strategy') === 'balanced') {
+			this.set('poolSorting', [`${this.get('selectFor').replace('r', 'v')}:desc`]);
+		} else if (this.get('strategy') === 'sands') {
+			this.set('poolSorting', [`${this.get('selectFor')}:desc`]);
+		}
 
 		// Run fillMax
 		let success = this.fillMax();
@@ -604,7 +600,7 @@ const NbaFdOptimizer = Ember.Component.extend({
 
 				// Now we can see if there is a temp solution, or if this player is better than the temp solution
 				if (!temp || math.larger(potential.get(`${profitStat}`), temp.player.get(`${profitStat}`))) {
-					temp = { position: position, player:potential };
+					temp = { position: position, player: potential };
 				}
 			} // -- End of PlayerLoop
 
