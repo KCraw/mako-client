@@ -73,11 +73,11 @@ const NbaFdOptimizer = Ember.Component.extend({
 			return [this.get('requiredPG1')];	// If a player has been required at this position, then the pool is only that player
 		} else {	// The pool at this position is the pool at the real position, minus any sibling position solutions and excluded players
 			return this.get('poolPG').filter((item) => {
-				return item !== this.get('solutionPG2.[]');
+				return item !== this.get('solutionPG2');
 			});
 		}
 	}),
-	sortedPoolPG1: Ember.computed.sort('poolPG1', 'poolSorting'), 
+	sortedPoolPG1: Ember.computed.sort('poolPG1.[]', 'poolSorting'), 
 
 	requiredPG2DidChange: Ember.on('init', Ember.observer('requiredPG2', function() {
 		if (this.get('requiredPG2')) {
@@ -539,8 +539,10 @@ const NbaFdOptimizer = Ember.Component.extend({
 		let success = this.fillMax();
 
 		if (!success) {
-			return alert('Could not find any valid lineup solutions! Requiring/excluding fewer players should fix this.');
+			setTimeout(alert, 250, 'Could not find any valid lineup solutions! Requiring/excluding fewer players should fix this.');
+			return false;
 		}
+
 
 		// Sort the pools by descending profit
 		this.set('poolSorting', [`${this.get('selectFor')}:desc`]);
